@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="PatientViewPage" lazy="true">
+        <pm:header title="#{myBundle.ViewPatientTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:PatientListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="PatientViewForm">
+
+                <h:panelGroup id="display">
+                    <p:tabView id="PatientTabView">
+
+                        <p:tab id="PatientTab1" title="#{myBundle.TabHeaderPrefix} 1">
+                            <p:outputPanel rendered="#{patientController.selected != null}">
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_codepatient}"/>
+                                    <h:outputText value="#{patientController.selected.codepatient}" title="#{myBundle.ViewPatientTitle_codepatient}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_firstName}"/>
+                                    <h:outputText value="#{patientController.selected.firstName}" title="#{myBundle.ViewPatientTitle_firstName}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_lastName}"/>
+                                    <h:outputText value="#{patientController.selected.lastName}" title="#{myBundle.ViewPatientTitle_lastName}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_centre}"/>
+                                    <h:outputText value="#{patientController.selected.centre}" title="#{myBundle.ViewPatientTitle_centre}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_datedeNaissance}"/>
+                                    <h:outputText value="#{patientController.selected.datedeNaissance}" title="#{myBundle.ViewPatientTitle_datedeNaissance}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_ageInclusion}"/>
+                                    <h:outputText value="#{patientController.selected.ageInclusion}" title="#{myBundle.ViewPatientTitle_ageInclusion}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_sexe}"/>
+                                    <h:outputText value="#{patientController.selected.sexe}" title="#{myBundle.ViewPatientTitle_sexe}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_niveaudetude}"/>
+                                    <h:outputText value="#{patientController.selected.niveaudetude}" title="#{myBundle.ViewPatientTitle_niveaudetude}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_lateralite}"/>
+                                    <h:outputText value="#{patientController.selected.lateralite}" title="#{myBundle.ViewPatientTitle_lateralite}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_grade}"/>
+                                    <h:outputText value="#{patientController.selected.grade}" title="#{myBundle.ViewPatientTitle_grade}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_taille}"/>
+                                    <h:outputText value="#{patientController.selected.taille}" title="#{myBundle.ViewPatientTitle_taille}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_localisation}"/>
+                                    <h:outputText value="#{patientController.selected.localisation}" title="#{myBundle.ViewPatientTitle_localisation}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_chirurgie}"/>
+                                    <h:outputText value="#{patientController.selected.chirurgie}" title="#{myBundle.ViewPatientTitle_chirurgie}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_diabete}"/>
+                                    <h:selectBooleanCheckbox id="diabete" value="#{patientController.selected.diabete}" title="#{myBundle.EditPatientTitle_diabete}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_diabete}" disabled="true"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_hta}"/>
+                                    <h:selectBooleanCheckbox id="hta" value="#{patientController.selected.hta}" title="#{myBundle.EditPatientTitle_hta}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_hta}" disabled="true"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_tabac}"/>
+                                    <h:outputText value="#{patientController.selected.tabac}" title="#{myBundle.ViewPatientTitle_tabac}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_datedarretdutabac}"/>
+                                    <h:outputText value="#{patientController.selected.datedarretdutabac}" title="#{myBundle.ViewPatientTitle_datedarretdutabac}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_dyslipidemie}"/>
+                                    <h:selectBooleanCheckbox id="dyslipidemie" value="#{patientController.selected.dyslipidemie}" title="#{myBundle.EditPatientTitle_dyslipidemie}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_dyslipidemie}" disabled="true"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewPatientLabel_alcool}"/>
+                                    <h:outputText value="#{patientController.selected.alcool}" title="#{myBundle.ViewPatientTitle_alcool}"/>
+                                </pm:field>
+                            </p:outputPanel>
+                        </p:tab>
+                    </p:tabView>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

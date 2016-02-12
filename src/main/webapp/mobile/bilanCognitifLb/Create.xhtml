@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="BilanCognitifLbCreatePage" lazy="true">
+        <pm:header title="#{myBundle.CreateBilanCognitifLbTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:BilanCognitifLbListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="BilanCognitifLbCreateForm">
+
+                <h:panelGroup id="display" rendered="#{bilanCognitifLbController.selected != null}">
+                    <p:tabView id="BilanCognitifLbTabView">
+
+                        <p:tab id="BilanCognitifLbTab1" title="#{myBundle.TabHeaderPrefix} 1">
+                            <p:outputPanel>
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_dateexamen}" for="dateexamen" />
+                                    <p:calendar id="dateexamen" pattern="MM/dd/yyyy" value="#{bilanCognitifLbController.selected.dateexamen}" title="#{myBundle.CreateBilanCognitifLbTitle_dateexamen}" required="true" requiredMessage="#{myBundle.CreateBilanCognitifLbRequiredMessage_dateexamen}" showOn="button"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_delaipostRT}" for="delaipostRT" />
+                                    <p:inputText id="delaipostRT" value="#{bilanCognitifLbController.selected.delaipostRT}" title="#{myBundle.CreateBilanCognitifLbTitle_delaipostRT}" required="true" requiredMessage="#{myBundle.CreateBilanCognitifLbRequiredMessage_delaipostRT}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_etatbilan}" for="etatbilan" />
+                                    <p:inputText id="etatbilan" value="#{bilanCognitifLbController.selected.etatbilan}" title="#{myBundle.CreateBilanCognitifLbTitle_etatbilan}" required="true" requiredMessage="#{myBundle.CreateBilanCognitifLbRequiredMessage_etatbilan}" size="25" maxlength="25"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_FNARTtotal}" for="FNARTtotal" />
+                                    <p:inputText id="FNARTtotal" value="#{bilanCognitifLbController.selected.FNARTtotal}" title="#{myBundle.CreateBilanCognitifLbTitle_FNARTtotal}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_MMSEtotal}" for="MMSEtotal" />
+                                    <p:inputText id="MMSEtotal" value="#{bilanCognitifLbController.selected.MMSEtotal}" title="#{myBundle.CreateBilanCognitifLbTitle_MMSEtotal}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_MOCAtotal}" for="MOCAtotal" />
+                                    <p:inputText id="MOCAtotal" value="#{bilanCognitifLbController.selected.MOCAtotal}" title="#{myBundle.CreateBilanCognitifLbTitle_MOCAtotal}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_mattisbruttotal}" for="mattisbruttotal" />
+                                    <p:inputText id="mattisbruttotal" value="#{bilanCognitifLbController.selected.mattisbruttotal}" title="#{myBundle.CreateBilanCognitifLbTitle_mattisbruttotal}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_mattisPCtotal}" for="mattisPCtotal" />
+                                    <p:inputText id="mattisPCtotal" value="#{bilanCognitifLbController.selected.mattisPCtotal}" title="#{myBundle.CreateBilanCognitifLbTitle_mattisPCtotal}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_RLRI16brutRL1}" for="RLRI16brutRL1" />
+                                    <p:inputText id="RLRI16brutRL1" value="#{bilanCognitifLbController.selected.RLRI16brutRL1}" title="#{myBundle.CreateBilanCognitifLbTitle_RLRI16brutRL1}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_rlri16ZsRl1}" for="rlri16ZsRl1" />
+                                    <p:inputText id="rlri16ZsRl1" value="#{bilanCognitifLbController.selected.rlri16ZsRl1}" title="#{myBundle.CreateBilanCognitifLbTitle_rlri16ZsRl1}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_RLRI16brutRL2}" for="RLRI16brutRL2" />
+                                    <p:inputText id="RLRI16brutRL2" value="#{bilanCognitifLbController.selected.RLRI16brutRL2}" title="#{myBundle.CreateBilanCognitifLbTitle_RLRI16brutRL2}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_rlri16ZsRl2}" for="rlri16ZsRl2" />
+                                    <p:inputText id="rlri16ZsRl2" value="#{bilanCognitifLbController.selected.rlri16ZsRl2}" title="#{myBundle.CreateBilanCognitifLbTitle_rlri16ZsRl2}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_RLRI16brutRL3}" for="RLRI16brutRL3" />
+                                    <p:inputText id="RLRI16brutRL3" value="#{bilanCognitifLbController.selected.RLRI16brutRL3}" title="#{myBundle.CreateBilanCognitifLbTitle_RLRI16brutRL3}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_rlri16ZsRl3}" for="rlri16ZsRl3" />
+                                    <p:inputText id="rlri16ZsRl3" value="#{bilanCognitifLbController.selected.rlri16ZsRl3}" title="#{myBundle.CreateBilanCognitifLbTitle_rlri16ZsRl3}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_RLRI16brutRD}" for="RLRI16brutRD" />
+                                    <p:inputText id="RLRI16brutRD" value="#{bilanCognitifLbController.selected.RLRI16brutRD}" title="#{myBundle.CreateBilanCognitifLbTitle_RLRI16brutRD}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_rlri16ZsRd}" for="rlri16ZsRd" />
+                                    <p:inputText id="rlri16ZsRd" value="#{bilanCognitifLbController.selected.rlri16ZsRd}" title="#{myBundle.CreateBilanCognitifLbTitle_rlri16ZsRd}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_RLRI16Indice}" for="RLRI16Indice" />
+                                    <p:inputText id="RLRI16Indice" value="#{bilanCognitifLbController.selected.RLRI16Indice}" title="#{myBundle.CreateBilanCognitifLbTitle_RLRI16Indice}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_RLRI16ZSmoy}" for="RLRI16ZSmoy" />
+                                    <p:inputText id="RLRI16ZSmoy" value="#{bilanCognitifLbController.selected.RLRI16ZSmoy}" title="#{myBundle.CreateBilanCognitifLbTitle_RLRI16ZSmoy}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_REYbrutrappel}" for="REYbrutrappel" />
+                                    <p:inputText id="REYbrutrappel" value="#{bilanCognitifLbController.selected.REYbrutrappel}" title="#{myBundle.CreateBilanCognitifLbTitle_REYbrutrappel}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_REYPCrappel}" for="REYPCrappel" />
+                                    <p:inputText id="REYPCrappel" value="#{bilanCognitifLbController.selected.REYPCrappel}" title="#{myBundle.CreateBilanCognitifLbTitle_REYPCrappel}"/>
+                                </pm:field>
+
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab id="BilanCognitifLbTab2" title="#{myBundle.TabHeaderPrefix} 2">
+                            <p:outputPanel>
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_REYbrutcopie}" for="REYbrutcopie" />
+                                    <p:inputText id="REYbrutcopie" value="#{bilanCognitifLbController.selected.REYbrutcopie}" title="#{myBundle.CreateBilanCognitifLbTitle_REYbrutcopie}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_REYPCcopie}" for="REYPCcopie" />
+                                    <p:inputText id="REYPCcopie" value="#{bilanCognitifLbController.selected.REYPCcopie}" title="#{myBundle.CreateBilanCognitifLbTitle_REYPCcopie}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_empandirect}" for="empandirect" />
+                                    <p:inputText id="empandirect" value="#{bilanCognitifLbController.selected.empandirect}" title="#{myBundle.CreateBilanCognitifLbTitle_empandirect}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_empaninverse}" for="empaninverse" />
+                                    <p:inputText id="empaninverse" value="#{bilanCognitifLbController.selected.empaninverse}" title="#{myBundle.CreateBilanCognitifLbTitle_empaninverse}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_memoirechiffrebrut}" for="memoirechiffrebrut" />
+                                    <p:inputText id="memoirechiffrebrut" value="#{bilanCognitifLbController.selected.memoirechiffrebrut}" title="#{myBundle.CreateBilanCognitifLbTitle_memoirechiffrebrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_memoirechiffreNS}" for="memoirechiffreNS" />
+                                    <p:inputText id="memoirechiffreNS" value="#{bilanCognitifLbController.selected.memoirechiffreNS}" title="#{myBundle.CreateBilanCognitifLbTitle_memoirechiffreNS}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_SLCbrut}" for="SLCbrut" />
+                                    <p:inputText id="SLCbrut" value="#{bilanCognitifLbController.selected.SLCbrut}" title="#{myBundle.CreateBilanCognitifLbTitle_SLCbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_slcNs}" for="slcNs" />
+                                    <p:inputText id="slcNs" value="#{bilanCognitifLbController.selected.slcNs}" title="#{myBundle.CreateBilanCognitifLbTitle_slcNs}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_fluencesPbrut}" for="fluencesPbrut" />
+                                    <p:inputText id="fluencesPbrut" value="#{bilanCognitifLbController.selected.fluencesPbrut}" title="#{myBundle.CreateBilanCognitifLbTitle_fluencesPbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_fluencesPZS}" for="fluencesPZS" />
+                                    <p:inputText id="fluencesPZS" value="#{bilanCognitifLbController.selected.fluencesPZS}" title="#{myBundle.CreateBilanCognitifLbTitle_fluencesPZS}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_fluencesanimauxbrut}" for="fluencesanimauxbrut" />
+                                    <p:inputText id="fluencesanimauxbrut" value="#{bilanCognitifLbController.selected.fluencesanimauxbrut}" title="#{myBundle.CreateBilanCognitifLbTitle_fluencesanimauxbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_fluencesanimauxZS}" for="fluencesanimauxZS" />
+                                    <p:inputText id="fluencesanimauxZS" value="#{bilanCognitifLbController.selected.fluencesanimauxZS}" title="#{myBundle.CreateBilanCognitifLbTitle_fluencesanimauxZS}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_TMTAbrut}" for="TMTAbrut" />
+                                    <p:inputText id="TMTAbrut" value="#{bilanCognitifLbController.selected.TMTAbrut}" title="#{myBundle.CreateBilanCognitifLbTitle_TMTAbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_tmtAZs}" for="tmtAZs" />
+                                    <p:inputText id="tmtAZs" value="#{bilanCognitifLbController.selected.tmtAZs}" title="#{myBundle.CreateBilanCognitifLbTitle_tmtAZs}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_TMTBbrut}" for="TMTBbrut" />
+                                    <p:inputText id="TMTBbrut" value="#{bilanCognitifLbController.selected.TMTBbrut}" title="#{myBundle.CreateBilanCognitifLbTitle_TMTBbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_tmtBZs}" for="tmtBZs" />
+                                    <p:inputText id="tmtBZs" value="#{bilanCognitifLbController.selected.tmtBZs}" title="#{myBundle.CreateBilanCognitifLbTitle_tmtBZs}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_TMTBAbrut}" for="TMTBAbrut" />
+                                    <p:inputText id="TMTBAbrut" value="#{bilanCognitifLbController.selected.TMTBAbrut}" title="#{myBundle.CreateBilanCognitifLbTitle_TMTBAbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_tmtBAZs}" for="tmtBAZs" />
+                                    <p:inputText id="tmtBAZs" value="#{bilanCognitifLbController.selected.tmtBAZs}" title="#{myBundle.CreateBilanCognitifLbTitle_tmtBAZs}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_stroopdenobrut}" for="stroopdenobrut" />
+                                    <p:inputText id="stroopdenobrut" value="#{bilanCognitifLbController.selected.stroopdenobrut}" title="#{myBundle.CreateBilanCognitifLbTitle_stroopdenobrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_stroopdenoZS}" for="stroopdenoZS" />
+                                    <p:inputText id="stroopdenoZS" value="#{bilanCognitifLbController.selected.stroopdenoZS}" title="#{myBundle.CreateBilanCognitifLbTitle_stroopdenoZS}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_strooplecturebrut}" for="strooplecturebrut" />
+                                    <p:inputText id="strooplecturebrut" value="#{bilanCognitifLbController.selected.strooplecturebrut}" title="#{myBundle.CreateBilanCognitifLbTitle_strooplecturebrut}"/>
+                                </pm:field>
+
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab id="BilanCognitifLbTab3" title="#{myBundle.TabHeaderPrefix} 3">
+                            <p:outputPanel>
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_strooplectureZS}" for="strooplectureZS" />
+                                    <p:inputText id="strooplectureZS" value="#{bilanCognitifLbController.selected.strooplectureZS}" title="#{myBundle.CreateBilanCognitifLbTitle_strooplectureZS}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_stroopinterbrut}" for="stroopinterbrut" />
+                                    <p:inputText id="stroopinterbrut" value="#{bilanCognitifLbController.selected.stroopinterbrut}" title="#{myBundle.CreateBilanCognitifLbTitle_stroopinterbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_stroopinterZS}" for="stroopinterZS" />
+                                    <p:inputText id="stroopinterZS" value="#{bilanCognitifLbController.selected.stroopinterZS}" title="#{myBundle.CreateBilanCognitifLbTitle_stroopinterZS}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_BNTbrut}" for="BNTbrut" />
+                                    <p:inputText id="BNTbrut" value="#{bilanCognitifLbController.selected.BNTbrut}" title="#{myBundle.CreateBilanCognitifLbTitle_BNTbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_bntZs}" for="bntZs" />
+                                    <p:inputText id="bntZs" value="#{bilanCognitifLbController.selected.bntZs}" title="#{myBundle.CreateBilanCognitifLbTitle_bntZs}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_tokenbrut}" for="tokenbrut" />
+                                    <p:inputText id="tokenbrut" value="#{bilanCognitifLbController.selected.tokenbrut}" title="#{myBundle.CreateBilanCognitifLbTitle_tokenbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_tokenZS}" for="tokenZS" />
+                                    <p:inputText id="tokenZS" value="#{bilanCognitifLbController.selected.tokenZS}" title="#{myBundle.CreateBilanCognitifLbTitle_tokenZS}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQC30global}" for="QLQC30global" />
+                                    <p:inputText id="QLQC30global" value="#{bilanCognitifLbController.selected.QLQC30global}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQC30global}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQC30physique}" for="QLQC30physique" />
+                                    <p:inputText id="QLQC30physique" value="#{bilanCognitifLbController.selected.QLQC30physique}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQC30physique}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQC30personnel}" for="QLQC30personnel" />
+                                    <p:inputText id="QLQC30personnel" value="#{bilanCognitifLbController.selected.QLQC30personnel}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQC30personnel}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQC30emotionnel}" for="QLQC30emotionnel" />
+                                    <p:inputText id="QLQC30emotionnel" value="#{bilanCognitifLbController.selected.QLQC30emotionnel}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQC30emotionnel}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQC30cognitif}" for="QLQC30cognitif" />
+                                    <p:inputText id="QLQC30cognitif" value="#{bilanCognitifLbController.selected.QLQC30cognitif}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQC30cognitif}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQC30social}" for="QLQC30social" />
+                                    <p:inputText id="QLQC30social" value="#{bilanCognitifLbController.selected.QLQC30social}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQC30social}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQC30fatigue}" for="QLQC30fatigue" />
+                                    <p:inputText id="QLQC30fatigue" value="#{bilanCognitifLbController.selected.QLQC30fatigue}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQC30fatigue}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQC30nausees}" for="QLQC30nausees" />
+                                    <p:inputText id="QLQC30nausees" value="#{bilanCognitifLbController.selected.QLQC30nausees}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQC30nausees}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQC30douleur}" for="QLQC30douleur" />
+                                    <p:inputText id="QLQC30douleur" value="#{bilanCognitifLbController.selected.QLQC30douleur}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQC30douleur}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQC30dyspnee}" for="QLQC30dyspnee" />
+                                    <p:inputText id="QLQC30dyspnee" value="#{bilanCognitifLbController.selected.QLQC30dyspnee}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQC30dyspnee}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQC30insomnies}" for="QLQC30insomnies" />
+                                    <p:inputText id="QLQC30insomnies" value="#{bilanCognitifLbController.selected.QLQC30insomnies}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQC30insomnies}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQC30appetit}" for="QLQC30appetit" />
+                                    <p:inputText id="QLQC30appetit" value="#{bilanCognitifLbController.selected.QLQC30appetit}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQC30appetit}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQC30constipation}" for="QLQC30constipation" />
+                                    <p:inputText id="QLQC30constipation" value="#{bilanCognitifLbController.selected.QLQC30constipation}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQC30constipation}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQC30diarhees}" for="QLQC30diarhees" />
+                                    <p:inputText id="QLQC30diarhees" value="#{bilanCognitifLbController.selected.QLQC30diarhees}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQC30diarhees}"/>
+                                </pm:field>
+
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab id="BilanCognitifLbTab4" title="#{myBundle.TabHeaderPrefix} 4">
+                            <p:outputPanel>
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQC30finances}" for="QLQC30finances" />
+                                    <p:inputText id="QLQC30finances" value="#{bilanCognitifLbController.selected.QLQC30finances}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQC30finances}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQBN20futur}" for="QLQBN20futur" />
+                                    <p:inputText id="QLQBN20futur" value="#{bilanCognitifLbController.selected.QLQBN20futur}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQBN20futur}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQBN20visuel}" for="QLQBN20visuel" />
+                                    <p:inputText id="QLQBN20visuel" value="#{bilanCognitifLbController.selected.QLQBN20visuel}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQBN20visuel}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQBN20moteur}" for="QLQBN20moteur" />
+                                    <p:inputText id="QLQBN20moteur" value="#{bilanCognitifLbController.selected.QLQBN20moteur}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQBN20moteur}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQBN20comm}" for="QLQBN20comm" />
+                                    <p:inputText id="QLQBN20comm" value="#{bilanCognitifLbController.selected.QLQBN20comm}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQBN20comm}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQBN20epilepsie}" for="QLQBN20epilepsie" />
+                                    <p:inputText id="QLQBN20epilepsie" value="#{bilanCognitifLbController.selected.QLQBN20epilepsie}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQBN20epilepsie}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQBN20somnolence}" for="QLQBN20somnolence" />
+                                    <p:inputText id="QLQBN20somnolence" value="#{bilanCognitifLbController.selected.QLQBN20somnolence}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQBN20somnolence}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQBN20demange}" for="QLQBN20demange" />
+                                    <p:inputText id="QLQBN20demange" value="#{bilanCognitifLbController.selected.QLQBN20demange}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQBN20demange}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQBN20cheveux}" for="QLQBN20cheveux" />
+                                    <p:inputText id="QLQBN20cheveux" value="#{bilanCognitifLbController.selected.QLQBN20cheveux}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQBN20cheveux}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQBN20faiblesse}" for="QLQBN20faiblesse" />
+                                    <p:inputText id="QLQBN20faiblesse" value="#{bilanCognitifLbController.selected.QLQBN20faiblesse}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQBN20faiblesse}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_QLQBN20incontinence}" for="QLQBN20incontinence" />
+                                    <p:inputText id="QLQBN20incontinence" value="#{bilanCognitifLbController.selected.QLQBN20incontinence}" title="#{myBundle.CreateBilanCognitifLbTitle_QLQBN20incontinence}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_isdc}" for="isdc" />
+                                    <p:inputText id="isdc" value="#{bilanCognitifLbController.selected.isdc}" title="#{myBundle.CreateBilanCognitifLbTitle_isdc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_goldberg}" for="goldberg" />
+                                    <p:inputText id="goldberg" value="#{bilanCognitifLbController.selected.goldberg}" title="#{myBundle.CreateBilanCognitifLbTitle_goldberg}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_facit}" for="facit" />
+                                    <p:inputText id="facit" value="#{bilanCognitifLbController.selected.facit}" title="#{myBundle.CreateBilanCognitifLbTitle_facit}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_macNair}" for="macNair" />
+                                    <p:inputText id="macNair" value="#{bilanCognitifLbController.selected.macNair}" title="#{myBundle.CreateBilanCognitifLbTitle_macNair}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_eiadl}" for="eiadl" />
+                                    <p:inputText id="eiadl" value="#{bilanCognitifLbController.selected.eiadl}" title="#{myBundle.CreateBilanCognitifLbTitle_eiadl}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_ces}" for="ces" />
+                                    <p:inputText id="ces" value="#{bilanCognitifLbController.selected.ces}" title="#{myBundle.CreateBilanCognitifLbTitle_ces}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_evalglobaledeficit}" for="evalglobaledeficit" />
+                                    <p:selectBooleanCheckbox id="evalglobaledeficit" value="#{bilanCognitifLbController.selected.evalglobaledeficit}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_memverbdeficit}" for="memverbdeficit" />
+                                    <p:selectBooleanCheckbox id="memverbdeficit" value="#{bilanCognitifLbController.selected.memverbdeficit}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_memvisudeficit}" for="memvisudeficit" />
+                                    <p:selectBooleanCheckbox id="memvisudeficit" value="#{bilanCognitifLbController.selected.memvisudeficit}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_VTIdeficit}" for="VTIdeficit" />
+                                    <p:selectBooleanCheckbox id="VTIdeficit" value="#{bilanCognitifLbController.selected.VTIdeficit}" />
+                                </pm:field>
+
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab id="BilanCognitifLbTab5" title="#{myBundle.TabHeaderPrefix} 5">
+                            <p:outputPanel>
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_MCTMDTdeficit}" for="MCTMDTdeficit" />
+                                    <p:selectBooleanCheckbox id="MCTMDTdeficit" value="#{bilanCognitifLbController.selected.MCTMDTdeficit}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_inhibdeficit}" for="inhibdeficit" />
+                                    <p:selectBooleanCheckbox id="inhibdeficit" value="#{bilanCognitifLbController.selected.inhibdeficit}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_shiftingdeficit}" for="shiftingdeficit" />
+                                    <p:selectBooleanCheckbox id="shiftingdeficit" value="#{bilanCognitifLbController.selected.shiftingdeficit}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_expressiondeficit}" for="expressiondeficit" />
+                                    <p:selectBooleanCheckbox id="expressiondeficit" value="#{bilanCognitifLbController.selected.expressiondeficit}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_comprehensiondeficit}" for="comprehensiondeficit" />
+                                    <p:selectBooleanCheckbox id="comprehensiondeficit" value="#{bilanCognitifLbController.selected.comprehensiondeficit}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_visuoconstrudeficit}" for="visuoconstrudeficit" />
+                                    <p:selectBooleanCheckbox id="visuoconstrudeficit" value="#{bilanCognitifLbController.selected.visuoconstrudeficit}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_codepatient}" for="codepatient" />
+                                    <p:selectOneMenu id="codepatient" value="#{bilanCognitifLbController.selected.codepatient}" required="true" requiredMessage="#{myBundle.CreateBilanCognitifLbRequiredMessage_codepatient}" converter="patientConverter">
+                                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{patientController.items}"
+                                                       var="codepatientItem"
+                                                       itemValue="#{codepatientItem}"
+                                                       itemLabel="#{codepatientItem.firstName.toString()}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_visite}" for="visite" />
+                                    <p:selectOneMenu id="visite" value="#{bilanCognitifLbController.selected.visite}" required="true" requiredMessage="#{myBundle.CreateBilanCognitifLbRequiredMessage_visite}" converter="visitConverter">
+                                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{visitController.items}"
+                                                       var="visiteItem"
+                                                       itemValue="#{visiteItem}"
+                                                       itemLabel="#{visiteItem.id.toString()}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.CreateBilanCognitifLbLabel_visit}" for="visit" />
+                                    <p:selectOneMenu id="visit" value="#{bilanCognitifLbController.selected.visit}"  converter="visitConverter">
+                                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{visitController.items}"
+                                                       var="visitItem"
+                                                       itemValue="#{visitItem}"
+                                                       itemLabel="#{visitItem.id.toString()}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                </pm:field>
+                                </p:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+                    <p:commandButton actionListener="#{bilanCognitifLbController.saveNew}" value="#{myBundle.Save}" update="display,:BilanCognitifLbListPage:BilanCognitifLbListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:BilanCognitifLbListPage')}">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="CsctListPage">
+        <pm:header title="#{myBundle.ListCsctTitle}">
+            <h:form>
+                <p:commandButton id="backButton"   styleClass="ui-btn-left  ui-btn-inline" icon="ui-icon-arrow-l" value="#{myBundle.Back}" action="#{mobilePageController.navigateBackInHistory('/mobile/index')}"/>
+                <p:commandButton id="createButton" styleClass="ui-btn-right ui-btn-inline" icon="ui-icon-plus"    value="#{myBundle.Create}" update=":CsctCreatePage:CsctCreateForm" actionListener="#{csctController.prepareCreate}" action="#{mobilePageController.navigateWithHistory('pm:CsctCreatePage')}">
+                    <f:actionListener binding="#{currentPageListener}"/>
+                </p:commandButton>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="CsctListForm">
+
+                <p:dataTable id="datalist"
+                             value="#{csctController.items}"
+                             var="item"
+                             rowKey="#{item.id}"
+                             paginator="true"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             selectionMode="single"
+                             selection="#{csctController.selected}"
+                             reflow="true">
+
+                    <p:ajax event="rowSelect"   update="@form:editButton,@form:deleteButton,@form:navigationMenuButton,@form:navigationMenuPanel" listener="#{csctController.resetParents}"/>
+                    <p:ajax event="rowUnselect" update="@form:editButton,@form:deleteButton,@form:navigationMenuButton,@form:navigationMenuPanel" listener="#{csctController.resetParents}"/>
+                    <p:ajax event="swipeleft"   oncomplete="document.getElementById('CsctListPage:CsctListForm:deleteButton').click();"/>
+                    <p:ajax event="tap"         oncomplete="document.getElementById('CsctListPage:CsctListForm:editButton').click();"/>
+                    <p:ajax event="taphold"     oncomplete="document.getElementById('CsctListPage:CsctListForm:navigationMenuButton').click();"/>
+
+                    <p:column sortBy="#{item.id}" filterBy="#{item.id}" headerText="#{myBundle.ListCsctTitle_id}"/>
+                    <h:outputText value="#{item.id}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.dateexamen}" filterBy="#{item.dateexamen}" headerText="#{myBundle.ListCsctTitle_dateexamen}"/>
+                    <h:outputText value="#{item.dateexamen}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.delaipostRT}" filterBy="#{item.delaipostRT}" headerText="#{myBundle.ListCsctTitle_delaipostRT}"/>
+                    <h:outputText value="#{item.delaipostRT}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.etatduCSCT}" filterBy="#{item.etatduCSCT}" headerText="#{myBundle.ListCsctTitle_etatduCSCT}"/>
+                    <h:selectBooleanCheckbox id="etatduCSCT" value="#{item.etatduCSCT}" title="#{myBundle.EditCsctTitle_etatduCSCT}" required="true" requiredMessage="#{myBundle.EditCsctRequiredMessage_etatduCSCT}" disabled="true"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.nberreurs}" filterBy="#{item.nberreurs}" headerText="#{myBundle.ListCsctTitle_nberreurs}"/>
+                    <h:outputText value="#{item.nberreurs}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.nbreponsecorrectes}" filterBy="#{item.nbreponsecorrectes}" headerText="#{myBundle.ListCsctTitle_nbreponsecorrectes}"/>
+                    <h:outputText value="#{item.nbreponsecorrectes}"/>
+                    </p:column>
+
+                    <!--
+                                        <p:column sortBy="#{item.zs}" filterBy="#{item.zs}" headerText="#{myBundle.ListCsctTitle_zs}"/>
+                                            <h:outputText value="#{item.zs}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.visit.id}" filterBy="#{item.visit.id}" headerText="#{myBundle.ListCsctTitle_visit}"/>
+                                            <h:outputText value="#{item.visit.id}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.codepatient.firstName}" filterBy="#{item.codepatient.firstName}" headerText="#{myBundle.ListCsctTitle_codepatient}"/>
+                                            <h:outputText value="#{item.codepatient.firstName}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.visite.id}" filterBy="#{item.visite.id}" headerText="#{myBundle.ListCsctTitle_visite}"/>
+                                            <h:outputText value="#{item.visite.id}"/>
+                                        </p:column>
+                    -->
+                </p:dataTable>
+                <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":CsctEditPage:CsctEditForm" disabled="#{empty csctController.selected}" actionListener="#{mobilePageController.currentPageListener}" action="#{mobilePageController.navigateWithHistory('pm:CsctEditPage')}"/>
+                <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{csctController.delete}" update=":growl,datalist" disabled="#{empty csctController.selected}">
+                    <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                </p:commandButton>
+                <p:commandButton id="navigationMenuButton" style="visibility: hidden;" value="#{myBundle.Menu}" disabled="#{empty csctController.selected}"/>
+
+                <p:overlayPanel id="navigationMenuPanel" for="navigationMenuButton" at="right" showEffect="overlay">
+                    <h2>#{myBundle.CsctHeading} #{myBundle.Menu}</h2>
+                    <p:menu>
+                        <p:menuitem value="#{myBundle.CsctMenuItem_visit}" icon="ui-icon-search" update=":VisitEditPage:VisitEditForm" disabled="#{empty csctController.selected.visit}" actionListener="#{csctController.prepareVisit}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:VisitEditPage"/>
+                        </p:menuitem>
+                        <p:menuitem value="#{myBundle.CsctMenuItem_codepatient}" icon="ui-icon-search" update=":PatientEditPage:PatientEditForm" disabled="#{empty csctController.selected.codepatient}" actionListener="#{csctController.prepareCodepatient}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:PatientEditPage"/>
+                        </p:menuitem>
+                        <p:menuitem value="#{myBundle.CsctMenuItem_visite}" icon="ui-icon-search" update=":VisitEditPage:VisitEditForm" disabled="#{empty csctController.selected.visite}" actionListener="#{csctController.prepareVisite}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:VisitEditPage"/>
+                        </p:menuitem>
+                    </p:menu>
+                </p:overlayPanel>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

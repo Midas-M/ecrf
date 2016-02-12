@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="DosimetrieListPage">
+        <pm:header title="#{myBundle.ListDosimetrieTitle}">
+            <h:form>
+                <p:commandButton id="backButton"   styleClass="ui-btn-left  ui-btn-inline" icon="ui-icon-arrow-l" value="#{myBundle.Back}" action="#{mobilePageController.navigateBackInHistory('/mobile/index')}"/>
+                <p:commandButton id="createButton" styleClass="ui-btn-right ui-btn-inline" icon="ui-icon-plus"    value="#{myBundle.Create}" update=":DosimetrieCreatePage:DosimetrieCreateForm" actionListener="#{dosimetrieController.prepareCreate}" action="#{mobilePageController.navigateWithHistory('pm:DosimetrieCreatePage')}">
+                    <f:actionListener binding="#{currentPageListener}"/>
+                </p:commandButton>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="DosimetrieListForm">
+
+                <p:dataList id="datalist"
+                            paginator="true"
+                            rows="10"
+                            rowsPerPageTemplate="10,20,30,40,50"
+                            pt:data-inset="true"
+                            value="#{dosimetrieController.items}"
+                            var="item">
+
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListDosimetrieTitle}"/>
+                    </f:facet>
+
+                    <p:commandLink update=":DosimetrieEditPage:DosimetrieEditForm" action="pm:DosimetrieEditPage">
+                        <p>
+
+
+
+                            <h:outputText value="#{item.id}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.datedebutRT}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.datefinRT}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.dosetotale}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.nbrfraction}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.energiephotonMV}"/>
+
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.typetechnique}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:selectBooleanCheckbox id="interuptempo" value="#{item.interuptempo}" title="#{myBundle.EditDosimetrieTitle_interuptempo}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_interuptempo}" disabled="true"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.jourdarretcumul}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.nbrperiodearret3j}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.arret3jcausepatient}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.arret3jcausemaladieinter}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.arret3jcauseferies}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.arret3jcausemaintenance}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.arret3jcausepanne}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.arret3jcausetoxicite}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.arret3jcauseautre}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.interuptionprematuree}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.GTVtumeurmacro}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.CTVvolumeanatomoclinique}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.PTVvolumecibleplanif}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.volumeoedeme}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.PTV95dose}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.PTV90dose}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.PTV107dose}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.volumeisodose95}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.rcmiD98Ptv}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.rcmiD2Ptv}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.rcmiD50Ptv}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:selectBooleanCheckbox id="deliHippocampes" value="#{item.deliHippocampes}" title="#{myBundle.EditDosimetrieTitle_deliHippocampes}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_deliHippocampes}" disabled="true"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:selectBooleanCheckbox id="delihippocampes5mm" value="#{item.delihippocampes5mm}" title="#{myBundle.EditDosimetrieTitle_delihippocampes5mm}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delihippocampes5mm}" disabled="true"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:selectBooleanCheckbox id="delicorpscalleux" value="#{item.delicorpscalleux}" title="#{myBundle.EditDosimetrieTitle_delicorpscalleux}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delicorpscalleux}" disabled="true"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:selectBooleanCheckbox id="delilobetemporaux" value="#{item.delilobetemporaux}" title="#{myBundle.EditDosimetrieTitle_delilobetemporaux}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delilobetemporaux}" disabled="true"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:selectBooleanCheckbox id="delilobefrontaux" value="#{item.delilobefrontaux}" title="#{myBundle.EditDosimetrieTitle_delilobefrontaux}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delilobefrontaux}" disabled="true"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:selectBooleanCheckbox id="delicervelet" value="#{item.delicervelet}" title="#{myBundle.EditDosimetrieTitle_delicervelet}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delicervelet}" disabled="true"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:selectBooleanCheckbox id="deliperiventriculaire" value="#{item.deliperiventriculaire}" title="#{myBundle.EditDosimetrieTitle_deliperiventriculaire}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_deliperiventriculaire}" disabled="true"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:selectBooleanCheckbox id="deliencephalesain" value="#{item.deliencephalesain}" title="#{myBundle.EditDosimetrieTitle_deliencephalesain}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_deliencephalesain}" disabled="true"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:selectBooleanCheckbox id="delisustentoriel" value="#{item.delisustentoriel}" title="#{myBundle.EditDosimetrieTitle_delisustentoriel}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delisustentoriel}" disabled="true"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:selectBooleanCheckbox id="delifosseposterieure" value="#{item.delifosseposterieure}" title="#{myBundle.EditDosimetrieTitle_delifosseposterieure}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delifosseposterieure}" disabled="true"/>
+                            -->
+                        </p>
+                        <f:setPropertyActionListener value="#{item}" target="#{dosimetrieController.selected}" />
+                    </p:commandLink>
+
+                    <f:facet name="footer">
+                        <h:outputText value="#{myBundle.ListDosimetrieTitle}"/>
+                    </f:facet>
+
+                </p:dataList>
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

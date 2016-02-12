@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="IrmEditDlg" widgetVar="IrmEditDialog" width="auto" position="left top" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditIrmTitle}" closeOnEscape="true">
+
+            <h:form id="IrmEditForm">
+
+                <h:panelGroup id="display">
+                    <p:tabView id="IrmTabView">
+
+                        <p:tab id="IrmTab1" title="#{myBundle.TabHeaderPrefix} 1">
+                            <p:panelGrid columns="4" columnClasses="column">
+
+                                <p:outputLabel value="#{myBundle.CreateCsctLabel_codepatient}" for="codepatient" />
+                                <h:outputText id="codepatient" value="#{irmController.selected.codepatient.codepatient}" />
+
+                                <p:outputLabel value="#{myBundle.CreateCsctLabel_visite}" for="visite" />
+                                <h:outputText id="visite" value="#{irmController.visit}" />
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_dateexamen}" for="dateexamen" />
+                                <p:calendar id="dateexamen" pattern="dd/MM/yyyy" value="#{irmController.selected.dateexamen}" title="#{myBundle.CreateIrmTitle_dateexamen}" required="true" requiredMessage="#{myBundle.CreateIrmRequiredMessage_dateexamen}" showOn="button"/>
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_delaipostRT}" for="delaipostRT" />
+                                <p:inputText id="delaipostRT" value="#{irmController.selected.delaipostRT}" title="#{myBundle.CreateIrmTitle_delaipostRT}" required="true" requiredMessage="#{myBundle.CreateIrmRequiredMessage_delaipostRT}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"   /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="300" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_fgSb}" for="fgSb" />
+                                <p:inputText id="fgSb" value="#{irmController.selected.fgSb}" title="#{myBundle.CreateIrmTitle_fgSb}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_fdSb}" for="fdSb" />
+                                <p:inputText id="fdSb" value="#{irmController.selected.fdSb}" title="#{myBundle.CreateIrmTitle_fdSb}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_fgAc}" for="fgAc" />
+                                <p:inputText id="fgAc" value="#{irmController.selected.fgAc}" title="#{myBundle.CreateIrmTitle_fgAc}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_fdAc}" for="fdAc" />
+                                <p:inputText id="fdAc" value="#{irmController.selected.fdAc}" title="#{myBundle.CreateIrmTitle_fdAc}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_tgSb}" for="tgSb" />
+                                <p:inputText id="tgSb" value="#{irmController.selected.tgSb}" title="#{myBundle.CreateIrmTitle_tgSb}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_tdSb}" for="tdSb" />
+                                <p:inputText id="tdSb" value="#{irmController.selected.tdSb}" title="#{myBundle.CreateIrmTitle_tdSb}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_tgAc}" for="tgAc" />
+                                <p:inputText id="tgAc" value="#{irmController.selected.tgAc}" title="#{myBundle.CreateIrmTitle_tgAc}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_tdAc}" for="tdAc" />
+                                <p:inputText id="tdAc" value="#{irmController.selected.tdAc}" title="#{myBundle.CreateIrmTitle_tdAc}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_pogSb}" for="pogSb" />
+                                <p:inputText id="pogSb" value="#{irmController.selected.pogSb}" title="#{myBundle.CreateIrmTitle_pogSb}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_podSb}" for="podSb" />
+                                <p:inputText id="podSb" value="#{irmController.selected.podSb}" title="#{myBundle.CreateIrmTitle_podSb}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_pogAc}" for="pogAc" />
+                                <p:inputText id="pogAc" value="#{irmController.selected.pogAc}" title="#{myBundle.CreateIrmTitle_pogAc}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_podAc}" for="podAc" />
+                                <p:inputText id="podAc" value="#{irmController.selected.podAc}" title="#{myBundle.CreateIrmTitle_podAc}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_cgSb}" for="cgSb" />
+                                <p:inputText id="cgSb" value="#{irmController.selected.cgSb}" title="#{myBundle.CreateIrmTitle_cgSb}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_cdSb}" for="cdSb" />
+                                <p:inputText id="cdSb" value="#{irmController.selected.cdSb}" title="#{myBundle.CreateIrmTitle_cdSb}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_cgAc}" for="cgAc" />
+                                <p:inputText id="cgAc" value="#{irmController.selected.cgAc}" title="#{myBundle.CreateIrmTitle_cgAc}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_cdAc}" for="cdAc" />
+                                <p:inputText id="cdAc" value="#{irmController.selected.cdAc}" title="#{myBundle.CreateIrmTitle_cdAc}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_ggbgSb}" for="ggbgSb" />
+                                <p:inputText id="ggbgSb" value="#{irmController.selected.ggbgSb}" title="#{myBundle.CreateIrmTitle_ggbgSb}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_ggbdSb}" for="ggbdSb" />
+                                <p:inputText id="ggbdSb" value="#{irmController.selected.ggbdSb}" title="#{myBundle.CreateIrmTitle_ggbdSb}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_ggbgAc}" for="ggbgAc" />
+                                <p:inputText id="ggbgAc" value="#{irmController.selected.ggbgAc}" title="#{myBundle.CreateIrmTitle_ggbgAc}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateIrmLabel_ggbdAc}" for="ggbdAc" />
+                                <p:inputText id="ggbdAc" value="#{irmController.selected.ggbdAc}" title="#{myBundle.CreateIrmTitle_ggbdAc}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="3" />    
+                                </p:inputText> 
+
+
+                            </p:panelGrid>
+                        </p:tab>
+
+                    </p:tabView>
+                    <p:commandButton actionListener="#{irmController.save}" value="#{myBundle.Save}" update="display,:IrmListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('IrmEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="PF('IrmEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

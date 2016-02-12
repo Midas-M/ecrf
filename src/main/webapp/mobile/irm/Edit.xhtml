@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="IrmEditPage" lazy="true">
+        <pm:header title="#{myBundle.EditIrmTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:IrmListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="IrmEditForm">
+
+                <h:panelGroup id="display">
+                    <p:tabView id="IrmTabView">
+
+                        <p:tab id="IrmTab1" title="#{myBundle.TabHeaderPrefix} 1">
+                            <p:outputPanel rendered="#{irmController.selected != null}">
+                                <pm:field>
+                                    <h:outputLabel value="#{myBundle.EditIrmLabel_id}" for="id" />
+                                    <h:outputText id="id" value="#{irmController.selected.id}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_dateexamen}" for="dateexamen" />
+                                    <p:calendar id="dateexamen" pattern="MM/dd/yyyy" value="#{irmController.selected.dateexamen}" title="#{myBundle.EditIrmTitle_dateexamen}" required="true" requiredMessage="#{myBundle.EditIrmRequiredMessage_dateexamen}" showOn="button"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_delaipostRT}" for="delaipostRT" />
+                                    <p:inputText id="delaipostRT" value="#{irmController.selected.delaipostRT}" title="#{myBundle.EditIrmTitle_delaipostRT}" required="true" requiredMessage="#{myBundle.EditIrmRequiredMessage_delaipostRT}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_fgSb}" for="fgSb" />
+                                    <p:inputText id="fgSb" value="#{irmController.selected.fgSb}" title="#{myBundle.EditIrmTitle_fgSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_fdSb}" for="fdSb" />
+                                    <p:inputText id="fdSb" value="#{irmController.selected.fdSb}" title="#{myBundle.EditIrmTitle_fdSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_fgAc}" for="fgAc" />
+                                    <p:inputText id="fgAc" value="#{irmController.selected.fgAc}" title="#{myBundle.EditIrmTitle_fgAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_fdAc}" for="fdAc" />
+                                    <p:inputText id="fdAc" value="#{irmController.selected.fdAc}" title="#{myBundle.EditIrmTitle_fdAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_tgSb}" for="tgSb" />
+                                    <p:inputText id="tgSb" value="#{irmController.selected.tgSb}" title="#{myBundle.EditIrmTitle_tgSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_tdSb}" for="tdSb" />
+                                    <p:inputText id="tdSb" value="#{irmController.selected.tdSb}" title="#{myBundle.EditIrmTitle_tdSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_tgAc}" for="tgAc" />
+                                    <p:inputText id="tgAc" value="#{irmController.selected.tgAc}" title="#{myBundle.EditIrmTitle_tgAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_tdAc}" for="tdAc" />
+                                    <p:inputText id="tdAc" value="#{irmController.selected.tdAc}" title="#{myBundle.EditIrmTitle_tdAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_pogSb}" for="pogSb" />
+                                    <p:inputText id="pogSb" value="#{irmController.selected.pogSb}" title="#{myBundle.EditIrmTitle_pogSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_podSb}" for="podSb" />
+                                    <p:inputText id="podSb" value="#{irmController.selected.podSb}" title="#{myBundle.EditIrmTitle_podSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_pogAc}" for="pogAc" />
+                                    <p:inputText id="pogAc" value="#{irmController.selected.pogAc}" title="#{myBundle.EditIrmTitle_pogAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_podAc}" for="podAc" />
+                                    <p:inputText id="podAc" value="#{irmController.selected.podAc}" title="#{myBundle.EditIrmTitle_podAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_cgSb}" for="cgSb" />
+                                    <p:inputText id="cgSb" value="#{irmController.selected.cgSb}" title="#{myBundle.EditIrmTitle_cgSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_cdSb}" for="cdSb" />
+                                    <p:inputText id="cdSb" value="#{irmController.selected.cdSb}" title="#{myBundle.EditIrmTitle_cdSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_cgAc}" for="cgAc" />
+                                    <p:inputText id="cgAc" value="#{irmController.selected.cgAc}" title="#{myBundle.EditIrmTitle_cgAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_cdAc}" for="cdAc" />
+                                    <p:inputText id="cdAc" value="#{irmController.selected.cdAc}" title="#{myBundle.EditIrmTitle_cdAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_ggbgSb}" for="ggbgSb" />
+                                    <p:inputText id="ggbgSb" value="#{irmController.selected.ggbgSb}" title="#{myBundle.EditIrmTitle_ggbgSb}"/>
+                                </pm:field>
+
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab id="IrmTab2" title="#{myBundle.TabHeaderPrefix} 2">
+                            <p:outputPanel rendered="#{irmController.selected != null}">
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_ggbdSb}" for="ggbdSb" />
+                                    <p:inputText id="ggbdSb" value="#{irmController.selected.ggbdSb}" title="#{myBundle.EditIrmTitle_ggbdSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_ggbgAc}" for="ggbgAc" />
+                                    <p:inputText id="ggbgAc" value="#{irmController.selected.ggbgAc}" title="#{myBundle.EditIrmTitle_ggbgAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_ggbdAc}" for="ggbdAc" />
+                                    <p:inputText id="ggbdAc" value="#{irmController.selected.ggbdAc}" title="#{myBundle.EditIrmTitle_ggbdAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_codepatient}" for="codepatient" />
+                                    <p:selectOneMenu id="codepatient" value="#{irmController.selected.codepatient}" required="true" requiredMessage="#{myBundle.EditIrmRequiredMessage_codepatient}" converter="patientConverter">
+                                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{patientController.items}"
+                                                       var="codepatientItem"
+                                                       itemValue="#{codepatientItem}"
+                                                       itemLabel="#{codepatientItem.firstName.toString()}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_visite}" for="visite" />
+                                    <p:selectOneMenu id="visite" value="#{irmController.selected.visite}" required="true" requiredMessage="#{myBundle.EditIrmRequiredMessage_visite}" converter="visitConverter">
+                                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{visitController.items}"
+                                                       var="visiteItem"
+                                                       itemValue="#{visiteItem}"
+                                                       itemLabel="#{visiteItem.id.toString()}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditIrmLabel_visit}" for="visit" />
+                                    <p:selectOneMenu id="visit" value="#{irmController.selected.visit}"  converter="visitConverter">
+                                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{visitController.items}"
+                                                       var="visitItem"
+                                                       itemValue="#{visitItem}"
+                                                       itemLabel="#{visitItem.id.toString()}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                </pm:field>
+                            </p:outputPanel>
+                        </p:tab>
+                    </p:tabView>
+                    <p:commandButton actionListener="#{irmController.save}" value="#{myBundle.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:IrmListPage:IrmListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:IrmListPage')}">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="CsctViewPage" lazy="true">
+        <pm:header title="#{myBundle.ViewCsctTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:CsctListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="CsctViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{csctController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewCsctLabel_id}"/>
+                            <h:outputText value="#{csctController.selected.id}" title="#{myBundle.ViewCsctTitle_id}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewCsctLabel_dateexamen}"/>
+                            <h:outputText value="#{csctController.selected.dateexamen}" title="#{myBundle.ViewCsctTitle_dateexamen}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewCsctLabel_delaipostRT}"/>
+                            <h:outputText value="#{csctController.selected.delaipostRT}" title="#{myBundle.ViewCsctTitle_delaipostRT}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewCsctLabel_etatduCSCT}"/>
+                            <h:selectBooleanCheckbox id="etatduCSCT" value="#{csctController.selected.etatduCSCT}" title="#{myBundle.EditCsctTitle_etatduCSCT}" required="true" requiredMessage="#{myBundle.EditCsctRequiredMessage_etatduCSCT}" disabled="true"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewCsctLabel_nberreurs}"/>
+                            <h:outputText value="#{csctController.selected.nberreurs}" title="#{myBundle.ViewCsctTitle_nberreurs}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewCsctLabel_nbreponsecorrectes}"/>
+                            <h:outputText value="#{csctController.selected.nbreponsecorrectes}" title="#{myBundle.ViewCsctTitle_nbreponsecorrectes}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewCsctLabel_zs}"/>
+                            <h:outputText value="#{csctController.selected.zs}" title="#{myBundle.ViewCsctTitle_zs}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewCsctLabel_visit}"/>
+                            <h:outputText value="#{csctController.selected.visit.id}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewCsctLabel_codepatient}"/>
+                            <h:outputText value="#{csctController.selected.codepatient.firstName}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewCsctLabel_visite}"/>
+                            <h:outputText value="#{csctController.selected.visite.id}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

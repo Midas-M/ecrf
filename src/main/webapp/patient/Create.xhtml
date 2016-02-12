@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PatientCreateDlg" width="auto" position="left top" widgetVar="PatientCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{myBundle.CreatePatientTitle}" closeOnEscape="true">
+
+            <h:form id="PatientCreateForm">
+
+                <h:panelGroup id="display" rendered="#{patientController.selected != null}">
+                       <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_codepatient}" for="codepatient" />
+                        <p:inputText  id="codepatient" value="#{patientController.selected.codepatient}" title="#{myBundle.CreatePatientTitle_codepatient}" required="true" requiredMessage="#{myBundle.CreatePatientRequiredMessage_codepatient}" size="16"  maxlength="16">
+                            <f:validator validatorId="gr.aueb.ecrf.sizeValidator"  />
+                        </p:inputText>
+
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_centre}" for="centre" />  
+                        <p:selectOneButton  id="centre" value="#{patientController.selected.centre}">
+                            <f:selectItem itemLabel="Paul Strauss" itemValue="Paul-strauss" />
+                            <f:selectItem itemLabel="Pitie Salpetriere" itemValue="Pitie-salpetriere" />
+                        </p:selectOneButton>
+
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_datedeNaissance}" for="datedeNaissance" />
+                        <p:calendar id="datedeNaissance" pattern="dd/MM/yyyy" value="#{patientController.selected.datedeNaissance}" title="#{myBundle.CreatePatientTitle_datedeNaissance}" required="true" requiredMessage="#{myBundle.CreatePatientRequiredMessage_datedeNaissance}" showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_ageInclusion}" for="ageInclusion" />
+                        <p:spinner id="ageInclusion" value="#{patientController.selected.ageInclusion}" title="#{myBundle.CreatePatientTitle_ageInclusion}" min="18" max="100" required="true" requiredMessage="#{myBundle.CreatePatientRequiredMessage_ageInclusion}"/>  
+
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_sexe}" for="sexe" />
+                        <p:selectOneButton  id="sexe" value="#{patientController.selected.sexe}"  required="true" requiredMessage="#{myBundle.CreatePatientRequiredMessage_sexe}" >
+                            <f:selectItem itemLabel="Homme" itemValue="Homme" />
+                            <f:selectItem itemLabel="Femme" itemValue="Femme" />
+                        </p:selectOneButton>    
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_niveaudetude}" for="niveaudetude" />
+
+                        <p:selectOneButton  id="niveaudetude" value="#{patientController.selected.niveaudetude}"  required="true" requiredMessage="#{myBundle.CreatePatientRequiredMessage_niveaudetude}" >
+                            <f:selectItem itemLabel="1" itemValue="1" />
+                            <f:selectItem itemLabel="2" itemValue="2" />
+                            <f:selectItem itemLabel="3" itemValue="3" />
+                        </p:selectOneButton>
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_lateralite}" for="lateralite" />
+
+                        <p:selectOneButton   id="lateralite" value="#{patientController.selected.lateralite}" required="true" requiredMessage="#{myBundle.CreatePatientRequiredMessage_lateralite}" >
+                            <f:selectItem itemLabel="Droitier" itemValue="Droitier" />
+                            <f:selectItem itemLabel="Gaucher" itemValue="Gaucher" />
+                            <f:selectItem itemLabel="Ambidextre" itemValue="Ambidextre" />
+                        </p:selectOneButton>
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_grade}" for="grade" />
+
+                        <p:selectOneButton   id="grade" value="#{patientController.selected.grade}"  required="true" requiredMessage="#{myBundle.CreatePatientRequiredMessage_grade}" >
+                            <f:selectItem itemLabel="III" itemValue="3" />
+                            <f:selectItem itemLabel="IV" itemValue="4" />
+                        </p:selectOneButton>
+                        <p:outputLabel  value="#{myBundle.CreatePatientLabel_taille}" for="taille" />
+
+
+                        <p:inputText id="taille"  value="#{patientController.selected.taille}" title="#{myBundle.CreatePatientTitle_taille}"> 
+                            <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                            <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+
+                            <f:attribute name="min" value="0" /> 
+                            <f:attribute name="max" value="500" />    
+                        </p:inputText> 
+
+
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_localisation}" for="localisation" />
+                        <p:selectManyButton   id="localisation" value="#{patientController.selected.multilocalisation}" required="true" requiredMessage="#{myBundle.CreatePatientRequiredMessage_localisation}" >
+                            <f:selectItem itemLabel="FG" itemValue="FG" />
+                            <f:selectItem itemLabel="FD" itemValue="FD" />
+                            <f:selectItem itemLabel="TG" itemValue="TG" />
+                            <f:selectItem itemLabel="TD" itemValue="TD" />
+                            <f:selectItem itemLabel="PG" itemValue="PG" />
+                            <f:selectItem itemLabel="PD" itemValue="PD" />
+                            <f:selectItem itemLabel="OG" itemValue="OG" />
+                            <f:selectItem itemLabel="OD" itemValue="OD" />
+                            <f:selectItem itemLabel="GGB" itemValue="GGB" />
+                            
+                        </p:selectManyButton>
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_chirurgie}" for="chirurgie" />             
+                        <p:selectOneButton   id="chirurgie"  value="#{patientController.selected.chirurgie}"  required="true" requiredMessage="#{myBundle.CreatePatientRequiredMessage_chirurgie}" >
+                            <f:selectItem itemLabel="Exérèse complète" itemValue="Exerese_complete" />
+                            <f:selectItem itemLabel="Exérèse incomplète" itemValue="Exerese_incomplete" />
+                            <f:selectItem itemLabel="Biopsie" itemValue="Biopsie" />
+                        </p:selectOneButton>
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_diabete}" for="diabete" />
+
+                        <p:selectOneButton id="diabete" value="#{patientController.selected.diabete}" required="true" requiredMessage="#{myBundle.CreatePatientRequiredMessage_diabete}">
+                            <f:selectItem itemLabel="Yes" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" /> 
+                            <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                        </p:selectOneButton>
+
+
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_hta}" for="hta" />
+                        <p:selectOneButton id="hta" value="#{patientController.selected.hta}" required="true" requiredMessage="#{myBundle.CreatePatientRequiredMessage_hta}">
+                            <f:selectItem itemLabel="Yes" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" /> 
+                            <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                        </p:selectOneButton>
+
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_tabac}" for="tabac" />
+
+
+                        <p:inputText id="tabac" value="#{patientController.selected.tabac}" title="#{myBundle.CreatePatientTitle_tabac}"> 
+
+                            <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                            <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+
+                            <f:attribute name="min" value="0" /> 
+                            <f:attribute name="max" value="300" />    
+                        </p:inputText> 
+
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_datedarretdutabac}" for="datedarretdutabac" />
+                        <p:calendar id="datedarretdutabac" pattern="dd/MM/yyyy" value="#{patientController.selected.datedarretdutabac}" title="#{myBundle.CreatePatientTitle_datedarretdutabac}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_dyslipidemie}" for="dyslipidemie" />
+
+                        <p:selectOneButton id="dyslipidemie" value="#{patientController.selected.dyslipidemie}" required="true" requiredMessage="#{myBundle.CreatePatientRequiredMessage_dyslipidemie}">
+                            <f:selectItem itemLabel="Yes" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" /> 
+                            <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                        </p:selectOneButton>
+
+                        <p:outputLabel value="#{myBundle.CreatePatientLabel_alcool}" for="alcool" />
+
+                        <p:inputText  id="alcool" value="#{patientController.selected.alcool}" title="#{myBundle.CreatePatientTitle_alcool}"> 
+                            <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                            <f:attribute name="min" value="0" /> 
+                            <f:attribute name="max" value="300" />    
+                        </p:inputText> 
+
+
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{patientController.saveNew}" value="#{myBundle.Save}" update="display,:PatientListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PatientCreateDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="PF('PatientCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

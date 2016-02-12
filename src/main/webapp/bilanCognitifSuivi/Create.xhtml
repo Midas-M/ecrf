@@ -1,0 +1,1169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BilanCognitifSuiviCreateDlg" width="auto" position="left top" widgetVar="BilanCognitifSuiviCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{myBundle.CreateBilanCognitifSuiviTitle}" closeOnEscape="true" >
+
+            <h:form id="BilanCognitifSuiviCreateForm">
+
+                <h:panelGroup id="display" rendered="#{bilanCognitifSuiviController.selected != null}">
+                    <p:tabView id="BilanCognitifSuiviTabView">
+
+                        <p:tab id="BilanCognitifSuiviTab1" title="#{myBundle.TabHeaderPrefix} 1">
+                            <p:panelGrid columns="4" columnClasses="column">
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviTitle_codepatient}" for="codepatient" />
+                                <h:outputText id="codepatient" value="#{bilanCognitifSuiviController.selected.codepatient.codepatient}" />
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifLbTitle_visite}" for="visite" />
+                                <h:outputText id="visite" value="#{bilanCognitifSuiviController.visit}" />
+
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_dateexamen}" for="dateexamen" />
+                                <p:calendar id="dateexamen" pattern="dd/MM/yyyy" value="#{bilanCognitifSuiviController.selected.dateexamen}" title="#{myBundle.CreateBilanCognitifSuiviTitle_dateexamen}" required="true" requiredMessage="#{myBundle.CreateBilanCognitifSuiviRequiredMessage_dateexamen}" showOn="button"/>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_delaipostRT}" for="delaipostRT" />
+                                <p:inputText id="delaipostRT" value="#{bilanCognitifSuiviController.selected.delaipostRT}" title="#{myBundle.CreateBilanCognitifSuiviTitle_delaipostRT}" required="true" requiredMessage="#{myBundle.CreateBilanCognitifSuiviRequiredMessage_delaipostRT}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"   /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="300" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_etatbilan}" for="etatbilan" />
+                                <p:selectOneButton  id="etatbilan" value="#{bilanCognitifSuiviController.selected.etatbilan}"  required="true" requiredMessage="#{myBundle.CreateBilanCognitifLbRequiredMessage_etatbilan}">
+
+                                    <f:selectItem itemLabel="Bilan complet" itemValue="bilan_complet" />
+                                    <f:selectItem itemLabel="Bilan incomplet troubles" itemValue="bilan_incomplet_troubles" />
+                                    <f:selectItem itemLabel="Bilan incomplet fatigue" itemValue="bilan_incomplet_fatigue" />
+                                    <f:selectItem itemLabel="Bilan impossible troubles" itemValue="bilan_impossible_troubles" />
+                                    <f:selectItem itemLabel="Bilan impossible fatigue" itemValue="bilan_impossible_fatigue" />  
+
+                                </p:selectOneButton>
+
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_FNARTtotal}" for="FNARTtotal" />
+                                <p:inputText id="FNARTtotal" value="#{bilanCognitifSuiviController.selected.FNARTtotal}" title="#{myBundle.CreateBilanCognitifSuiviTitle_FNARTtotal}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="40" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_MMSEtotal}" for="MMSEtotal" />
+                                <p:inputText id="MMSEtotal" value="#{bilanCognitifSuiviController.selected.MMSEtotal}" title="#{myBundle.CreateBilanCognitifSuiviTitle_MMSEtotal}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="30" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_MMSEdeclin}" for="MMSEdeclin" />
+                                <p:selectOneButton   id="MMSEdeclin" value="#{bilanCognitifSuiviController.selected.MMSEdeclin}"  >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_MOCAtotal}" for="MOCAtotal" />
+                                <p:inputText id="MOCAtotal" value="#{bilanCognitifSuiviController.selected.MOCAtotal}" title="#{myBundle.CreateBilanCognitifSuiviTitle_MOCAtotal}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="30" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_MOCAdeclin}" for="MOCAdeclin" />
+                                <p:selectOneButton   id="MOCAdeclin" value="#{bilanCognitifSuiviController.selected.MOCAdeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_mattisbruttotal}" for="mattisbruttotal" />
+                                <p:inputText id="mattisbruttotal" value="#{bilanCognitifSuiviController.selected.mattisbruttotal}" title="#{myBundle.CreateBilanCognitifSuiviTitle_mattisbruttotal}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="144" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_mattisPCtotal}" for="mattisPCtotal" />
+                                <p:inputText id="mattisPCtotal" value="#{bilanCognitifSuiviController.selected.mattisPCtotal}" title="#{myBundle.CreateBilanCognitifSuiviTitle_mattisPCtotal}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_mattisdeclin}" for="mattisdeclin" />
+                                <p:selectOneButton   id="mattisdeclin" value="#{bilanCognitifSuiviController.selected.mattisdeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value=""  />
+                                <p:outputLabel value=""  />
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_RLRI16brutRL1}" for="RLRI16brutRL1" />
+                                <p:inputText id="RLRI16brutRL1" value="#{bilanCognitifSuiviController.selected.RLRI16brutRL1}" title="#{myBundle.CreateBilanCognitifSuiviTitle_RLRI16brutRL1}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="16" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_rlri16ZsRl1}" for="rlri16ZsRl1" />
+                                <p:inputText id="rlri16ZsRl1" value="#{bilanCognitifSuiviController.selected.rlri16ZsRl1}" title="#{myBundle.CreateBilanCognitifSuiviTitle_rlri16ZsRl1}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_RLRI16brutRL2}" for="RLRI16brutRL2" />
+                                <p:inputText id="RLRI16brutRL2" value="#{bilanCognitifSuiviController.selected.RLRI16brutRL2}" title="#{myBundle.CreateBilanCognitifSuiviTitle_RLRI16brutRL2}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="16" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_rlri16ZsRl2}" for="rlri16ZsRl2" />
+                                <p:inputText id="rlri16ZsRl2" value="#{bilanCognitifSuiviController.selected.rlri16ZsRl2}" title="#{myBundle.CreateBilanCognitifSuiviTitle_rlri16ZsRl2}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_RLRI16brutRL3}" for="RLRI16brutRL3" />
+                                <p:inputText id="RLRI16brutRL3" value="#{bilanCognitifSuiviController.selected.RLRI16brutRL3}" title="#{myBundle.CreateBilanCognitifSuiviTitle_RLRI16brutRL3}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="16" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_rlri16ZsRl3}" for="rlri16ZsRl3" />
+                                <p:inputText id="rlri16ZsRl3" value="#{bilanCognitifSuiviController.selected.rlri16ZsRl3}" title="#{myBundle.CreateBilanCognitifSuiviTitle_rlri16ZsRl3}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_RLRI16brutRD}" for="RLRI16brutRD" />
+                                <p:inputText id="RLRI16brutRD" value="#{bilanCognitifSuiviController.selected.RLRI16brutRD}" title="#{myBundle.CreateBilanCognitifSuiviTitle_RLRI16brutRD}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="16" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_rlri16ZsRd}" for="rlri16ZsRd" />
+                                <p:inputText id="rlri16ZsRd" value="#{bilanCognitifSuiviController.selected.rlri16ZsRd}" title="#{myBundle.CreateBilanCognitifSuiviTitle_rlri16ZsRd}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_RLRI16Indice}" for="RLRI16Indice" />
+                                <p:inputText id="RLRI16Indice" value="#{bilanCognitifSuiviController.selected.RLRI16Indice}" title="#{myBundle.CreateBilanCognitifSuiviTitle_RLRI16Indice}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_RLRI16ZSmoy}" for="RLRI16ZSmoy" />
+                                <p:inputText id="RLRI16ZSmoy" value="#{bilanCognitifSuiviController.selected.RLRI16ZSmoy}" title="#{myBundle.CreateBilanCognitifSuiviTitle_RLRI16ZSmoy}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_RLRI16declin}" for="RLRI16declin" />
+
+                                <p:selectOneButton   id="RLRI16declin" value="#{bilanCognitifSuiviController.selected.RLRI16declin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="BilanCognitifSuiviTab2" title="#{myBundle.TabHeaderPrefix} 2">
+                            <p:panelGrid columns="4" columnClasses="column">
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_REYbrutrappel}" for="REYbrutrappel" />
+                                <p:inputText id="REYbrutrappel" value="#{bilanCognitifSuiviController.selected.REYbrutrappel}" title="#{myBundle.CreateBilanCognitifSuiviTitle_REYbrutrappel}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="36" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_REYPCrappel}" for="REYPCrappel" />
+                                <p:inputText id="REYPCrappel" value="#{bilanCognitifSuiviController.selected.REYPCrappel}" title="#{myBundle.CreateBilanCognitifSuiviTitle_REYPCrappel}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_REYdeclinrappel}" for="REYdeclinrappel" />
+
+                                <p:selectOneButton  id="REYdeclinrappel" value="#{bilanCognitifSuiviController.selected.REYdeclinrappel}">
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_REYbrutcopie}" for="REYbrutcopie" />
+                                <p:inputText id="REYbrutcopie" value="#{bilanCognitifSuiviController.selected.REYbrutcopie}" title="#{myBundle.CreateBilanCognitifSuiviTitle_REYbrutcopie}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="36" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_REYPCcopie}" for="REYPCcopie" />
+                                <p:inputText id="REYPCcopie" value="#{bilanCognitifSuiviController.selected.REYPCcopie}" title="#{myBundle.CreateBilanCognitifSuiviTitle_REYPCcopie}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_REYdeclincopie}" for="REYdeclincopie" />
+
+                                <p:selectOneButton  id="REYdeclincopie" value="#{bilanCognitifSuiviController.selected.REYdeclincopie}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_empandirect}" for="empandirect" />
+                                <p:inputText id="empandirect" value="#{bilanCognitifSuiviController.selected.empandirect}" title="#{myBundle.CreateBilanCognitifSuiviTitle_empandirect}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_empaninverse}" for="empaninverse" />
+                                <p:inputText id="empaninverse" value="#{bilanCognitifSuiviController.selected.empaninverse}" title="#{myBundle.CreateBilanCognitifSuiviTitle_empaninverse}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_memoirechiffrebrut}" for="memoirechiffrebrut" />
+                                <p:inputText id="memoirechiffrebrut" value="#{bilanCognitifSuiviController.selected.memoirechiffrebrut}" title="#{myBundle.CreateBilanCognitifSuiviTitle_memoirechiffrebrut}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="30" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_memoirechiffreNS}" for="memoirechiffreNS" />
+                                <p:inputText id="memoirechiffreNS" value="#{bilanCognitifSuiviController.selected.memoirechiffreNS}" title="#{myBundle.CreateBilanCognitifSuiviTitle_memoirechiffreNS}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="19" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_memoirechiffredeclin}" for="memoirechiffredeclin" />
+
+                                <p:selectOneButton   id="memoirechiffredeclin" value="#{bilanCognitifSuiviController.selected.memoirechiffredeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value=""  />
+                                <p:outputLabel value=""  />
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_SLCbrut}" for="SLCbrut" />
+                                <p:inputText id="SLCbrut" value="#{bilanCognitifSuiviController.selected.SLCbrut}" title="#{myBundle.CreateBilanCognitifSuiviTitle_SLCbrut}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="21" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_slcNs}" for="slcNs" />
+                                <p:inputText id="slcNs" value="#{bilanCognitifSuiviController.selected.slcNs}" title="#{myBundle.CreateBilanCognitifSuiviTitle_slcNs}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_SLCdeclin}" for="SLCdeclin" />
+
+                                <p:selectOneButton   id="SLCdeclin" value="#{bilanCognitifSuiviController.selected.SLCdeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value=""  />
+                                <p:outputLabel value=""  />
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_fluencesPbrut}" for="fluencesPbrut" />
+                                <p:inputText id="fluencesPbrut" value="#{bilanCognitifSuiviController.selected.fluencesPbrut}" title="#{myBundle.CreateBilanCognitifSuiviTitle_fluencesPbrut}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_fluencesPZS}" for="fluencesPZS" />
+                                <p:inputText id="fluencesPZS" value="#{bilanCognitifSuiviController.selected.fluencesPZS}" title="#{myBundle.CreateBilanCognitifSuiviTitle_fluencesPZS}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_fluencesanimauxbrut}" for="fluencesanimauxbrut" />
+                                <p:inputText id="fluencesanimauxbrut" value="#{bilanCognitifSuiviController.selected.fluencesanimauxbrut}" title="#{myBundle.CreateBilanCognitifSuiviTitle_fluencesanimauxbrut}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_fluencesanimauxZS}" for="fluencesanimauxZS" />
+                                <p:inputText id="fluencesanimauxZS" value="#{bilanCognitifSuiviController.selected.fluencesanimauxZS}" title="#{myBundle.CreateBilanCognitifSuiviTitle_fluencesanimauxZS}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_fluencesdeclin}" for="fluencesdeclin" />
+
+                                <p:selectOneButton  id="fluencesdeclin" value="#{bilanCognitifSuiviController.selected.fluencesdeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="BilanCognitifSuiviTab3" title="#{myBundle.TabHeaderPrefix} 3">
+                            <p:panelGrid columns="4" columnClasses="column">
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_TMTAbrut}" for="TMTAbrut" />
+                                <p:inputText id="TMTAbrut" value="#{bilanCognitifSuiviController.selected.TMTAbrut}" title="#{myBundle.CreateBilanCognitifSuiviTitle_TMTAbrut}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_tmtAZs}" for="tmtAZs" />
+                                <p:inputText id="tmtAZs" value="#{bilanCognitifSuiviController.selected.tmtAZs}" title="#{myBundle.CreateBilanCognitifSuiviTitle_tmtAZs}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="TMT A erreurs" for="TMT_A_erreurs_brut" />
+                                <p:inputText id="TMT_A_erreurs_brut" value="#{bilanCognitifSuiviController.selected.TMT_A_erreurs_brut}" title="TMT A erreurs"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000" />    
+                                </p:inputText> 
+
+                                <p:outputLabel value="TMT A erreurs ZS" for="TMT_A_erreurs_zs" />
+                                <p:inputText id="TMT_A_erreurs_zs" value="#{bilanCognitifSuiviController.selected.TMT_A_erreurs_ZS}" title="TMT A erreurs ZS"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_TMTBbrut}" for="TMTBbrut" />
+                                <p:inputText id="TMTBbrut" value="#{bilanCognitifSuiviController.selected.TMTBbrut}" title="#{myBundle.CreateBilanCognitifSuiviTitle_TMTBbrut}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_tmtBZs}" for="tmtBZs" />
+                                <p:inputText id="tmtBZs" value="#{bilanCognitifSuiviController.selected.tmtBZs}" title="#{myBundle.CreateBilanCognitifSuiviTitle_tmtBZs}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+                                <p:outputLabel value="TMT B erreurs ZS" for="TMT_B_erreurs_zs" />
+                                <p:inputText id="TMT_B_erreurs_zs" value="#{bilanCognitifSuiviController.selected.TMT_B_erreurs_ZS}" title="TMT B erreurs ZS"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+                        
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_TMTBAbrut}" for="TMTBAbrut" />
+                                <p:inputText id="TMTBAbrut" value="#{bilanCognitifSuiviController.selected.TMTBAbrut}" title="#{myBundle.CreateBilanCognitifSuiviTitle_TMTBAbrut}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_tmtBAZs}" for="tmtBAZs" />
+                                <p:inputText id="tmtBAZs" value="#{bilanCognitifSuiviController.selected.tmtBAZs}" title="#{myBundle.CreateBilanCognitifSuiviTitle_tmtBAZs}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+
+
+                                <p:outputLabel value="TMT B-A erreurs" for="TMT_B_A_erreurs_brut" />
+                                <p:inputText id="TMT_B_A_erreurs_brut" value="#{bilanCognitifSuiviController.selected.TMT_B_A_erreurs_brut}" title="TMT B-A erreurs"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000" />    
+                                </p:inputText> 
+
+                                <p:outputLabel value="TMT B-A erreurs ZS" for="TMT_B_A_erreurs_zs" />
+                                <p:inputText id="TMT_B_A_erreurs_zs" value="#{bilanCognitifSuiviController.selected.TMT_B_A_erreurs_ZS}" title="TMT B-A erreurs ZS"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_TMTdeclin}" for="TMTdeclin" />
+
+                                <p:selectOneButton   id="TMTdeclin" value="#{bilanCognitifSuiviController.selected.TMTdeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value=""  />
+                                <p:outputLabel value=""  />
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_stroopdenobrut}" for="stroopdenobrut" />
+                                <p:inputText id="stroopdenobrut" value="#{bilanCognitifSuiviController.selected.stroopdenobrut}" title="#{myBundle.CreateBilanCognitifSuiviTitle_stroopdenobrut}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_stroopdenoZS}" for="stroopdenoZS" />
+                                <p:inputText id="stroopdenoZS" value="#{bilanCognitifSuiviController.selected.stroopdenoZS}" title="#{myBundle.CreateBilanCognitifSuiviTitle_stroopdenoZS}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+                                <p:outputLabel value="Stroop déno erreurs" for="Stroop_deno_erreurs" />
+                                <p:inputText id="Stroop_deno_erreurs" value="#{bilanCognitifSuiviController.selected.stroop_deno_erreurs}" title="Stroop déno  erreurs"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="Stroop déno erreurs ZS" for="Stroop_deno_erreurs_ZS" />
+                                <p:inputText id="Stroop_deno_erreurs_ZS" value="#{bilanCognitifSuiviController.selected.stroop_déno_erreurs_ZS}" title="Stroop déno erreurs ZS"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_strooplecturebrut}" for="strooplecturebrut" />
+                                <p:inputText id="strooplecturebrut" value="#{bilanCognitifSuiviController.selected.strooplecturebrut}" title="#{myBundle.CreateBilanCognitifSuiviTitle_strooplecturebrut}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_strooplectureZS}" for="strooplectureZS" />
+                                <p:inputText id="strooplectureZS" value="#{bilanCognitifSuiviController.selected.strooplectureZS}" title="#{myBundle.CreateBilanCognitifSuiviTitle_strooplectureZS}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+                                <p:outputLabel value="Stroop lecture  erreurs" for="Stroop_lecture_erreurs" />
+                                <p:inputText id="Stroop_lecture_erreurs" value="#{bilanCognitifSuiviController.selected.stroop_lecture_erreurs}" title="Stroop lecture  erreurs"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="Stroop lecture  erreurs ZS" for="Stroop_lecture_erreurs_ZS" />
+                                <p:inputText id="Stroop_lecture_erreurs_ZS" value="#{bilanCognitifSuiviController.selected.stroop_lecture_erreurs_ZS}" title="Stroop lecture  erreurs ZS"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_stroopinterbrut}" for="stroopinterbrut" />
+                                <p:inputText id="stroopinterbrut" value="#{bilanCognitifSuiviController.selected.stroopinterbrut}" title="#{myBundle.CreateBilanCognitifSuiviTitle_stroopinterbrut}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_stroopinterZS}" for="stroopinterZS" />
+                                <p:inputText id="stroopinterZS" value="#{bilanCognitifSuiviController.selected.stroopinterZS}" title="#{myBundle.CreateBilanCognitifSuiviTitle_stroopinterZS}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+                                <p:outputLabel value="Stroop inter  erreurs" for="Stroop_inter_erreurs" />
+                                <p:inputText id="Stroop_inter_erreurs" value="#{bilanCognitifSuiviController.selected.stroop_inter_erreurs}" title="Stroop inter  erreurs"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="Stroop inter  erreurs ZS" for="Stroop_inter_erreurs_ZS" />
+                                <p:inputText id="Stroop_inter_erreurs_ZS" value="#{bilanCognitifSuiviController.selected.stroop_inter_erreurs_ZS}" title="Stroop inter  erreurs ZS"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_stroopdeclin}" for="stroopdeclin" />
+
+                                <p:selectOneButton  id="stroopdeclin" value="#{bilanCognitifSuiviController.selected.stroopdeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value=""  />
+                                <p:outputLabel value=""  />
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_BNTbrut}" for="BNTbrut" />
+                                <p:inputText id="BNTbrut" value="#{bilanCognitifSuiviController.selected.BNTbrut}" title="#{myBundle.CreateBilanCognitifSuiviTitle_BNTbrut}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="34" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_bntZs}" for="bntZs" />
+                                <p:inputText id="bntZs" value="#{bilanCognitifSuiviController.selected.bntZs}" title="#{myBundle.CreateBilanCognitifSuiviTitle_bntZs}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_BNTdeclin}" for="BNTdeclin" />
+
+                                <p:selectOneButton   id="BNTdeclin" value="#{bilanCognitifSuiviController.selected.BNTdeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value=""  />
+                                <p:outputLabel value=""  />
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_tokenbrut}" for="tokenbrut" />
+                                <p:inputText id="tokenbrut" value="#{bilanCognitifSuiviController.selected.tokenbrut}" title="#{myBundle.CreateBilanCognitifSuiviTitle_tokenbrut}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="36" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_tokenZS}" for="tokenZS" />
+                                <p:inputText id="tokenZS" value="#{bilanCognitifSuiviController.selected.tokenZS}" title="#{myBundle.CreateBilanCognitifSuiviTitle_tokenZS}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="-10" /> 
+                                    <f:attribute name="max" value="10" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_tokendeclin}" for="tokendeclin" />
+
+                                <p:selectOneButton  id="tokendeclin" value="#{bilanCognitifSuiviController.selected.tokendeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="BilanCognitifSuiviTab4" title="#{myBundle.TabHeaderPrefix} 4">
+                            <p:panelGrid columns="4" columnClasses="column">
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQC30global}" for="QLQC30global" />
+                                <p:inputText id="QLQC30global" value="#{bilanCognitifSuiviController.selected.QLQC30global}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQC30global}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQC30physique}" for="QLQC30physique" />
+                                <p:inputText id="QLQC30physique" value="#{bilanCognitifSuiviController.selected.QLQC30physique}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQC30physique}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQC30personnel}" for="QLQC30personnel" />
+                                <p:inputText id="QLQC30personnel" value="#{bilanCognitifSuiviController.selected.QLQC30personnel}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQC30personnel}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQC30emotionnel}" for="QLQC30emotionnel" />
+                                <p:inputText id="QLQC30emotionnel" value="#{bilanCognitifSuiviController.selected.QLQC30emotionnel}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQC30emotionnel}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQC30cognitif}" for="QLQC30cognitif" />
+                                <p:inputText id="QLQC30cognitif" value="#{bilanCognitifSuiviController.selected.QLQC30cognitif}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQC30cognitif}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQC30social}" for="QLQC30social" />
+                                <p:inputText id="QLQC30social" value="#{bilanCognitifSuiviController.selected.QLQC30social}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQC30social}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQC30fatigue}" for="QLQC30fatigue" />
+                                <p:inputText id="QLQC30fatigue" value="#{bilanCognitifSuiviController.selected.QLQC30fatigue}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQC30fatigue}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQC30nausees}" for="QLQC30nausees" />
+                                <p:inputText id="QLQC30nausees" value="#{bilanCognitifSuiviController.selected.QLQC30nausees}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQC30nausees}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQC30douleur}" for="QLQC30douleur" />
+                                <p:inputText id="QLQC30douleur" value="#{bilanCognitifSuiviController.selected.QLQC30douleur}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQC30douleur}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQC30dyspnee}" for="QLQC30dyspnee" />
+                                <p:inputText id="QLQC30dyspnee" value="#{bilanCognitifSuiviController.selected.QLQC30dyspnee}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQC30dyspnee}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQC30insomnies}" for="QLQC30insomnies" />
+                                <p:inputText id="QLQC30insomnies" value="#{bilanCognitifSuiviController.selected.QLQC30insomnies}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQC30insomnies}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQC30appetit}" for="QLQC30appetit" />
+                                <p:inputText id="QLQC30appetit" value="#{bilanCognitifSuiviController.selected.QLQC30appetit}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQC30appetit}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQC30constipation}" for="QLQC30constipation" />
+                                <p:inputText id="QLQC30constipation" value="#{bilanCognitifSuiviController.selected.QLQC30constipation}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQC30constipation}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQC30diarhees}" for="QLQC30diarhees" />
+                                <p:inputText id="QLQC30diarhees" value="#{bilanCognitifSuiviController.selected.QLQC30diarhees}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQC30diarhees}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQC30finances}" for="QLQC30finances" />
+                                <p:inputText id="QLQC30finances" value="#{bilanCognitifSuiviController.selected.QLQC30finances}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQC30finances}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQBN20futur}" for="QLQBN20futur" />
+                                <p:inputText id="QLQBN20futur" value="#{bilanCognitifSuiviController.selected.QLQBN20futur}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQBN20futur}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQBN20visuel}" for="QLQBN20visuel" />
+                                <p:inputText id="QLQBN20visuel" value="#{bilanCognitifSuiviController.selected.QLQBN20visuel}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQBN20visuel}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQBN20moteur}" for="QLQBN20moteur" />
+                                <p:inputText id="QLQBN20moteur" value="#{bilanCognitifSuiviController.selected.QLQBN20moteur}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQBN20moteur}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQBN20comm}" for="QLQBN20comm" />
+                                <p:inputText id="QLQBN20comm" value="#{bilanCognitifSuiviController.selected.QLQBN20comm}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQBN20comm}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQBN20epilepsie}" for="QLQBN20epilepsie" />
+                                <p:inputText id="QLQBN20epilepsie" value="#{bilanCognitifSuiviController.selected.QLQBN20epilepsie}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQBN20epilepsie}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQBN20somnolence}" for="QLQBN20somnolence" />
+                                <p:inputText id="QLQBN20somnolence" value="#{bilanCognitifSuiviController.selected.QLQBN20somnolence}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQBN20somnolence}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQBN20demange}" for="QLQBN20demange" />
+                                <p:inputText id="QLQBN20demange" value="#{bilanCognitifSuiviController.selected.QLQBN20demange}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQBN20demange}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQBN20cheveux}" for="QLQBN20cheveux" />
+                                <p:inputText id="QLQBN20cheveux" value="#{bilanCognitifSuiviController.selected.QLQBN20cheveux}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQBN20cheveux}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQBN20faiblesse}" for="QLQBN20faiblesse" />
+                                <p:inputText id="QLQBN20faiblesse" value="#{bilanCognitifSuiviController.selected.QLQBN20faiblesse}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQBN20faiblesse}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_QLQBN20incontinence}" for="QLQBN20incontinence" />
+                                <p:inputText id="QLQBN20incontinence" value="#{bilanCognitifSuiviController.selected.QLQBN20incontinence}" title="#{myBundle.CreateBilanCognitifSuiviTitle_QLQBN20incontinence}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="BilanCognitifSuiviTab5" title="#{myBundle.TabHeaderPrefix} 5">
+                            <p:panelGrid columns="4" columnClasses="column">
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_isdc}" for="isdc" />
+                                <p:inputText id="isdc" value="#{bilanCognitifSuiviController.selected.isdc}" title="#{myBundle.CreateBilanCognitifSuiviTitle_isdc}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="12" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_goldberg}" for="goldberg" />
+                                <p:inputText id="goldberg" value="#{bilanCognitifSuiviController.selected.goldberg}" title="#{myBundle.CreateBilanCognitifSuiviTitle_goldberg}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="18" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_facit}" for="facit" />
+                                <p:inputText id="facit" value="#{bilanCognitifSuiviController.selected.facit}" title="#{myBundle.CreateBilanCognitifSuiviTitle_facit}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="52" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_macNair}" for="macNair" />
+                                <p:inputText id="macNair" value="#{bilanCognitifSuiviController.selected.macNair}" title="#{myBundle.CreateBilanCognitifSuiviTitle_macNair}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="156" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_eiadl}" for="eiadl" />
+                                <p:inputText id="eiadl" value="#{bilanCognitifSuiviController.selected.eiadl}" title="#{myBundle.CreateBilanCognitifSuiviTitle_eiadl}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="8" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_ces}" for="ces" />
+                                <p:inputText id="ces" value="#{bilanCognitifSuiviController.selected.ces}" title="#{myBundle.CreateBilanCognitifSuiviTitle_ces}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="60" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_evalglobaledeficit}" for="evalglobaledeficit" />
+
+                                <p:selectOneButton  id="evalglobaledeficit" value="#{bilanCognitifSuiviController.selected.evalglobaledeficit}" >                                  
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />                   
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_evalglobaledeclin}" for="evalglobaledeclin" />
+
+                                <p:selectOneButton  id="evalglobaledeclin" value="#{bilanCognitifSuiviController.selected.evalglobaledeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_memverbdeficit}" for="memverbdeficit" />
+
+                                <p:selectOneButton  id="memverbdeficit" value="#{bilanCognitifSuiviController.selected.memverbdeficit}" >                                  
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />                   
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_memverbdeclin}" for="memverbdeclin" />
+
+                                <p:selectOneButton  id="memverbdeclin" value="#{bilanCognitifSuiviController.selected.memverbdeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_memvisudeficit}" for="memvisudeficit" />
+
+                                <p:selectOneButton  id="memvisudeficit" value="#{bilanCognitifSuiviController.selected.memvisudeficit}" >                                  
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />                   
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_memvisudeclin}" for="memvisudeclin" />
+
+                                <p:selectOneButton   id="memvisudeclin" value="#{bilanCognitifSuiviController.selected.memvisudeclin}"  >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_VTIdeficit}" for="VTIdeficit" />
+
+                                <p:selectOneButton  id="VTIdeficit" value="#{bilanCognitifSuiviController.selected.VTIdeficit}" >                                  
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />                   
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_VTIdeclin}" for="VTIdeclin" />
+
+                                <p:selectOneButton   id="VTIdeclin" value="#{bilanCognitifSuiviController.selected.VTIdeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_MCTMDTdeficit}" for="MCTMDTdeficit" />
+
+                                <p:selectOneButton  id="MCTMDTdeficit" value="#{bilanCognitifSuiviController.selected.MCTMDTdeficit}" >                                  
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />                   
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_MCTMDTdeclin}" for="MCTMDTdeclin" />
+
+                                <p:selectOneButton   id="MCTMDTdeclin" value="#{bilanCognitifSuiviController.selected.MCTMDTdeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_inhibdeficit}" for="inhibdeficit" />
+
+                                <p:selectOneButton  id="inhibdeficit" value="#{bilanCognitifSuiviController.selected.inhibdeficit}" >                                  
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />                   
+                                </p:selectOneButton>
+
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_inhibdeclin}" for="inhibdeclin" />
+
+                                <p:selectOneButton  id="inhibdeclin" value="#{bilanCognitifSuiviController.selected.inhibdeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="BilanCognitifSuiviTab6" title="#{myBundle.TabHeaderPrefix} 6">
+                            <p:panelGrid columns="4" columnClasses="column">
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_shiftingdeficit}" for="shiftingdeficit" />
+
+                                <p:selectOneButton  id="shiftingdeficit" value="#{bilanCognitifSuiviController.selected.shiftingdeficit}" >                                  
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />                   
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_shiftingdeclin}" for="shiftingdeclin" />
+
+                                <p:selectOneButton  id="shiftingdeclin" value="#{bilanCognitifSuiviController.selected.shiftingdeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_expressiondeficit}" for="expressiondeficit" />
+
+                                <p:selectOneButton  id="expressiondeficit" value="#{bilanCognitifSuiviController.selected.expressiondeficit}" >                                  
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />                   
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_expressiondeclin}" for="expressiondeclin" />
+                                <p:selectOneButton   id="expressiondeclin" value="#{bilanCognitifSuiviController.selected.expressiondeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_comprehensiondeficit}" for="comprehensiondeficit" />
+
+                                <p:selectOneButton  id="comprehensiondeficit" value="#{bilanCognitifSuiviController.selected.comprehensiondeficit}" >                                  
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />                   
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_comprehensiondeclin}" for="comprehensiondeclin" />
+
+                                <p:selectOneButton   id="comprehensiondeclin" value="#{bilanCognitifSuiviController.selected.comprehensiondeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_visuoconstrudeficit}" for="visuoconstrudeficit" />
+
+                                <p:selectOneButton  id="visuoconstrudeficit" value="#{bilanCognitifSuiviController.selected.visuoconstrudeficit}" >                                  
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />                   
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateBilanCognitifSuiviLabel_visuoconstrudeclin}" for="visuoconstrudeclin" />
+                                <p:selectOneButton  id="visuoconstrudeclin" value="#{bilanCognitifSuiviController.selected.visuoconstrudeclin}" >
+                                    <f:selectItem itemLabel="Stable" itemValue="stable" />                            
+                                    <f:selectItem itemLabel="déclin" itemValue="declin" />
+                                    <f:selectItem itemLabel="amelioration" itemValue="amelioration" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+
+                            </p:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+                    <p:commandButton actionListener="#{bilanCognitifSuiviController.saveNew}" value="#{myBundle.Save}" update="display,:BilanCognitifSuiviListForm:datalist,:growl,:BilanCognitifSuiviListForm:createButton" oncomplete="handleSubmit(xhr,status,args,PF('BilanCognitifSuiviCreateDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="PF('BilanCognitifSuiviCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

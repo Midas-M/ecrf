@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="DosimetrieEditPage" lazy="true">
+        <pm:header title="#{myBundle.EditDosimetrieTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:DosimetrieListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="DosimetrieEditForm">
+
+                <h:panelGroup id="display">
+                    <p:tabView id="DosimetrieTabView">
+
+                        <p:tab id="DosimetrieTab1" title="#{myBundle.TabHeaderPrefix} 1">
+                            <p:outputPanel rendered="#{dosimetrieController.selected != null}">
+                                <pm:field>
+                                    <h:outputLabel value="#{myBundle.EditDosimetrieLabel_id}" for="id" />
+                                    <h:outputText id="id" value="#{dosimetrieController.selected.id}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_datedebutRT}" for="datedebutRT" />
+                                    <p:calendar id="datedebutRT" pattern="MM/dd/yyyy" value="#{dosimetrieController.selected.datedebutRT}" title="#{myBundle.EditDosimetrieTitle_datedebutRT}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_datedebutRT}" showOn="button"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_datefinRT}" for="datefinRT" />
+                                    <p:calendar id="datefinRT" pattern="MM/dd/yyyy" value="#{dosimetrieController.selected.datefinRT}" title="#{myBundle.EditDosimetrieTitle_datefinRT}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_datefinRT}" showOn="button"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_dosetotale}" for="dosetotale" />
+                                    <p:inputText id="dosetotale" value="#{dosimetrieController.selected.dosetotale}" title="#{myBundle.EditDosimetrieTitle_dosetotale}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_dosetotale}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_nbrfraction}" for="nbrfraction" />
+                                    <p:inputText id="nbrfraction" value="#{dosimetrieController.selected.nbrfraction}" title="#{myBundle.EditDosimetrieTitle_nbrfraction}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_nbrfraction}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_energiephotonMV}" for="energiephotonMV" />
+                                    <p:inputText id="energiephotonMV" value="#{dosimetrieController.selected.energiephotonMV}" title="#{myBundle.EditDosimetrieTitle_energiephotonMV}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_energiephotonMV}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_typetechnique}" for="typetechnique" />
+                                    <p:inputText id="typetechnique" value="#{dosimetrieController.selected.typetechnique}" title="#{myBundle.EditDosimetrieTitle_typetechnique}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_typetechnique}" size="13" maxlength="13"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_interuptempo}" for="interuptempo" />
+                                    <p:selectBooleanCheckbox id="interuptempo" value="#{dosimetrieController.selected.interuptempo}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_interuptempo}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_jourdarretcumul}" for="jourdarretcumul" />
+                                    <p:inputText id="jourdarretcumul" value="#{dosimetrieController.selected.jourdarretcumul}" title="#{myBundle.EditDosimetrieTitle_jourdarretcumul}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_jourdarretcumul}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_nbrperiodearret3j}" for="nbrperiodearret3j" />
+                                    <p:inputText id="nbrperiodearret3j" value="#{dosimetrieController.selected.nbrperiodearret3j}" title="#{myBundle.EditDosimetrieTitle_nbrperiodearret3j}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_nbrperiodearret3j}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_arret3jcausepatient}" for="arret3jcausepatient" />
+                                    <p:inputText id="arret3jcausepatient" value="#{dosimetrieController.selected.arret3jcausepatient}" title="#{myBundle.EditDosimetrieTitle_arret3jcausepatient}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_arret3jcausepatient}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_arret3jcausemaladieinter}" for="arret3jcausemaladieinter" />
+                                    <p:inputText id="arret3jcausemaladieinter" value="#{dosimetrieController.selected.arret3jcausemaladieinter}" title="#{myBundle.EditDosimetrieTitle_arret3jcausemaladieinter}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_arret3jcausemaladieinter}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_arret3jcauseferies}" for="arret3jcauseferies" />
+                                    <p:inputText id="arret3jcauseferies" value="#{dosimetrieController.selected.arret3jcauseferies}" title="#{myBundle.EditDosimetrieTitle_arret3jcauseferies}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_arret3jcauseferies}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_arret3jcausemaintenance}" for="arret3jcausemaintenance" />
+                                    <p:inputText id="arret3jcausemaintenance" value="#{dosimetrieController.selected.arret3jcausemaintenance}" title="#{myBundle.EditDosimetrieTitle_arret3jcausemaintenance}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_arret3jcausemaintenance}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_arret3jcausepanne}" for="arret3jcausepanne" />
+                                    <p:inputText id="arret3jcausepanne" value="#{dosimetrieController.selected.arret3jcausepanne}" title="#{myBundle.EditDosimetrieTitle_arret3jcausepanne}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_arret3jcausepanne}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_arret3jcausetoxicite}" for="arret3jcausetoxicite" />
+                                    <p:inputText id="arret3jcausetoxicite" value="#{dosimetrieController.selected.arret3jcausetoxicite}" title="#{myBundle.EditDosimetrieTitle_arret3jcausetoxicite}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_arret3jcausetoxicite}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_arret3jcauseautre}" for="arret3jcauseautre" />
+                                    <p:inputText id="arret3jcauseautre" value="#{dosimetrieController.selected.arret3jcauseautre}" title="#{myBundle.EditDosimetrieTitle_arret3jcauseautre}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_arret3jcauseautre}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_interuptionprematuree}" for="interuptionprematuree" />
+                                    <p:inputText id="interuptionprematuree" value="#{dosimetrieController.selected.interuptionprematuree}" title="#{myBundle.EditDosimetrieTitle_interuptionprematuree}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_interuptionprematuree}" size="14" maxlength="14"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_GTVtumeurmacro}" for="GTVtumeurmacro" />
+                                    <p:inputText id="GTVtumeurmacro" value="#{dosimetrieController.selected.GTVtumeurmacro}" title="#{myBundle.EditDosimetrieTitle_GTVtumeurmacro}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_GTVtumeurmacro}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_CTVvolumeanatomoclinique}" for="CTVvolumeanatomoclinique" />
+                                    <p:inputText id="CTVvolumeanatomoclinique" value="#{dosimetrieController.selected.CTVvolumeanatomoclinique}" title="#{myBundle.EditDosimetrieTitle_CTVvolumeanatomoclinique}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_CTVvolumeanatomoclinique}"/>
+                                </pm:field>
+
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab id="DosimetrieTab2" title="#{myBundle.TabHeaderPrefix} 2">
+                            <p:outputPanel rendered="#{dosimetrieController.selected != null}">
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_PTVvolumecibleplanif}" for="PTVvolumecibleplanif" />
+                                    <p:inputText id="PTVvolumecibleplanif" value="#{dosimetrieController.selected.PTVvolumecibleplanif}" title="#{myBundle.EditDosimetrieTitle_PTVvolumecibleplanif}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_PTVvolumecibleplanif}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_volumeoedeme}" for="volumeoedeme" />
+                                    <p:inputText id="volumeoedeme" value="#{dosimetrieController.selected.volumeoedeme}" title="#{myBundle.EditDosimetrieTitle_volumeoedeme}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_volumeoedeme}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_PTV95dose}" for="PTV95dose" />
+                                    <p:inputText id="PTV95dose" value="#{dosimetrieController.selected.PTV95dose}" title="#{myBundle.EditDosimetrieTitle_PTV95dose}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_PTV95dose}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_PTV90dose}" for="PTV90dose" />
+                                    <p:inputText id="PTV90dose" value="#{dosimetrieController.selected.PTV90dose}" title="#{myBundle.EditDosimetrieTitle_PTV90dose}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_PTV90dose}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_PTV107dose}" for="PTV107dose" />
+                                    <p:inputText id="PTV107dose" value="#{dosimetrieController.selected.PTV107dose}" title="#{myBundle.EditDosimetrieTitle_PTV107dose}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_PTV107dose}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_volumeisodose95}" for="volumeisodose95" />
+                                    <p:inputText id="volumeisodose95" value="#{dosimetrieController.selected.volumeisodose95}" title="#{myBundle.EditDosimetrieTitle_volumeisodose95}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_volumeisodose95}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_rcmiD98Ptv}" for="rcmiD98Ptv" />
+                                    <p:inputText id="rcmiD98Ptv" value="#{dosimetrieController.selected.rcmiD98Ptv}" title="#{myBundle.EditDosimetrieTitle_rcmiD98Ptv}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_rcmiD2Ptv}" for="rcmiD2Ptv" />
+                                    <p:inputText id="rcmiD2Ptv" value="#{dosimetrieController.selected.rcmiD2Ptv}" title="#{myBundle.EditDosimetrieTitle_rcmiD2Ptv}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_rcmiD50Ptv}" for="rcmiD50Ptv" />
+                                    <p:inputText id="rcmiD50Ptv" value="#{dosimetrieController.selected.rcmiD50Ptv}" title="#{myBundle.EditDosimetrieTitle_rcmiD50Ptv}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_deliHippocampes}" for="deliHippocampes" />
+                                    <p:selectBooleanCheckbox id="deliHippocampes" value="#{dosimetrieController.selected.deliHippocampes}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_deliHippocampes}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_delihippocampes5mm}" for="delihippocampes5mm" />
+                                    <p:selectBooleanCheckbox id="delihippocampes5mm" value="#{dosimetrieController.selected.delihippocampes5mm}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delihippocampes5mm}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_delicorpscalleux}" for="delicorpscalleux" />
+                                    <p:selectBooleanCheckbox id="delicorpscalleux" value="#{dosimetrieController.selected.delicorpscalleux}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delicorpscalleux}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_delilobetemporaux}" for="delilobetemporaux" />
+                                    <p:selectBooleanCheckbox id="delilobetemporaux" value="#{dosimetrieController.selected.delilobetemporaux}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delilobetemporaux}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_delilobefrontaux}" for="delilobefrontaux" />
+                                    <p:selectBooleanCheckbox id="delilobefrontaux" value="#{dosimetrieController.selected.delilobefrontaux}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delilobefrontaux}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_delicervelet}" for="delicervelet" />
+                                    <p:selectBooleanCheckbox id="delicervelet" value="#{dosimetrieController.selected.delicervelet}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delicervelet}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_deliperiventriculaire}" for="deliperiventriculaire" />
+                                    <p:selectBooleanCheckbox id="deliperiventriculaire" value="#{dosimetrieController.selected.deliperiventriculaire}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_deliperiventriculaire}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_deliencephalesain}" for="deliencephalesain" />
+                                    <p:selectBooleanCheckbox id="deliencephalesain" value="#{dosimetrieController.selected.deliencephalesain}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_deliencephalesain}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_delisustentoriel}" for="delisustentoriel" />
+                                    <p:selectBooleanCheckbox id="delisustentoriel" value="#{dosimetrieController.selected.delisustentoriel}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delisustentoriel}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditDosimetrieLabel_delifosseposterieure}" for="delifosseposterieure" />
+                                    <p:selectBooleanCheckbox id="delifosseposterieure" value="#{dosimetrieController.selected.delifosseposterieure}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delifosseposterieure}"/>
+                                </pm:field>
+                            </p:outputPanel>
+                        </p:tab>
+                    </p:tabView>
+                    <p:commandButton actionListener="#{dosimetrieController.save}" value="#{myBundle.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:DosimetrieListPage:DosimetrieListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:DosimetrieListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

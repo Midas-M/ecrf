@@ -1,0 +1,38 @@
+.ui-widget {
+    font-size: 85% ;
+}
+
+
+@media (min-height: 300px) {
+    .ui-widget { font-size: 88% !important; }
+}
+
+@media (min-height: 600px) {
+    .ui-widget { font-size: 91% !important; }
+}
+
+@media (min-height: 900px) {
+    .ui-widget { font-size: 98% !important; }
+}
+
+
+.ui-layout-north {
+    z-index:20 !important;
+    overflow:visible !important;
+}
+.ui-layout-north .ui-layout-unit-content {
+    overflow:visible !important;
+}
+.ui-widget-header {
+    text-align: center;
+    text-transform: uppercase;
+}
+.ui-datatable .ui-datatable-footer .footer-section {
+    text-align: left;
+}
+
+.column {
+    font-weight: bold;
+    background-color: menu;
+
+}

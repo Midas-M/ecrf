@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="VisitEditDlg" width="auto" position="left top" widgetVar="VisitEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditVisitTitle}" closeOnEscape="true">
+
+            <h:form id="VisitEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{visitController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditVisitLabel_id}" for="id" />
+                        <h:outputText id="id" value="#{visitController.selected.nom_visite}" />
+
+                        <p:outputLabel value="#{myBundle.EditVisitLabel_date}" for="date" />
+                        <p:calendar id="date" pattern="dd/MM/yyyy" value="#{visitController.selected.date}" title="#{myBundle.EditVisitTitle_date}" required="true" requiredMessage="#{myBundle.EditVisitRequiredMessage_date}" showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditVisitLabel_codepatient}" for="codepatient" />
+                        <h:outputText id="codepatient" value="#{visitController.codePatient}" />
+
+                        <p:outputLabel value="Nom de la visite" for="nomvisite" />
+                        <h:inputText  id="nomvisite" value="#{visitController.selected.nom_visite}" />
+                         
+                         <p:outputLabel rendered="false" value="#{myBundle.EditVisitLabel_irmid}" for="irmid" />
+                        <h:outputText rendered="false" id="irmid" value="#{visitController.selected.irmid}"  />
+                        
+
+                        <p:outputLabel rendered="false" value="#{myBundle.EditVisitLabel_csctid}" for="csctid" />
+                        <h:outputText  rendered="false" id="csctid" value="#{visitController.selected.csctid}"  />
+
+                        <p:outputLabel rendered="false" value="#{myBundle.EditVisitLabel_bilancognitiflbid}" for="bilancognitiflbid" />
+                        <h:outputText  rendered="false" id="bilancognitiflbid" value="#{visitController.selected.bilancognitiflbid}"  />
+                        
+                        <p:outputLabel  rendered="false" value="#{myBundle.EditVisitLabel_consultationid}" for="consultationid" />
+                        <h:outputText  rendered="false" id="consultationid" value="#{visitController.selected.consultationid}"  />
+                        
+
+                        <p:outputLabel rendered="false"  value="#{myBundle.EditVisitLabel_bilancognitifsuiviid}" for="bilancognitifsuiviid" />
+                        <h:outputText rendered="false" id="bilancognitifsuiviid" value="#{visitController.selected.bilancognitifsuiviid}"  />
+                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{visitController.save}" value="#{myBundle.Save}" update="display,:VisitListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('VisitEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="PF('VisitEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

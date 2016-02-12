@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VisitCreateDlg" width="auto" position="left top" widgetVar="VisitCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{myBundle.CreateVisitTitle}" closeOnEscape="true" >
+
+            <h:form id="VisitCreateForm">
+
+                <h:panelGroup id="display" rendered="#{visitController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{myBundle.CreateVisitLabel_date}" for="date" />
+                        <p:calendar id="date" pattern="dd/MM/yyyy" value="#{visitController.selected.date}" title="#{myBundle.CreateVisitTitle_date}" required="true" requiredMessage="#{myBundle.CreateVisitRequiredMessage_date}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.CreateVisitLabel_codepatient}" for="codepatient" />
+                        <h:outputText  id="codepatient" value="#{visitController.codePatient}" />
+
+                         <p:outputLabel value="Nom de la visite" for="nomvisite" />
+                         <h:inputText  id="nomvisite" value="#{visitController.selected.nom_visite}" />                        
+                        
+                        <p:selectOneMenu rendered="false" id="irmid" value="#{visitController.selected.irmid}"  converter="irmConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{irmController.items}"
+                                           var="irmidItem"
+                                           itemValue="#{irmidItem}"
+                                           itemLabel="#{irmidItem.id.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+               
+                        <p:selectOneMenu rendered="false" id="csctid" value="#{visitController.selected.csctid}"  converter="csctConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{csctController.items}"
+                                           var="csctidItem"
+                                           itemValue="#{csctidItem}"
+                                           itemLabel="#{csctidItem.id.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                     
+                        <p:selectOneMenu rendered="false" id="bilancognitiflbid" value="#{visitController.selected.bilancognitiflbid}"  converter="bilanCognitifLbConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{bilanCognitifLbController.items}"
+                                           var="bilancognitiflbidItem"
+                                           itemValue="#{bilancognitiflbidItem}"
+                                           itemLabel="#{bilancognitiflbidItem.id.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+  
+                        <p:selectOneMenu  rendered="false" id="consultationid" value="#{visitController.selected.consultationid}"  converter="consultationConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{consultationController.items}"
+                                           var="consultationidItem"
+                                           itemValue="#{consultationidItem}"
+                                           itemLabel="#{consultationidItem.id.toString()}"
+                                           />
+                        </p:selectOneMenu>
+                
+                        <p:selectOneMenu rendered="false" id="bilancognitifsuiviid" value="#{visitController.selected.bilancognitifsuiviid}"  converter="bilanCognitifSuiviConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{bilanCognitifSuiviController.items}"
+                                           var="bilancognitifsuiviidItem"
+                                           itemValue="#{bilancognitifsuiviidItem}"
+                                           itemLabel="#{bilancognitifsuiviidItem.id.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{visitController.saveNew}" value="#{myBundle.Save}" update="display,:VisitListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('VisitCreateDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="PF('VisitCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    
+
+    <h:form id="CsctListForm">
+
+        <p:panel header="#{myBundle.ListCsctTitle}">
+            <p:contextMenu id="CsctDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{myBundle.Create}" onclick="document.getElementById('CsctListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('CsctListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('CsctListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{myBundle.Delete}" rendered="false" onclick="document.getElementById('CsctListForm:deleteButton').click();" icon="ui-icon-trash"/>           
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{csctController.items}"
+                         var="item"
+                         rowKey="#{item.id}"
+                         paginator="false"
+                         rows="1"
+                         rowsPerPageTemplate="1"
+                         selectionMode="single"
+                         selection="#{csctController.selected}">
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CsctDataTableContextMenu" />
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CsctDataTableContextMenu" />
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" />
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('CsctListForm:viewButton').click();"/>
+
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListCsctTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.visite.nom_visite}"/>
+                </p:column>
+
+
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListCsctTitle_dateexamen}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dateexamen}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton" disabled="#{csctController.nItemsLimit}" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{csctController.prepareCreate}" update=":CsctCreateForm" oncomplete="PF('CsctCreateDialog').show()"/>
+            <p:commandButton id="viewButton"  rendered="false"  icon="ui-icon-search" value="#{myBundle.View}" update=":CsctViewForm" oncomplete="PF('CsctViewDialog').show()" disabled="#{empty csctController.selected}"/>
+            <p:commandButton id="editButton" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":CsctEditForm" oncomplete="PF('CsctEditDialog').show()" disabled="#{empty csctController.selected}"/>
+            <p:commandButton id="deleteButton" rendered="false"  icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{csctController.delete}" update=":growl,datalist" disabled="#{empty csctController.selected}">
+                <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+            
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

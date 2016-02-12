@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="CsctCreatePage" lazy="true">
+        <pm:header title="#{myBundle.CreateCsctTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:CsctListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="CsctCreateForm">
+
+                <h:panelGroup id="display" rendered="#{csctController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCsctLabel_dateexamen}" for="dateexamen" />
+                            <p:calendar id="dateexamen" pattern="MM/dd/yyyy" value="#{csctController.selected.dateexamen}" title="#{myBundle.CreateCsctTitle_dateexamen}" required="true" requiredMessage="#{myBundle.CreateCsctRequiredMessage_dateexamen}" showOn="button"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCsctLabel_delaipostRT}" for="delaipostRT" />
+                            <p:inputText id="delaipostRT" value="#{csctController.selected.delaipostRT}" title="#{myBundle.CreateCsctTitle_delaipostRT}" required="true" requiredMessage="#{myBundle.CreateCsctRequiredMessage_delaipostRT}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCsctLabel_etatduCSCT}" for="etatduCSCT" />
+                            <p:selectBooleanCheckbox id="etatduCSCT" value="#{csctController.selected.etatduCSCT}" required="true" requiredMessage="#{myBundle.CreateCsctRequiredMessage_etatduCSCT}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCsctLabel_nberreurs}" for="nberreurs" />
+                            <p:inputText id="nberreurs" value="#{csctController.selected.nberreurs}" title="#{myBundle.CreateCsctTitle_nberreurs}" required="true" requiredMessage="#{myBundle.CreateCsctRequiredMessage_nberreurs}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCsctLabel_nbreponsecorrectes}" for="nbreponsecorrectes" />
+                            <p:inputText id="nbreponsecorrectes" value="#{csctController.selected.nbreponsecorrectes}" title="#{myBundle.CreateCsctTitle_nbreponsecorrectes}" required="true" requiredMessage="#{myBundle.CreateCsctRequiredMessage_nbreponsecorrectes}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCsctLabel_zs}" for="zs" />
+                            <p:inputText id="zs" value="#{csctController.selected.zs}" title="#{myBundle.CreateCsctTitle_zs}" required="true" requiredMessage="#{myBundle.CreateCsctRequiredMessage_zs}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCsctLabel_visit}" for="visit" />
+                            <p:selectOneMenu id="visit" value="#{csctController.selected.visit}"  converter="visitConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{visitController.items}"
+                                               var="visitItem"
+                                               itemValue="#{visitItem}"
+                                               itemLabel="#{visitItem.id.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCsctLabel_codepatient}" for="codepatient" />
+                            <p:selectOneMenu id="codepatient" value="#{csctController.selected.codepatient}" required="true" requiredMessage="#{myBundle.CreateCsctRequiredMessage_codepatient}" converter="patientConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{patientController.items}"
+                                               var="codepatientItem"
+                                               itemValue="#{codepatientItem}"
+                                               itemLabel="#{codepatientItem.firstName.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCsctLabel_visite}" for="visite" />
+                            <p:selectOneMenu id="visite" value="#{csctController.selected.visite}" required="true" requiredMessage="#{myBundle.CreateCsctRequiredMessage_visite}" converter="visitConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{visitController.items}"
+                                               var="visiteItem"
+                                               itemValue="#{visiteItem}"
+                                               itemLabel="#{visiteItem.id.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{csctController.saveNew}" value="#{myBundle.Save}" update="display,:CsctListPage:CsctListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:CsctListPage')}">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

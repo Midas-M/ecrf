@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="BilanCognitifSuiviViewPage" lazy="true">
+        <pm:header title="#{myBundle.ViewBilanCognitifSuiviTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:BilanCognitifSuiviListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="BilanCognitifSuiviViewForm">
+
+                <h:panelGroup id="display">
+                    <p:tabView id="BilanCognitifSuiviTabView">
+
+                        <p:tab id="BilanCognitifSuiviTab1" title="#{myBundle.TabHeaderPrefix} 1">
+                            <p:outputPanel rendered="#{bilanCognitifSuiviController.selected != null}">
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_id}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.id}" title="#{myBundle.ViewBilanCognitifSuiviTitle_id}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_dateexamen}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.dateexamen}" title="#{myBundle.ViewBilanCognitifSuiviTitle_dateexamen}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_delaipostRT}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.delaipostRT}" title="#{myBundle.ViewBilanCognitifSuiviTitle_delaipostRT}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_etatbilan}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.etatbilan}" title="#{myBundle.ViewBilanCognitifSuiviTitle_etatbilan}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_FNARTtotal}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.FNARTtotal}" title="#{myBundle.ViewBilanCognitifSuiviTitle_FNARTtotal}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_MMSEtotal}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.MMSEtotal}" title="#{myBundle.ViewBilanCognitifSuiviTitle_MMSEtotal}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_MMSEdeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.MMSEdeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_MMSEdeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_MOCAtotal}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.MOCAtotal}" title="#{myBundle.ViewBilanCognitifSuiviTitle_MOCAtotal}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_MOCAdeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.MOCAdeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_MOCAdeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_mattisbruttotal}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.mattisbruttotal}" title="#{myBundle.ViewBilanCognitifSuiviTitle_mattisbruttotal}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_mattisPCtotal}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.mattisPCtotal}" title="#{myBundle.ViewBilanCognitifSuiviTitle_mattisPCtotal}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_mattisdeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.mattisdeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_mattisdeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_RLRI16brutRL1}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.RLRI16brutRL1}" title="#{myBundle.ViewBilanCognitifSuiviTitle_RLRI16brutRL1}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_rlri16ZsRl1}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.rlri16ZsRl1}" title="#{myBundle.ViewBilanCognitifSuiviTitle_rlri16ZsRl1}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_RLRI16brutRL2}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.RLRI16brutRL2}" title="#{myBundle.ViewBilanCognitifSuiviTitle_RLRI16brutRL2}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_rlri16ZsRl2}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.rlri16ZsRl2}" title="#{myBundle.ViewBilanCognitifSuiviTitle_rlri16ZsRl2}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_RLRI16brutRL3}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.RLRI16brutRL3}" title="#{myBundle.ViewBilanCognitifSuiviTitle_RLRI16brutRL3}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_rlri16ZsRl3}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.rlri16ZsRl3}" title="#{myBundle.ViewBilanCognitifSuiviTitle_rlri16ZsRl3}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_RLRI16brutRD}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.RLRI16brutRD}" title="#{myBundle.ViewBilanCognitifSuiviTitle_RLRI16brutRD}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_rlri16ZsRd}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.rlri16ZsRd}" title="#{myBundle.ViewBilanCognitifSuiviTitle_rlri16ZsRd}"/>
+                                </pm:field>
+
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab id="BilanCognitifSuiviTab2" title="#{myBundle.TabHeaderPrefix} 2">
+                            <p:outputPanel rendered="#{bilanCognitifSuiviController.selected != null}">
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_RLRI16Indice}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.RLRI16Indice}" title="#{myBundle.ViewBilanCognitifSuiviTitle_RLRI16Indice}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_RLRI16ZSmoy}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.RLRI16ZSmoy}" title="#{myBundle.ViewBilanCognitifSuiviTitle_RLRI16ZSmoy}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_RLRI16declin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.RLRI16declin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_RLRI16declin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_REYbrutrappel}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.REYbrutrappel}" title="#{myBundle.ViewBilanCognitifSuiviTitle_REYbrutrappel}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_REYPCrappel}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.REYPCrappel}" title="#{myBundle.ViewBilanCognitifSuiviTitle_REYPCrappel}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_REYdeclinrappel}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.REYdeclinrappel}" title="#{myBundle.ViewBilanCognitifSuiviTitle_REYdeclinrappel}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_REYbrutcopie}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.REYbrutcopie}" title="#{myBundle.ViewBilanCognitifSuiviTitle_REYbrutcopie}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_REYPCcopie}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.REYPCcopie}" title="#{myBundle.ViewBilanCognitifSuiviTitle_REYPCcopie}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_REYdeclincopie}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.REYdeclincopie}" title="#{myBundle.ViewBilanCognitifSuiviTitle_REYdeclincopie}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_empandirect}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.empandirect}" title="#{myBundle.ViewBilanCognitifSuiviTitle_empandirect}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_empaninverse}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.empaninverse}" title="#{myBundle.ViewBilanCognitifSuiviTitle_empaninverse}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_memoirechiffrebrut}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.memoirechiffrebrut}" title="#{myBundle.ViewBilanCognitifSuiviTitle_memoirechiffrebrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_memoirechiffreNS}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.memoirechiffreNS}" title="#{myBundle.ViewBilanCognitifSuiviTitle_memoirechiffreNS}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_memoirechiffredeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.memoirechiffredeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_memoirechiffredeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_SLCbrut}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.SLCbrut}" title="#{myBundle.ViewBilanCognitifSuiviTitle_SLCbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_slcNs}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.slcNs}" title="#{myBundle.ViewBilanCognitifSuiviTitle_slcNs}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_SLCdeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.SLCdeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_SLCdeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_fluencesPbrut}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.fluencesPbrut}" title="#{myBundle.ViewBilanCognitifSuiviTitle_fluencesPbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_fluencesPZS}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.fluencesPZS}" title="#{myBundle.ViewBilanCognitifSuiviTitle_fluencesPZS}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_fluencesanimauxbrut}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.fluencesanimauxbrut}" title="#{myBundle.ViewBilanCognitifSuiviTitle_fluencesanimauxbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_fluencesanimauxZS}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.fluencesanimauxZS}" title="#{myBundle.ViewBilanCognitifSuiviTitle_fluencesanimauxZS}"/>
+                                </pm:field>
+
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab id="BilanCognitifSuiviTab3" title="#{myBundle.TabHeaderPrefix} 3">
+                            <p:outputPanel rendered="#{bilanCognitifSuiviController.selected != null}">
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_fluencesdeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.fluencesdeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_fluencesdeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_TMTAbrut}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.TMTAbrut}" title="#{myBundle.ViewBilanCognitifSuiviTitle_TMTAbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_tmtAZs}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.tmtAZs}" title="#{myBundle.ViewBilanCognitifSuiviTitle_tmtAZs}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_TMTBbrut}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.TMTBbrut}" title="#{myBundle.ViewBilanCognitifSuiviTitle_TMTBbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_tmtBZs}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.tmtBZs}" title="#{myBundle.ViewBilanCognitifSuiviTitle_tmtBZs}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_TMTBAbrut}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.TMTBAbrut}" title="#{myBundle.ViewBilanCognitifSuiviTitle_TMTBAbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_tmtBAZs}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.tmtBAZs}" title="#{myBundle.ViewBilanCognitifSuiviTitle_tmtBAZs}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_TMTdeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.TMTdeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_TMTdeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_stroopdenobrut}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.stroopdenobrut}" title="#{myBundle.ViewBilanCognitifSuiviTitle_stroopdenobrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_stroopdenoZS}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.stroopdenoZS}" title="#{myBundle.ViewBilanCognitifSuiviTitle_stroopdenoZS}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_strooplecturebrut}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.strooplecturebrut}" title="#{myBundle.ViewBilanCognitifSuiviTitle_strooplecturebrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_strooplectureZS}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.strooplectureZS}" title="#{myBundle.ViewBilanCognitifSuiviTitle_strooplectureZS}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_stroopinterbrut}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.stroopinterbrut}" title="#{myBundle.ViewBilanCognitifSuiviTitle_stroopinterbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_stroopinterZS}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.stroopinterZS}" title="#{myBundle.ViewBilanCognitifSuiviTitle_stroopinterZS}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_stroopdeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.stroopdeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_stroopdeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_BNTbrut}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.BNTbrut}" title="#{myBundle.ViewBilanCognitifSuiviTitle_BNTbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_bntZs}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.bntZs}" title="#{myBundle.ViewBilanCognitifSuiviTitle_bntZs}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_BNTdeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.BNTdeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_BNTdeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_tokenbrut}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.tokenbrut}" title="#{myBundle.ViewBilanCognitifSuiviTitle_tokenbrut}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_tokenZS}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.tokenZS}" title="#{myBundle.ViewBilanCognitifSuiviTitle_tokenZS}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_tokendeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.tokendeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_tokendeclin}"/>
+                                </pm:field>
+
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab id="BilanCognitifSuiviTab4" title="#{myBundle.TabHeaderPrefix} 4">
+                            <p:outputPanel rendered="#{bilanCognitifSuiviController.selected != null}">
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQC30global}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQC30global}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQC30global}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQC30physique}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQC30physique}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQC30physique}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQC30personnel}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQC30personnel}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQC30personnel}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQC30emotionnel}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQC30emotionnel}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQC30emotionnel}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQC30cognitif}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQC30cognitif}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQC30cognitif}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQC30social}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQC30social}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQC30social}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQC30fatigue}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQC30fatigue}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQC30fatigue}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQC30nausees}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQC30nausees}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQC30nausees}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQC30douleur}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQC30douleur}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQC30douleur}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQC30dyspnee}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQC30dyspnee}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQC30dyspnee}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQC30insomnies}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQC30insomnies}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQC30insomnies}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQC30appetit}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQC30appetit}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQC30appetit}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQC30constipation}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQC30constipation}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQC30constipation}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQC30diarhees}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQC30diarhees}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQC30diarhees}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQC30finances}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQC30finances}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQC30finances}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQBN20futur}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQBN20futur}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQBN20futur}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQBN20visuel}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQBN20visuel}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQBN20visuel}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQBN20moteur}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQBN20moteur}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQBN20moteur}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQBN20comm}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQBN20comm}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQBN20comm}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQBN20epilepsie}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQBN20epilepsie}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQBN20epilepsie}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQBN20somnolence}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQBN20somnolence}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQBN20somnolence}"/>
+                                </pm:field>
+
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab id="BilanCognitifSuiviTab5" title="#{myBundle.TabHeaderPrefix} 5">
+                            <p:outputPanel rendered="#{bilanCognitifSuiviController.selected != null}">
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQBN20demange}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQBN20demange}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQBN20demange}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQBN20cheveux}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQBN20cheveux}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQBN20cheveux}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQBN20faiblesse}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQBN20faiblesse}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQBN20faiblesse}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_QLQBN20incontinence}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.QLQBN20incontinence}" title="#{myBundle.ViewBilanCognitifSuiviTitle_QLQBN20incontinence}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_isdc}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.isdc}" title="#{myBundle.ViewBilanCognitifSuiviTitle_isdc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_goldberg}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.goldberg}" title="#{myBundle.ViewBilanCognitifSuiviTitle_goldberg}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_facit}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.facit}" title="#{myBundle.ViewBilanCognitifSuiviTitle_facit}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_macNair}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.macNair}" title="#{myBundle.ViewBilanCognitifSuiviTitle_macNair}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_eiadl}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.eiadl}" title="#{myBundle.ViewBilanCognitifSuiviTitle_eiadl}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_ces}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.ces}" title="#{myBundle.ViewBilanCognitifSuiviTitle_ces}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_evalglobaledeficit}"/>
+                                    <h:selectBooleanCheckbox id="evalglobaledeficit" value="#{bilanCognitifSuiviController.selected.evalglobaledeficit}" title="#{myBundle.EditBilanCognitifSuiviTitle_evalglobaledeficit}"  disabled="true"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_evalglobaledeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.evalglobaledeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_evalglobaledeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_memverbdeficit}"/>
+                                    <h:selectBooleanCheckbox id="memverbdeficit" value="#{bilanCognitifSuiviController.selected.memverbdeficit}" title="#{myBundle.EditBilanCognitifSuiviTitle_memverbdeficit}"  disabled="true"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_memverbdeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.memverbdeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_memverbdeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_memvisudeficit}"/>
+                                    <h:selectBooleanCheckbox id="memvisudeficit" value="#{bilanCognitifSuiviController.selected.memvisudeficit}" title="#{myBundle.EditBilanCognitifSuiviTitle_memvisudeficit}"  disabled="true"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_memvisudeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.memvisudeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_memvisudeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_VTIdeficit}"/>
+                                    <h:selectBooleanCheckbox id="VTIdeficit" value="#{bilanCognitifSuiviController.selected.VTIdeficit}" title="#{myBundle.EditBilanCognitifSuiviTitle_VTIdeficit}"  disabled="true"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_VTIdeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.VTIdeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_VTIdeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_MCTMDTdeficit}"/>
+                                    <h:selectBooleanCheckbox id="MCTMDTdeficit" value="#{bilanCognitifSuiviController.selected.MCTMDTdeficit}" title="#{myBundle.EditBilanCognitifSuiviTitle_MCTMDTdeficit}"  disabled="true"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_MCTMDTdeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.MCTMDTdeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_MCTMDTdeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_inhibdeficit}"/>
+                                    <h:selectBooleanCheckbox id="inhibdeficit" value="#{bilanCognitifSuiviController.selected.inhibdeficit}" title="#{myBundle.EditBilanCognitifSuiviTitle_inhibdeficit}"  disabled="true"/>
+                                </pm:field>
+
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab id="BilanCognitifSuiviTab6" title="#{myBundle.TabHeaderPrefix} 6">
+                            <p:outputPanel rendered="#{bilanCognitifSuiviController.selected != null}">
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_inhibdeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.inhibdeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_inhibdeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_shiftingdeficit}"/>
+                                    <h:selectBooleanCheckbox id="shiftingdeficit" value="#{bilanCognitifSuiviController.selected.shiftingdeficit}" title="#{myBundle.EditBilanCognitifSuiviTitle_shiftingdeficit}"  disabled="true"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_shiftingdeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.shiftingdeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_shiftingdeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_expressiondeficit}"/>
+                                    <h:selectBooleanCheckbox id="expressiondeficit" value="#{bilanCognitifSuiviController.selected.expressiondeficit}" title="#{myBundle.EditBilanCognitifSuiviTitle_expressiondeficit}"  disabled="true"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_expressiondeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.expressiondeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_expressiondeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_comprehensiondeficit}"/>
+                                    <h:selectBooleanCheckbox id="comprehensiondeficit" value="#{bilanCognitifSuiviController.selected.comprehensiondeficit}" title="#{myBundle.EditBilanCognitifSuiviTitle_comprehensiondeficit}"  disabled="true"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_comprehensiondeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.comprehensiondeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_comprehensiondeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_visuoconstrudeficit}"/>
+                                    <h:selectBooleanCheckbox id="visuoconstrudeficit" value="#{bilanCognitifSuiviController.selected.visuoconstrudeficit}" title="#{myBundle.EditBilanCognitifSuiviTitle_visuoconstrudeficit}"  disabled="true"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_visuoconstrudeclin}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.visuoconstrudeclin}" title="#{myBundle.ViewBilanCognitifSuiviTitle_visuoconstrudeclin}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_visit}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.visit.id}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_codepatient}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.codepatient.firstName}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewBilanCognitifSuiviLabel_visite}"/>
+                                    <h:outputText value="#{bilanCognitifSuiviController.selected.visite.id}"/>
+                                </pm:field>
+                            </p:outputPanel>
+                        </p:tab>
+                    </p:tabView>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

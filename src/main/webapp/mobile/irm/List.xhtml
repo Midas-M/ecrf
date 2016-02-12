@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="IrmListPage">
+        <pm:header title="#{myBundle.ListIrmTitle}">
+            <h:form>
+                <p:commandButton id="backButton"   styleClass="ui-btn-left  ui-btn-inline" icon="ui-icon-arrow-l" value="#{myBundle.Back}" action="#{mobilePageController.navigateBackInHistory('/mobile/index')}"/>
+                <p:commandButton id="createButton" styleClass="ui-btn-right ui-btn-inline" icon="ui-icon-plus"    value="#{myBundle.Create}" update=":IrmCreatePage:IrmCreateForm" actionListener="#{irmController.prepareCreate}" action="#{mobilePageController.navigateWithHistory('pm:IrmCreatePage')}">
+                    <f:actionListener binding="#{currentPageListener}"/>
+                </p:commandButton>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="IrmListForm">
+
+                <p:dataTable id="datalist"
+                             value="#{irmController.items}"
+                             var="item"
+                             rowKey="#{item.id}"
+                             paginator="true"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             selectionMode="single"
+                             selection="#{irmController.selected}"
+                             reflow="true">
+
+                    <p:ajax event="rowSelect"   update="@form:editButton,@form:deleteButton,@form:navigationMenuButton,@form:navigationMenuPanel" listener="#{irmController.resetParents}"/>
+                    <p:ajax event="rowUnselect" update="@form:editButton,@form:deleteButton,@form:navigationMenuButton,@form:navigationMenuPanel" listener="#{irmController.resetParents}"/>
+                    <p:ajax event="swipeleft"   oncomplete="document.getElementById('IrmListPage:IrmListForm:deleteButton').click();"/>
+                    <p:ajax event="tap"         oncomplete="document.getElementById('IrmListPage:IrmListForm:editButton').click();"/>
+                    <p:ajax event="taphold"     oncomplete="document.getElementById('IrmListPage:IrmListForm:navigationMenuButton').click();"/>
+
+                    <p:column sortBy="#{item.id}" filterBy="#{item.id}" headerText="#{myBundle.ListIrmTitle_id}"/>
+                    <h:outputText value="#{item.id}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.dateexamen}" filterBy="#{item.dateexamen}" headerText="#{myBundle.ListIrmTitle_dateexamen}"/>
+                    <h:outputText value="#{item.dateexamen}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.delaipostRT}" filterBy="#{item.delaipostRT}" headerText="#{myBundle.ListIrmTitle_delaipostRT}"/>
+                    <h:outputText value="#{item.delaipostRT}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.fgSb}" filterBy="#{item.fgSb}" headerText="#{myBundle.ListIrmTitle_fgSb}"/>
+                    <h:outputText value="#{item.fgSb}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.fdSb}" filterBy="#{item.fdSb}" headerText="#{myBundle.ListIrmTitle_fdSb}"/>
+                    <h:outputText value="#{item.fdSb}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.fgAc}" filterBy="#{item.fgAc}" headerText="#{myBundle.ListIrmTitle_fgAc}"/>
+                    <h:outputText value="#{item.fgAc}"/>
+                    </p:column>
+
+                    <!--
+                                        <p:column sortBy="#{item.fdAc}" filterBy="#{item.fdAc}" headerText="#{myBundle.ListIrmTitle_fdAc}"/>
+                                            <h:outputText value="#{item.fdAc}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.tgSb}" filterBy="#{item.tgSb}" headerText="#{myBundle.ListIrmTitle_tgSb}"/>
+                                            <h:outputText value="#{item.tgSb}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.tdSb}" filterBy="#{item.tdSb}" headerText="#{myBundle.ListIrmTitle_tdSb}"/>
+                                            <h:outputText value="#{item.tdSb}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.tgAc}" filterBy="#{item.tgAc}" headerText="#{myBundle.ListIrmTitle_tgAc}"/>
+                                            <h:outputText value="#{item.tgAc}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.tdAc}" filterBy="#{item.tdAc}" headerText="#{myBundle.ListIrmTitle_tdAc}"/>
+                                            <h:outputText value="#{item.tdAc}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.pogSb}" filterBy="#{item.pogSb}" headerText="#{myBundle.ListIrmTitle_pogSb}"/>
+                                            <h:outputText value="#{item.pogSb}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.podSb}" filterBy="#{item.podSb}" headerText="#{myBundle.ListIrmTitle_podSb}"/>
+                                            <h:outputText value="#{item.podSb}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.pogAc}" filterBy="#{item.pogAc}" headerText="#{myBundle.ListIrmTitle_pogAc}"/>
+                                            <h:outputText value="#{item.pogAc}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.podAc}" filterBy="#{item.podAc}" headerText="#{myBundle.ListIrmTitle_podAc}"/>
+                                            <h:outputText value="#{item.podAc}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.cgSb}" filterBy="#{item.cgSb}" headerText="#{myBundle.ListIrmTitle_cgSb}"/>
+                                            <h:outputText value="#{item.cgSb}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.cdSb}" filterBy="#{item.cdSb}" headerText="#{myBundle.ListIrmTitle_cdSb}"/>
+                                            <h:outputText value="#{item.cdSb}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.cgAc}" filterBy="#{item.cgAc}" headerText="#{myBundle.ListIrmTitle_cgAc}"/>
+                                            <h:outputText value="#{item.cgAc}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.cdAc}" filterBy="#{item.cdAc}" headerText="#{myBundle.ListIrmTitle_cdAc}"/>
+                                            <h:outputText value="#{item.cdAc}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.ggbgSb}" filterBy="#{item.ggbgSb}" headerText="#{myBundle.ListIrmTitle_ggbgSb}"/>
+                                            <h:outputText value="#{item.ggbgSb}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.ggbdSb}" filterBy="#{item.ggbdSb}" headerText="#{myBundle.ListIrmTitle_ggbdSb}"/>
+                                            <h:outputText value="#{item.ggbdSb}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.ggbgAc}" filterBy="#{item.ggbgAc}" headerText="#{myBundle.ListIrmTitle_ggbgAc}"/>
+                                            <h:outputText value="#{item.ggbgAc}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.ggbdAc}" filterBy="#{item.ggbdAc}" headerText="#{myBundle.ListIrmTitle_ggbdAc}"/>
+                                            <h:outputText value="#{item.ggbdAc}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.codepatient.firstName}" filterBy="#{item.codepatient.firstName}" headerText="#{myBundle.ListIrmTitle_codepatient}"/>
+                                            <h:outputText value="#{item.codepatient.firstName}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.visite.id}" filterBy="#{item.visite.id}" headerText="#{myBundle.ListIrmTitle_visite}"/>
+                                            <h:outputText value="#{item.visite.id}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.visit.id}" filterBy="#{item.visit.id}" headerText="#{myBundle.ListIrmTitle_visit}"/>
+                                            <h:outputText value="#{item.visit.id}"/>
+                                        </p:column>
+                    -->
+                </p:dataTable>
+                <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":IrmEditPage:IrmEditForm" disabled="#{empty irmController.selected}" actionListener="#{mobilePageController.currentPageListener}" action="#{mobilePageController.navigateWithHistory('pm:IrmEditPage')}"/>
+                <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{irmController.delete}" update=":growl,datalist" disabled="#{empty irmController.selected}">
+                    <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                </p:commandButton>
+                <p:commandButton id="navigationMenuButton" style="visibility: hidden;" value="#{myBundle.Menu}" disabled="#{empty irmController.selected}"/>
+
+                <p:overlayPanel id="navigationMenuPanel" for="navigationMenuButton" at="right" showEffect="overlay">
+                    <h2>#{myBundle.IrmHeading} #{myBundle.Menu}</h2>
+                    <p:menu>
+                        <p:menuitem value="#{myBundle.IrmMenuItem_codepatient}" icon="ui-icon-search" update=":PatientEditPage:PatientEditForm" disabled="#{empty irmController.selected.codepatient}" actionListener="#{irmController.prepareCodepatient}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:PatientEditPage"/>
+                        </p:menuitem>
+                        <p:menuitem value="#{myBundle.IrmMenuItem_visite}" icon="ui-icon-search" update=":VisitEditPage:VisitEditForm" disabled="#{empty irmController.selected.visite}" actionListener="#{irmController.prepareVisite}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:VisitEditPage"/>
+                        </p:menuitem>
+                        <p:menuitem value="#{myBundle.IrmMenuItem_visit}" icon="ui-icon-search" update=":VisitEditPage:VisitEditForm" disabled="#{empty irmController.selected.visit}" actionListener="#{irmController.prepareVisit}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:VisitEditPage"/>
+                        </p:menuitem>
+                    </p:menu>
+                </p:overlayPanel>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

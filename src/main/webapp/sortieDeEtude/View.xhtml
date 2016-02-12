@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SortieDeEtudeViewDlg" widgetVar="SortieDeEtudeViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewSortieDeEtudeTitle}" closeOnEscape="true">
+
+            <h:form id="SortieDeEtudeViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{SortieDeEtudeController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewSortieDeEtudeLabel_id}"/>
+                        <h:outputText value="#{SortieDeEtudeController.selected.id}" title="#{myBundle.ViewSortieDeEtudeTitle_id}"/>
+
+                        <h:outputText value="#{myBundle.ViewSortieDeEtudeLabel_raison}"/>
+                        <h:outputText value="#{SortieDeEtudeController.selected.raison}" title="#{myBundle.ViewSortieDeEtudeTitle_raison}"/>
+
+                        <h:outputText value="#{myBundle.ViewSortieDeEtudeLabel_precisionSortie}"/>
+                        <h:outputText value="#{SortieDeEtudeController.selected.precisionSortie}" title="#{myBundle.ViewSortieDeEtudeTitle_precisionSortie}"/>
+
+                        <h:outputText value="#{myBundle.ViewSortieDeEtudeLabel_lieealatumeur}"/>
+                        <h:selectBooleanCheckbox id="lieealatumeur" value="#{SortieDeEtudeController.selected.lieealatumeur}" title="#{myBundle.EditSortieDeEtudeTitle_lieealatumeur}" required="true" requiredMessage="#{myBundle.EditSortieDeEtudeRequiredMessage_lieealatumeur}" disabled="true"/>
+
+                        <h:outputText value="#{myBundle.ViewSortieDeEtudeLabel_dateSortie}"/>
+                        <h:outputText value="#{SortieDeEtudeController.selected.dateSortie}" title="#{myBundle.ViewSortieDeEtudeTitle_dateSortie}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewSortieDeEtudeLabel_codepatient}"/>
+                        <h:outputText value="#{SortieDeEtudeController.selected.codepatient.firstName}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('SortieDeEtudeViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BilanCognitifLbViewDlg" width="auto" position="left top" widgetVar="BilanCognitifLbViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewBilanCognitifLbTitle}" closeOnEscape="true" >
+
+            <h:form id="BilanCognitifLbViewForm">
+
+                <h:panelGroup id="display">
+                    <p:tabView id="BilanCognitifLbTabView">
+
+                        <p:tab id="BilanCognitifLbTab1" title="#{myBundle.TabHeaderPrefix} 1">
+                            <p:panelGrid columns="2" columnClasses="column" rendered="#{bilanCognitifLbController.selected != null}">
+                                
+                                 <h:outputText value="#{myBundle.ViewCsctLabel_codepatient}"/>
+                                 <h:outputText value="#{bilanCognitifLbController.codePatient}"/>
+
+                                <h:outputText value="#{myBundle.ViewCsctLabel_visite}"/>
+                                <h:outputText value="#{bilanCognitifLbController.visit}"/>
+                                
+                                
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_dateexamen}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.dateexamen}" title="#{myBundle.ViewBilanCognitifLbTitle_dateexamen}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_delaipostRT}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.delaipostRT}" title="#{myBundle.ViewBilanCognitifLbTitle_delaipostRT}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_etatbilan}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.etatbilan}" title="#{myBundle.ViewBilanCognitifLbTitle_etatbilan}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_FNARTtotal}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.FNARTtotal}" title="#{myBundle.ViewBilanCognitifLbTitle_FNARTtotal}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_MMSEtotal}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.MMSEtotal}" title="#{myBundle.ViewBilanCognitifLbTitle_MMSEtotal}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_MOCAtotal}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.MOCAtotal}" title="#{myBundle.ViewBilanCognitifLbTitle_MOCAtotal}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_mattisbruttotal}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.mattisbruttotal}" title="#{myBundle.ViewBilanCognitifLbTitle_mattisbruttotal}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_mattisPCtotal}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.mattisPCtotal}" title="#{myBundle.ViewBilanCognitifLbTitle_mattisPCtotal}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_RLRI16brutRL1}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.RLRI16brutRL1}" title="#{myBundle.ViewBilanCognitifLbTitle_RLRI16brutRL1}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_rlri16ZsRl1}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.rlri16ZsRl1}" title="#{myBundle.ViewBilanCognitifLbTitle_rlri16ZsRl1}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_RLRI16brutRL2}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.RLRI16brutRL2}" title="#{myBundle.ViewBilanCognitifLbTitle_RLRI16brutRL2}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_rlri16ZsRl2}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.rlri16ZsRl2}" title="#{myBundle.ViewBilanCognitifLbTitle_rlri16ZsRl2}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_RLRI16brutRL3}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.RLRI16brutRL3}" title="#{myBundle.ViewBilanCognitifLbTitle_RLRI16brutRL3}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_rlri16ZsRl3}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.rlri16ZsRl3}" title="#{myBundle.ViewBilanCognitifLbTitle_rlri16ZsRl3}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_RLRI16brutRD}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.RLRI16brutRD}" title="#{myBundle.ViewBilanCognitifLbTitle_RLRI16brutRD}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_rlri16ZsRd}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.rlri16ZsRd}" title="#{myBundle.ViewBilanCognitifLbTitle_rlri16ZsRd}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_RLRI16Indice}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.RLRI16Indice}" title="#{myBundle.ViewBilanCognitifLbTitle_RLRI16Indice}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_RLRI16ZSmoy}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.RLRI16ZSmoy}" title="#{myBundle.ViewBilanCognitifLbTitle_RLRI16ZSmoy}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_REYbrutrappel}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.REYbrutrappel}" title="#{myBundle.ViewBilanCognitifLbTitle_REYbrutrappel}"/>
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="BilanCognitifLbTab2" title="#{myBundle.TabHeaderPrefix} 2">
+                            <p:panelGrid columns="2" columnClasses="column" rendered="#{bilanCognitifLbController.selected != null}">
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_REYPCrappel}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.REYPCrappel}" title="#{myBundle.ViewBilanCognitifLbTitle_REYPCrappel}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_REYbrutcopie}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.REYbrutcopie}" title="#{myBundle.ViewBilanCognitifLbTitle_REYbrutcopie}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_REYPCcopie}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.REYPCcopie}" title="#{myBundle.ViewBilanCognitifLbTitle_REYPCcopie}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_empandirect}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.empandirect}" title="#{myBundle.ViewBilanCognitifLbTitle_empandirect}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_empaninverse}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.empaninverse}" title="#{myBundle.ViewBilanCognitifLbTitle_empaninverse}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_memoirechiffrebrut}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.memoirechiffrebrut}" title="#{myBundle.ViewBilanCognitifLbTitle_memoirechiffrebrut}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_memoirechiffreNS}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.memoirechiffreNS}" title="#{myBundle.ViewBilanCognitifLbTitle_memoirechiffreNS}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_SLCbrut}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.SLCbrut}" title="#{myBundle.ViewBilanCognitifLbTitle_SLCbrut}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_slcNs}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.slcNs}" title="#{myBundle.ViewBilanCognitifLbTitle_slcNs}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_fluencesPbrut}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.fluencesPbrut}" title="#{myBundle.ViewBilanCognitifLbTitle_fluencesPbrut}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_fluencesPZS}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.fluencesPZS}" title="#{myBundle.ViewBilanCognitifLbTitle_fluencesPZS}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_fluencesanimauxbrut}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.fluencesanimauxbrut}" title="#{myBundle.ViewBilanCognitifLbTitle_fluencesanimauxbrut}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_fluencesanimauxZS}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.fluencesanimauxZS}" title="#{myBundle.ViewBilanCognitifLbTitle_fluencesanimauxZS}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_TMTAbrut}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.TMTAbrut}" title="#{myBundle.ViewBilanCognitifLbTitle_TMTAbrut}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_tmtAZs}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.tmtAZs}" title="#{myBundle.ViewBilanCognitifLbTitle_tmtAZs}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_TMTBbrut}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.TMTBbrut}" title="#{myBundle.ViewBilanCognitifLbTitle_TMTBbrut}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_tmtBZs}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.tmtBZs}" title="#{myBundle.ViewBilanCognitifLbTitle_tmtBZs}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_TMTBAbrut}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.TMTBAbrut}" title="#{myBundle.ViewBilanCognitifLbTitle_TMTBAbrut}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_tmtBAZs}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.tmtBAZs}" title="#{myBundle.ViewBilanCognitifLbTitle_tmtBAZs}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_stroopdenobrut}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.stroopdenobrut}" title="#{myBundle.ViewBilanCognitifLbTitle_stroopdenobrut}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_stroopdenoZS}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.stroopdenoZS}" title="#{myBundle.ViewBilanCognitifLbTitle_stroopdenoZS}"/>
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="BilanCognitifLbTab3" title="#{myBundle.TabHeaderPrefix} 3">
+                            <p:panelGrid columns="2" columnClasses="column" rendered="#{bilanCognitifLbController.selected != null}">
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_strooplecturebrut}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.strooplecturebrut}" title="#{myBundle.ViewBilanCognitifLbTitle_strooplecturebrut}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_strooplectureZS}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.strooplectureZS}" title="#{myBundle.ViewBilanCognitifLbTitle_strooplectureZS}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_stroopinterbrut}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.stroopinterbrut}" title="#{myBundle.ViewBilanCognitifLbTitle_stroopinterbrut}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_stroopinterZS}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.stroopinterZS}" title="#{myBundle.ViewBilanCognitifLbTitle_stroopinterZS}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_BNTbrut}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.BNTbrut}" title="#{myBundle.ViewBilanCognitifLbTitle_BNTbrut}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_bntZs}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.bntZs}" title="#{myBundle.ViewBilanCognitifLbTitle_bntZs}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_tokenbrut}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.tokenbrut}" title="#{myBundle.ViewBilanCognitifLbTitle_tokenbrut}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_tokenZS}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.tokenZS}" title="#{myBundle.ViewBilanCognitifLbTitle_tokenZS}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQC30global}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQC30global}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQC30global}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQC30physique}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQC30physique}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQC30physique}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQC30personnel}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQC30personnel}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQC30personnel}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQC30emotionnel}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQC30emotionnel}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQC30emotionnel}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQC30cognitif}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQC30cognitif}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQC30cognitif}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQC30social}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQC30social}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQC30social}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQC30fatigue}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQC30fatigue}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQC30fatigue}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQC30nausees}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQC30nausees}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQC30nausees}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQC30douleur}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQC30douleur}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQC30douleur}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQC30dyspnee}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQC30dyspnee}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQC30dyspnee}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQC30insomnies}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQC30insomnies}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQC30insomnies}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQC30appetit}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQC30appetit}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQC30appetit}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQC30constipation}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQC30constipation}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQC30constipation}"/>
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="BilanCognitifLbTab4" title="#{myBundle.TabHeaderPrefix} 4">
+                            <p:panelGrid columns="2" columnClasses="column" rendered="#{bilanCognitifLbController.selected != null}">
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQC30diarhees}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQC30diarhees}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQC30diarhees}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQC30finances}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQC30finances}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQC30finances}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQBN20futur}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQBN20futur}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQBN20futur}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQBN20visuel}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQBN20visuel}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQBN20visuel}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQBN20moteur}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQBN20moteur}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQBN20moteur}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQBN20comm}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQBN20comm}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQBN20comm}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQBN20epilepsie}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQBN20epilepsie}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQBN20epilepsie}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQBN20somnolence}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQBN20somnolence}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQBN20somnolence}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQBN20demange}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQBN20demange}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQBN20demange}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQBN20cheveux}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQBN20cheveux}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQBN20cheveux}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQBN20faiblesse}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQBN20faiblesse}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQBN20faiblesse}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_QLQBN20incontinence}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.QLQBN20incontinence}" title="#{myBundle.ViewBilanCognitifLbTitle_QLQBN20incontinence}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_isdc}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.isdc}" title="#{myBundle.ViewBilanCognitifLbTitle_isdc}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_goldberg}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.goldberg}" title="#{myBundle.ViewBilanCognitifLbTitle_goldberg}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_facit}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.facit}" title="#{myBundle.ViewBilanCognitifLbTitle_facit}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_macNair}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.macNair}" title="#{myBundle.ViewBilanCognitifLbTitle_macNair}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_eiadl}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.eiadl}" title="#{myBundle.ViewBilanCognitifLbTitle_eiadl}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_ces}"/>
+                                <h:outputText value="#{bilanCognitifLbController.selected.ces}" title="#{myBundle.ViewBilanCognitifLbTitle_ces}"/>
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_evalglobaledeficit}"/>
+                                <h:outputText id="evalglobaledeficit" value="#{bilanCognitifLbController.selected.evalglobaledeficit}"  />
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_memverbdeficit}"/>
+                                <h:outputText id="memverbdeficit" value="#{bilanCognitifLbController.selected.memverbdeficit}" title="#{myBundle.EditBilanCognitifLbTitle_memverbdeficit}"  />
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_memvisudeficit}"/>
+                                <h:outputText id="memvisudeficit" value="#{bilanCognitifLbController.selected.memvisudeficit}" title="#{myBundle.EditBilanCognitifLbTitle_memvisudeficit}"  />
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="BilanCognitifLbTab5" title="#{myBundle.TabHeaderPrefix} 5">
+                            <p:panelGrid columns="2" columnClasses="column" rendered="#{bilanCognitifLbController.selected != null}">
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_VTIdeficit}"/>
+                                <h:outputText id="VTIdeficit" value="#{bilanCognitifLbController.selected.VTIdeficit}" title="#{myBundle.EditBilanCognitifLbTitle_VTIdeficit}"  />
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_MCTMDTdeficit}"/>
+                                <h:outputText id="MCTMDTdeficit" value="#{bilanCognitifLbController.selected.MCTMDTdeficit}" title="#{myBundle.EditBilanCognitifLbTitle_MCTMDTdeficit}"  />
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_inhibdeficit}"/>
+                                <h:outputText id="inhibdeficit" value="#{bilanCognitifLbController.selected.inhibdeficit}" title="#{myBundle.EditBilanCognitifLbTitle_inhibdeficit}"  />
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_shiftingdeficit}"/>
+                                <h:outputText id="shiftingdeficit" value="#{bilanCognitifLbController.selected.shiftingdeficit}" title="#{myBundle.EditBilanCognitifLbTitle_shiftingdeficit}"  />
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_expressiondeficit}"/>
+                                <h:outputText id="expressiondeficit" value="#{bilanCognitifLbController.selected.expressiondeficit}" title="#{myBundle.EditBilanCognitifLbTitle_expressiondeficit}"  />
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_comprehensiondeficit}"/>
+                                <h:outputText id="comprehensiondeficit" value="#{bilanCognitifLbController.selected.comprehensiondeficit}" title="#{myBundle.EditBilanCognitifLbTitle_comprehensiondeficit}"  />
+
+                                <h:outputText value="#{myBundle.ViewBilanCognitifLbLabel_visuoconstrudeficit}"/>
+                                <h:outputText id="visuoconstrudeficit" value="#{bilanCognitifLbController.selected.visuoconstrudeficit}" title="#{myBundle.EditBilanCognitifLbTitle_visuoconstrudeficit}"  />
+
+                               
+                            </p:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('BilanCognitifLbViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

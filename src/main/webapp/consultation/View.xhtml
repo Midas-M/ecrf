@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConsultationViewDlg" width="auto" position="left top" widgetVar="ConsultationViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewConsultationTitle}" closeOnEscape="true" >
+
+            <h:form id="ConsultationViewForm">
+
+                <h:panelGroup id="display">
+                    <p:tabView id="ConsultationTabView">
+
+                        <p:tab id="ConsultationTab1" title="#{myBundle.TabHeaderPrefix} 1">
+                            <p:panelGrid columns="4" columnClasses="column" rendered="#{consultationController.selected != null}">
+                                <h:outputText value="#{myBundle.ViewCsctLabel_codepatient}"/>
+                                 <h:outputText value="#{consultationController.codePatient}"/>
+
+                                <h:outputText value="#{myBundle.ViewCsctLabel_visite}"/>
+                                <h:outputText value="#{consultationController.visit}"/>
+                                
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_dateexamen}"/>
+                                <h:outputText value="#{consultationController.selected.dateexamen}" title="#{myBundle.ViewConsultationTitle_dateexamen}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_delaipostRT}"/>
+                                <h:outputText value="#{consultationController.selected.delaipostRT}" title="#{myBundle.ViewConsultationTitle_delaipostRT}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_lignedetraitement}"/>
+                                <h:outputText value="#{consultationController.selected.lignedetraitement}" title="#{myBundle.ViewConsultationTitle_lignedetraitement}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_chimiotherapie}"/>
+                                <h:outputText value="#{consultationController.selected.chimiotherapie}" title="#{myBundle.ViewConsultationTitle_chimiotherapie}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_cycle}"/>
+                                <h:outputText value="#{consultationController.selected.cycle}" title="#{myBundle.ViewConsultationTitle_cycle}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_posologie}"/>
+                                <h:outputText value="#{consultationController.selected.posologie}" title="#{myBundle.ViewConsultationTitle_posologie}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_dosetotale}"/>
+                                <h:outputText value="#{consultationController.selected.dosetotale}" title="#{myBundle.ViewConsultationTitle_dosetotale}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_ik}"/>
+                                <h:outputText value="#{consultationController.selected.ik}" title="#{myBundle.ViewConsultationTitle_ik}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_examennormal}"/>
+                                <h:selectBooleanCheckbox id="examennormal" value="#{consultationController.selected.examennormal}" title="#{myBundle.EditConsultationTitle_examennormal}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_epilepsie}"/>
+                                <h:selectBooleanCheckbox id="epilepsie" value="#{consultationController.selected.epilepsie}" title="#{myBundle.EditConsultationTitle_epilepsie}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_deficitsensitivomoteur}"/>
+                                <h:selectBooleanCheckbox id="deficitsensitivomoteur" value="#{consultationController.selected.deficitsensitivomoteur}" title="#{myBundle.EditConsultationTitle_deficitsensitivomoteur}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_troublesphasiques}"/>
+                                <h:selectBooleanCheckbox id="troublesphasiques" value="#{consultationController.selected.troublesphasiques}" title="#{myBundle.EditConsultationTitle_troublesphasiques}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_troublesmnesiques}"/>
+                                <h:selectBooleanCheckbox id="troublesmnesiques" value="#{consultationController.selected.troublesmnesiques}" title="#{myBundle.EditConsultationTitle_troublesmnesiques}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_troublesattentionnels}"/>
+                                <h:selectBooleanCheckbox id="troublesattentionnels" value="#{consultationController.selected.troublesattentionnels}" title="#{myBundle.EditConsultationTitle_troublesattentionnels}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_troublesexecutifs}"/>
+                                <h:selectBooleanCheckbox id="troublesexecutifs" value="#{consultationController.selected.troublesexecutifs}" title="#{myBundle.EditConsultationTitle_troublesexecutifs}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_rigiditeaxiale}"/>
+                                <h:selectBooleanCheckbox id="rigiditeaxiale" value="#{consultationController.selected.rigiditeaxiale}" title="#{myBundle.EditConsultationTitle_rigiditeaxiale}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_ralentissementmarche}"/>
+                                <h:selectBooleanCheckbox id="ralentissementmarche" value="#{consultationController.selected.ralentissementmarche}" title="#{myBundle.EditConsultationTitle_ralentissementmarche}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_bradykinesie}"/>
+                                <h:selectBooleanCheckbox id="bradykinesie" value="#{consultationController.selected.bradykinesie}" title="#{myBundle.EditConsultationTitle_bradykinesie}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_urgenturie}"/>
+                                <h:selectBooleanCheckbox id="urgenturie" value="#{consultationController.selected.urgenturie}" title="#{myBundle.EditConsultationTitle_urgenturie}"  disabled="true"/>
+ <h:outputText value="#{myBundle.ViewConsultationLabel_rigiditemembres}"/>
+                                <h:selectBooleanCheckbox id="rigiditemembres" value="#{consultationController.selected.rigiditemembres}" title="#{myBundle.EditConsultationTitle_rigiditemembres}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_apraxiemarche}"/>
+                                <h:selectBooleanCheckbox id="apraxiemarche" value="#{consultationController.selected.apraxiemarche}" title="#{myBundle.EditConsultationTitle_apraxiemarche}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_apathie}"/>
+                                <h:selectBooleanCheckbox id="apathie" value="#{consultationController.selected.apathie}" title="#{myBundle.EditConsultationTitle_apathie}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_hypophonie}"/>
+                                <h:selectBooleanCheckbox id="hypophonie" value="#{consultationController.selected.hypophonie}" title="#{myBundle.EditConsultationTitle_hypophonie}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_troubledelaposture}"/>
+                                <h:selectBooleanCheckbox id="troubledelaposture" value="#{consultationController.selected.troubledelaposture}" title="#{myBundle.EditConsultationTitle_troubledelaposture}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_incontinenceurinaire}"/>
+                                <h:selectBooleanCheckbox id="incontinenceurinaire" value="#{consultationController.selected.incontinenceurinaire}" title="#{myBundle.EditConsultationTitle_incontinenceurinaire}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_hb}"/>
+                                <h:outputText value="#{consultationController.selected.hb}" title="#{myBundle.ViewConsultationTitle_hb}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_hbNadir}"/>
+                                <h:outputText value="#{consultationController.selected.hbNadir}" title="#{myBundle.ViewConsultationTitle_hbNadir}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_pnn}"/>
+                                <h:outputText value="#{consultationController.selected.pnn}" title="#{myBundle.ViewConsultationTitle_pnn}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_PNNNadir}"/>
+                                <h:outputText value="#{consultationController.selected.PNNNadir}" title="#{myBundle.ViewConsultationTitle_PNNNadir}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_lymphocite}"/>
+                                <h:outputText value="#{consultationController.selected.lymphocite}" title="#{myBundle.ViewConsultationTitle_lymphocite}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_lymphociteNadir}"/>
+                                <h:outputText value="#{consultationController.selected.lymphociteNadir}" title="#{myBundle.ViewConsultationTitle_lymphociteNadir}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_plaquettes}"/>
+                                <h:outputText value="#{consultationController.selected.plaquettes}" title="#{myBundle.ViewConsultationTitle_plaquettes}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_plaquettesNadir}"/>
+                                <h:outputText value="#{consultationController.selected.plaquettesNadir}" title="#{myBundle.ViewConsultationTitle_plaquettesNadir}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_bilanhepatique}"/>
+                                <h:outputText value="#{consultationController.selected.bilanhepatique}" title="#{myBundle.ViewConsultationTitle_bilanhepatique}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_asatAlat}"/>
+                                <h:outputText value="#{consultationController.selected.asatAlat}" title="#{myBundle.ViewConsultationTitle_asatAlat}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_phosphatealkaline}"/>
+                                <h:outputText value="#{consultationController.selected.phosphatealkaline}" title="#{myBundle.ViewConsultationTitle_phosphatealkaline}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_bilirubinemie}"/>
+                                <h:outputText value="#{consultationController.selected.bilirubinemie}" title="#{myBundle.ViewConsultationTitle_bilirubinemie}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_fonctionrenale}"/>
+                                <h:outputText value="#{consultationController.selected.fonctionrenale}" title="#{myBundle.ViewConsultationTitle_fonctionrenale}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_proteinurie}"/>
+                                <h:outputText value="#{consultationController.selected.proteinurie}" title="#{myBundle.ViewConsultationTitle_proteinurie}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_chimionausees}"/>
+                                <h:outputText value="#{consultationController.selected.chimionausees}" title="#{myBundle.ViewConsultationTitle_chimionausees}"/>
+
+                            </p:panelGrid>
+                        </p:tab>
+                       
+                        <p:tab id="ConsultationTab2" title="#{myBundle.TabHeaderPrefix} 2">
+                            <p:panelGrid columns="4" columnClasses="column" rendered="#{consultationController.selected != null}">
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_chimiofatigue}"/>
+                                <h:outputText value="#{consultationController.selected.chimiofatigue}" title="#{myBundle.ViewConsultationTitle_chimiofatigue}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_chimiocephalees}"/>
+                                <h:outputText value="#{consultationController.selected.chimiocephalees}" title="#{myBundle.ViewConsultationTitle_chimiocephalees}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_chimiodiarrhees}"/>
+                                <h:outputText value="#{consultationController.selected.chimiodiarrhees}" title="#{myBundle.ViewConsultationTitle_chimiodiarrhees}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_chimioconstipation}"/>
+                                <h:outputText value="#{consultationController.selected.chimioconstipation}" title="#{myBundle.ViewConsultationTitle_chimioconstipation}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_chimiofievre}"/>
+                                <h:outputText value="#{consultationController.selected.chimiofievre}" title="#{myBundle.ViewConsultationTitle_chimiofievre}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_chimioepistaxis}"/>
+                                <h:outputText value="#{consultationController.selected.chimioepistaxis}" title="#{myBundle.ViewConsultationTitle_chimioepistaxis}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_chimioallergies}"/>
+                                <h:outputText value="#{consultationController.selected.chimioallergies}" title="#{myBundle.ViewConsultationTitle_chimioallergies}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_chimiohemato}"/>
+                                <h:outputText value="#{consultationController.selected.chimiohemato}" title="#{myBundle.ViewConsultationTitle_chimiohemato}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_chimiodyspnees}"/>
+                                <h:outputText value="#{consultationController.selected.chimiodyspnees}" title="#{myBundle.ViewConsultationTitle_chimiodyspnees}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_chimiophlebites}"/>
+                                <h:outputText value="#{consultationController.selected.chimiophlebites}" title="#{myBundle.ViewConsultationTitle_chimiophlebites}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_chimioautres}"/>
+                                <h:outputText value="#{consultationController.selected.chimioautres}" title="#{myBundle.ViewConsultationTitle_chimioautres}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_antiemetique}"/>
+                                <h:outputText value="#{consultationController.selected.antiemetique}" title="#{myBundle.ViewConsultationTitle_antiemetique}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_corticotherapienom}"/>
+                                <h:outputText value="#{consultationController.selected.corticotherapienom}" title="#{myBundle.ViewConsultationTitle_corticotherapienom}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_corticotherapieposologie}"/>
+                                <h:outputText value="#{consultationController.selected.corticotherapieposologie}" title="#{myBundle.ViewConsultationTitle_corticotherapieposologie}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_nombredecriseepileptiquepartielle}"/>
+                                <h:outputText value="#{consultationController.selected.nombredecriseepileptiquepartielle}" title="#{myBundle.ViewConsultationTitle_nombredecriseepileptiquepartielle}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_nombredecriseepileptiquegeneralisee}"/>
+                                <h:outputText value="#{consultationController.selected.nombredecriseepileptiquegeneralisee}" title="#{myBundle.ViewConsultationTitle_nombredecriseepileptiquegeneralisee}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_nombredantiepileptique}"/>
+                                <h:outputText value="#{consultationController.selected.nombredantiepileptique}" title="#{myBundle.ViewConsultationTitle_nombredantiepileptique}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_antiepileptique1nom}"/>
+                                <h:outputText value="#{consultationController.selected.antiepileptique1nom}" title="#{myBundle.ViewConsultationTitle_antiepileptique1nom}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_antiepileptique1posologie}"/>
+                                <h:outputText value="#{consultationController.selected.antiepileptique1posologie}" title="#{myBundle.ViewConsultationTitle_antiepileptique1posologie}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_antiepileptique2nom}"/>
+                                <h:outputText value="#{consultationController.selected.antiepileptique2nom}" title="#{myBundle.ViewConsultationTitle_antiepileptique2nom}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_antiepileptique2posologie}"/>
+                                <h:outputText value="#{consultationController.selected.antiepileptique2posologie}" title="#{myBundle.ViewConsultationTitle_antiepileptique2posologie}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_antiepileptique3nom}"/>
+                                <h:outputText value="#{consultationController.selected.antiepileptique3nom}" title="#{myBundle.ViewConsultationTitle_antiepileptique3nom}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_antiepileptique3posologie}"/>
+                                <h:outputText value="#{consultationController.selected.antiepileptique3posologie}" title="#{myBundle.ViewConsultationTitle_antiepileptique3posologie}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_antiepileptique4nom}"/>
+                                <h:outputText value="#{consultationController.selected.antiepileptique4nom}" title="#{myBundle.ViewConsultationTitle_antiepileptique4nom}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_antiepileptique4posologie}"/>
+                                <h:outputText value="#{consultationController.selected.antiepileptique4posologie}" title="#{myBundle.ViewConsultationTitle_antiepileptique4posologie}"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_prophylaxieantiTVP}"/>
+                                <h:selectBooleanCheckbox id="prophylaxieantiTVP" value="#{consultationController.selected.prophylaxieantiTVP}" title="#{myBundle.EditConsultationTitle_prophylaxieantiTVP}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_prophylaxiepneumocystiscarinii}"/>
+                                <h:selectBooleanCheckbox id="prophylaxiepneumocystiscarinii" value="#{consultationController.selected.prophylaxiepneumocystiscarinii}" title="#{myBundle.EditConsultationTitle_prophylaxiepneumocystiscarinii}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_EPOdarbopoetin}"/>
+                                <h:selectBooleanCheckbox id="EPOdarbopoetin" value="#{consultationController.selected.EPOdarbopoetin}" title="#{myBundle.EditConsultationTitle_EPOdarbopoetin}"  disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewConsultationLabel_GCsf}"/>
+                                <h:selectBooleanCheckbox id="GCsf" value="#{consultationController.selected.GCsf}" title="#{myBundle.EditConsultationTitle_GCsf}"  disabled="true"/>
+
+                            </p:panelGrid>
+                        </p:tab>
+                       </p:tabView>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('ConsultationViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

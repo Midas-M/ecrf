@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CsctCreateDlg" width="auto" position="left top" widgetVar="CsctCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{myBundle.CreateCsctTitle}" closeOnEscape="true">
+
+            <h:form  id="CsctCreateForm" >
+
+                <h:panelGroup  id="display" rendered="#{csctController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{myBundle.CreateCsctLabel_codepatient}" for="codepatient" />
+                        <h:outputText id="visite" value="#{csctController.selected.codepatient.codepatient}" />
+
+                        <p:outputLabel value="#{myBundle.CreateCsctLabel_visite}" for="visite" />
+                        <h:outputText id="codepatient" value="#{csctController.visit}" />
+
+                        <p:outputLabel value="#{myBundle.CreateCsctLabel_dateexamen}" for="dateexamen" />
+                        <p:calendar id="dateexamen" pattern="dd/MM/yyyy" value="#{csctController.selected.dateexamen}" title="#{myBundle.CreateCsctTitle_dateexamen}" required="true"  requiredMessage="#{myBundle.CreateCsctRequiredMessage_dateexamen}" showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.CreateCsctLabel_delaipostRT}" for="delaipostRT" />
+                        <p:inputText id="delaipostRT" value="#{csctController.selected.delaipostRT}" title="#{myBundle.CreateBilanCognitifSuiviTitle_delaipostRT}" required="true" requiredMessage="#{myBundle.CreateCsctRequiredMessage_delaipostRT}"> 
+                            <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                            <f:attribute name="min" value="0" /> 
+                            <f:attribute name="max" value="300" />    
+                        </p:inputText> 
+
+                        <p:outputLabel value="Etat du CSCT"  for="etatDuCSCT" />
+
+                        <p:selectOneButton  id="etatDuCSCT" value="#{csctController.selected.etatduCSCT}" >                                  
+                            <f:selectItem itemLabel="Fait" itemValue="true" />
+                            <f:selectItem itemLabel="Non fait" itemValue="false" /> 
+                            <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                        </p:selectOneButton>
+
+                        <p:outputLabel value="#{myBundle.CreateCsctLabel_nberreurs}" for="nberreurs" />
+
+                        <p:inputText id="nberreurs" value="#{csctController.selected.nberreurs}" title="#{myBundle.CreateCsctTitle_nberreurs}" required="true" requiredMessage="#{myBundle.CreateCsctRequiredMessage_nberreurs}"> 
+                            <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                            <f:attribute name="min" value="0" /> 
+                            <f:attribute name="max" value="100" />    
+                        </p:inputText> 
+
+                        <p:outputLabel value="#{myBundle.CreateCsctLabel_nbreponsecorrectes}" for="nbreponsecorrectes" />
+
+                        <p:inputText id="nbreponsecorrectes" value="#{csctController.selected.nbreponsecorrectes}" title="#{myBundle.CreateCsctTitle_nbreponsecorrectes}" required="true" requiredMessage="#{myBundle.CreateCsctRequiredMessage_nbreponsecorrectes}"> 
+                            <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                            <f:attribute name="min" value="0" /> 
+                            <f:attribute name="max" value="100" />    
+                        </p:inputText> 
+
+                        <p:outputLabel value="#{myBundle.CreateCsctLabel_zs}" for="zs" />
+
+
+                        <p:inputText id="zs" value="#{csctController.selected.zs}" title="#{myBundle.CreateCsctTitle_zs}" required="true" requiredMessage="#{myBundle.CreateCsctRequiredMessage_zs}"> 
+                            <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                            <f:attribute name="min" value="-10" /> 
+                            <f:attribute name="max" value="10" />    
+                        </p:inputText> 
+
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{csctController.saveNew}" value="#{myBundle.Save}" update="display,:CsctListForm:datalist,:growl,:CsctListForm:createButton" oncomplete="handleSubmit(xhr,status,args,PF('CsctCreateDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="PF('CsctCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

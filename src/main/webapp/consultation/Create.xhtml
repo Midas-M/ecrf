@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConsultationCreateDlg" width="auto" position="left top" widgetVar="ConsultationCreateDialog" modal="true" resizable="true" draggable="true" appendTo="@(body)" header="#{myBundle.CreateConsultationTitle}" closeOnEscape="true" >
+
+            <h:form id="ConsultationCreateForm">
+
+                <h:panelGroup id="display" rendered="#{consultationController.selected != null}">
+                       <p:tabView id="ConsultationTabView">
+
+
+                        <p:tab id="ConsultationTab1" title="#{myBundle.TabHeaderPrefix} 1">
+                            <p:panelGrid columns="4" columnClasses="column">
+
+                                <p:outputLabel value="#{myBundle.CreateCsctLabel_codepatient}" for="codepatient" />
+                                <h:outputText id="codepatient" value="#{consultationController.selected.codepatient.codepatient}" />
+
+                                <p:outputLabel value="#{myBundle.CreateCsctLabel_visite}" for="visite" />
+                                <h:outputText id="visite" value="#{consultationController.visit}" />
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_dateexamen}" for="dateexamen" />
+                                <p:calendar id="dateexamen" pattern="dd/MM/yyyy" value="#{consultationController.selected.dateexamen}" title="#{myBundle.CreateConsultationTitle_dateexamen}" required="true" requiredMessage="#{myBundle.CreateConsultationRequiredMessage_dateexamen}" showOn="button"/>
+
+                                <p:outputLabel title="#{myBundle.CreateConsultationTitle_delaipostRT}" value="#{myBundle.CreateConsultationLabel_delaipostRT}" for="delaipostRT" />
+                                <p:inputText id="delaipostRT" value="#{consultationController.selected.delaipostRT}"  required="true" requiredMessage="#{myBundle.CreateConsultationRequiredMessage_delaipostRT}" > 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"   /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="300" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_lignedetraitement}" for="lignedetraitement" />
+                                <p:inputText id="lignedetraitement" value="#{consultationController.selected.lignedetraitement}" title="#{myBundle.CreateConsultationTitle_lignedetraitement}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_chimiotherapie}" for="chimiotherapie" />
+
+                                <p:selectOneButton  id="chimiotherapie" value="#{consultationController.selected.chimiotherapie}"  >
+                                    <f:selectItem itemLabel="Temozolomide" itemValue="temozolomide" />                            
+                                    <f:selectItem itemLabel="autre" itemValue="autre" />                           
+                                    <f:selectItem itemLabel="NA" itemValue="na" />
+                                </p:selectOneButton>
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_cycle}" for="cycle" />
+                                <p:inputText id="cycle" value="#{consultationController.selected.cycle}" title="#{myBundle.CreateConsultationTitle_cycle}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_posologie}" for="posologie" />
+                                <p:inputText id="posologie" value="#{consultationController.selected.posologie}" title="#{myBundle.CreateConsultationTitle_posologie}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_dosetotale}" for="dosetotale" />
+                                <p:inputText id="dosetotale" value="#{consultationController.selected.dosetotale}" title="#{myBundle.CreateConsultationTitle_dosetotale}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_ik}" for="ik" />
+                                <p:inputText id="ik" value="#{consultationController.selected.ik}" title="#{myBundle.CreateConsultationTitle_ik}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_examennormal}" for="examennormal"  />
+                                <p:selectOneButton id="examennormal" value="#{consultationController.selected.examennormal}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_epilepsie}" for="epilepsie" />
+                                <p:selectOneButton id="epilepsie" value="#{consultationController.selected.epilepsie}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_deficitsensitivomoteur}" for="deficitsensitivomoteur" />
+                                <p:selectOneButton id="deficitsensitivomoteur" value="#{consultationController.selected.deficitsensitivomoteur}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_troublesphasiques}" for="troublesphasiques" />
+                                <p:selectOneButton id="troublesphasiques" value="#{consultationController.selected.troublesphasiques}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_troublesmnesiques}" for="troublesmnesiques" />
+                                <p:selectOneButton id="troublesmnesiques" value="#{consultationController.selected.troublesmnesiques}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_troublesattentionnels}" for="troublesattentionnels" />
+                                <p:selectOneButton id="troublesattentionnels" value="#{consultationController.selected.troublesattentionnels}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_troublesexecutifs}" for="troublesexecutifs" />
+                                <p:selectOneButton id="troublesexecutifs" value="#{consultationController.selected.troublesexecutifs}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_rigiditeaxiale}" for="rigiditeaxiale" />
+                                <p:selectOneButton id="rigiditeaxiale" value="#{consultationController.selected.rigiditeaxiale}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_ralentissementmarche}" for="ralentissementmarche" />
+                                <p:selectOneButton id="ralentissementmarche" value="#{consultationController.selected.ralentissementmarche}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_bradykinesie}" for="bradykinesie" />
+                                <p:selectOneButton id="bradykinesie" value="#{consultationController.selected.bradykinesie}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_urgenturie}" for="urgenturie" />
+                                <p:selectOneButton id="urgenturie" value="#{consultationController.selected.urgenturie}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_rigiditemembres}" for="rigiditemembres" />
+                                <p:selectOneButton id="rigiditemembres" value="#{consultationController.selected.rigiditemembres}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="ConsultationTab2" title="#{myBundle.TabHeaderPrefix} 2">
+                            <p:panelGrid columns="4" columnClasses="column">
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_apraxiemarche}" for="apraxiemarche" />
+                                <p:selectOneButton id="apraxiemarche" value="#{consultationController.selected.apraxiemarche}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_apathie}" for="apathie" />
+                                <p:selectOneButton id="apathie" value="#{consultationController.selected.apathie}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_hypophonie}" for="hypophonie" />
+                                <p:selectOneButton id="hypophonie" value="#{consultationController.selected.hypophonie}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_troubledelaposture}" for="troubledelaposture" />
+                                <p:selectOneButton id="troubledelaposture" value="#{consultationController.selected.troubledelaposture}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_incontinenceurinaire}" for="incontinenceurinaire" />
+                                <p:selectOneButton id="incontinenceurinaire" value="#{consultationController.selected.incontinenceurinaire}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_hb}" for="hb" />
+                                <p:inputText id="hb" value="#{consultationController.selected.hb}" title="#{myBundle.CreateConsultationTitle_hb}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_hbNadir}" for="hbNadir" />
+                                <p:inputText id="hbNadir" value="#{consultationController.selected.hbNadir}" title="#{myBundle.CreateConsultationTitle_hbNadir}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_pnn}" for="pnn" />
+                                <p:inputText id="pnn" value="#{consultationController.selected.pnn}" title="#{myBundle.CreateConsultationTitle_pnn}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_PNNNadir}" for="PNNNadir" />
+                                <p:inputText id="PNNNadir" value="#{consultationController.selected.PNNNadir}" title="#{myBundle.CreateConsultationTitle_PNNNadir}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_lymphocite}" for="lymphocite" />
+                                <p:inputText id="lymphocite" value="#{consultationController.selected.lymphocite}" title="#{myBundle.CreateConsultationTitle_lymphocite}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_lymphociteNadir}" for="lymphociteNadir" />
+                                <p:inputText id="lymphociteNadir" value="#{consultationController.selected.lymphociteNadir}" title="#{myBundle.CreateConsultationTitle_lymphociteNadir}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_plaquettes}" for="plaquettes" />
+                                <p:inputText id="plaquettes" value="#{consultationController.selected.plaquettes}" title="#{myBundle.CreateConsultationTitle_plaquettes}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_plaquettesNadir}" for="plaquettesNadir" />
+                                <p:inputText id="plaquettesNadir" value="#{consultationController.selected.plaquettesNadir}" title="#{myBundle.CreateConsultationTitle_plaquettesNadir}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_bilanhepatique}" for="bilanhepatique" />
+
+                                <p:selectOneButton   id="bilanhepatique" value="#{consultationController.selected.bilanhepatique}" required="true" requiredMessage="Please choose a value for Bilan hépatique"  >
+                                    <f:selectItem itemLabel="Nonrmal" itemValue="normal" />                            
+                                    <f:selectItem itemLabel="anormale" itemValue="anormal" />  
+                                    <f:selectItem itemLabel="inconnue" itemValue="inconnue" />          
+                                </p:selectOneButton>
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_asatAlat}" for="asatAlat" />
+                                <p:inputText id="asatAlat" value="#{consultationController.selected.asatAlat}" title="#{myBundle.CreateConsultationTitle_asatAlat}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_phosphatealkaline}" for="phosphatealkaline" />
+                                <p:inputText id="phosphatealkaline" value="#{consultationController.selected.phosphatealkaline}" title="#{myBundle.CreateConsultationTitle_phosphatealkaline}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_bilirubinemie}" for="bilirubinemie" />
+                                <p:inputText id="bilirubinemie" value="#{consultationController.selected.bilirubinemie}" title="#{myBundle.CreateConsultationTitle_bilirubinemie}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_fonctionrenale}" for="fonctionrenale" />
+                                <p:selectOneButton  id="fonctionrenale" value="#{consultationController.selected.fonctionrenale}" required="true" requiredMessage="Please choose a value for Fonction rénale "  >
+                                    <f:selectItem itemLabel="Nonrmal" itemValue="normal" />                            
+                                    <f:selectItem itemLabel="anormale" itemValue="anormal" />  
+                                    <f:selectItem itemLabel="inconnue" itemValue="inconnue" />          
+                                </p:selectOneButton>
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_proteinurie}" for="proteinurie" />
+
+                                <p:selectOneButton  id="proteinurie" value="#{consultationController.selected.proteinurie}" required="true" requiredMessage="Please choose a value for Protéinurie"  >
+                                    <f:selectItem itemLabel="0" itemValue="0" />                            
+                                    <f:selectItem itemLabel="1" itemValue="1" /> 
+                                    <f:selectItem itemLabel="2" itemValue="2" />     
+                                    <f:selectItem itemLabel="3" itemValue="3" />     
+                                    <f:selectItem itemLabel="inconnue" itemValue="inconnue" />          
+                                </p:selectOneButton>
+
+
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="ConsultationTab3" title="#{myBundle.TabHeaderPrefix} 3">
+                            <p:panelGrid columns="4" columnClasses="column">
+
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_chimionausees}" for="chimionausees" />
+
+                                <p:selectOneButton  id="chimionausees" value="#{consultationController.selected.chimionausees}" required="true" requiredMessage="Please choose a value for Chimio nausées"  >
+                                    <f:selectItem itemLabel="0" itemValue="0" />                            
+                                    <f:selectItem itemLabel="1" itemValue="1" /> 
+                                    <f:selectItem itemLabel="2" itemValue="2" />     
+                                    <f:selectItem itemLabel="3" itemValue="3" /> 
+                                    <f:selectItem itemLabel="4" itemValue="4" /> 
+                                    <f:selectItem itemLabel="5" itemValue="5" />          
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_chimiofatigue}" for="chimiofatigue" />
+
+                                <p:selectOneButton   id="chimiofatigue" value="#{consultationController.selected.chimiofatigue}" required="true" requiredMessage="Please choose a value for Chimio fatigue"  >
+                                    <f:selectItem itemLabel="0" itemValue="0" />                            
+                                    <f:selectItem itemLabel="1" itemValue="1" /> 
+                                    <f:selectItem itemLabel="2" itemValue="2" />     
+                                    <f:selectItem itemLabel="3" itemValue="3" /> 
+                                    <f:selectItem itemLabel="4" itemValue="4" /> 
+                                    <f:selectItem itemLabel="5" itemValue="5" />          
+                                </p:selectOneButton>
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_chimiocephalees}" for="chimiocephalees" />
+
+                                <p:selectOneButton  id="chimiocephalees" value="#{consultationController.selected.chimiocephalees}" required="true" requiredMessage="Please choose a value for Chimio céphalées"  >
+                                    <f:selectItem itemLabel="0" itemValue="0" />                            
+                                    <f:selectItem itemLabel="1" itemValue="1" /> 
+                                    <f:selectItem itemLabel="2" itemValue="2" />     
+                                    <f:selectItem itemLabel="3" itemValue="3" /> 
+                                    <f:selectItem itemLabel="4" itemValue="4" /> 
+                                    <f:selectItem itemLabel="5" itemValue="5" />          
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_chimiodiarrhees}" for="chimiodiarrhees" />
+
+                                <p:selectOneButton   id="chimiodiarrhees" value="#{consultationController.selected.chimiodiarrhees}" required="true" requiredMessage="Please choose a value for Chimio diarrhées"  >
+                                    <f:selectItem itemLabel="0" itemValue="0" />                            
+                                    <f:selectItem itemLabel="1" itemValue="1" /> 
+                                    <f:selectItem itemLabel="2" itemValue="2" />     
+                                    <f:selectItem itemLabel="3" itemValue="3" /> 
+                                    <f:selectItem itemLabel="4" itemValue="4" /> 
+                                    <f:selectItem itemLabel="5" itemValue="5" />          
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_chimioconstipation}" for="chimioconstipation" />
+
+                                <p:selectOneButton  id="chimioconstipation" value="#{consultationController.selected.chimioconstipation}" required="true" requiredMessage="Please choose a value for Chimio constipation"  >
+                                    <f:selectItem itemLabel="0" itemValue="0" />                            
+                                    <f:selectItem itemLabel="1" itemValue="1" /> 
+                                    <f:selectItem itemLabel="2" itemValue="2" />     
+                                    <f:selectItem itemLabel="3" itemValue="3" /> 
+                                    <f:selectItem itemLabel="4" itemValue="4" /> 
+                                    <f:selectItem itemLabel="5" itemValue="5" />          
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_chimiofievre}" for="chimiofievre" />
+
+                                <p:selectOneButton  id="chimiofievre" value="#{consultationController.selected.chimiofievre}" required="true" requiredMessage="Please choose a value for Chimio fièvre"  >
+                                    <f:selectItem itemLabel="0" itemValue="0" />                            
+                                    <f:selectItem itemLabel="1" itemValue="1" /> 
+                                    <f:selectItem itemLabel="2" itemValue="2" />     
+                                    <f:selectItem itemLabel="3" itemValue="3" /> 
+                                    <f:selectItem itemLabel="4" itemValue="4" /> 
+                                    <f:selectItem itemLabel="5" itemValue="5" />          
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_chimioepistaxis}" for="chimioepistaxis" />
+
+                                <p:selectOneButton   id="chimioepistaxis" value="#{consultationController.selected.chimioepistaxis}" required="true" requiredMessage="Please choose a value for Chimio epistaxis"  >
+                                    <f:selectItem itemLabel="0" itemValue="0" />                            
+                                    <f:selectItem itemLabel="1" itemValue="1" /> 
+                                    <f:selectItem itemLabel="2" itemValue="2" />     
+                                    <f:selectItem itemLabel="3" itemValue="3" /> 
+                                    <f:selectItem itemLabel="4" itemValue="4" /> 
+                                    <f:selectItem itemLabel="5" itemValue="5" />          
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_chimioallergies}" for="chimioallergies" />
+
+                                <p:selectOneButton   id="chimioallergies" value="#{consultationController.selected.chimioallergies}" required="true" requiredMessage="Please choose a value for Chimio allergies"  >
+                                    <f:selectItem itemLabel="0" itemValue="0" />                            
+                                    <f:selectItem itemLabel="1" itemValue="1" /> 
+                                    <f:selectItem itemLabel="2" itemValue="2" />     
+                                    <f:selectItem itemLabel="3" itemValue="3" /> 
+                                    <f:selectItem itemLabel="4" itemValue="4" /> 
+                                    <f:selectItem itemLabel="5" itemValue="5" />          
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_chimiohemato}" for="chimiohemato" />
+
+                                <p:selectOneButton   id="chimiohemato" value="#{consultationController.selected.chimiohemato}" required="true" requiredMessage="Please choose a value for Chimio hémato"  >
+                                    <f:selectItem itemLabel="0" itemValue="0" />                            
+                                    <f:selectItem itemLabel="1" itemValue="1" /> 
+                                    <f:selectItem itemLabel="2" itemValue="2" />     
+                                    <f:selectItem itemLabel="3" itemValue="3" /> 
+                                    <f:selectItem itemLabel="4" itemValue="4" /> 
+                                    <f:selectItem itemLabel="5" itemValue="5" />          
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_chimiodyspnees}" for="chimiodyspnees" />
+
+                                <p:selectOneButton   id="chimiodyspnees" value="#{consultationController.selected.chimiodyspnees}" required="true" requiredMessage="Please choose a value for Chimio dyspnées"  >
+                                    <f:selectItem itemLabel="0" itemValue="0" />                            
+                                    <f:selectItem itemLabel="1" itemValue="1" /> 
+                                    <f:selectItem itemLabel="2" itemValue="2" />     
+                                    <f:selectItem itemLabel="3" itemValue="3" /> 
+                                    <f:selectItem itemLabel="4" itemValue="4" /> 
+                                    <f:selectItem itemLabel="5" itemValue="5" />          
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_chimiophlebites}" for="chimiophlebites" />
+
+                                <p:selectOneButton   id="chimiophlebites" value="#{consultationController.selected.chimiophlebites}" required="true" requiredMessage="Please choose a value for Chimio phlébites"  >
+                                    <f:selectItem itemLabel="0" itemValue="0" />                            
+                                    <f:selectItem itemLabel="1" itemValue="1" /> 
+                                    <f:selectItem itemLabel="2" itemValue="2" />     
+                                    <f:selectItem itemLabel="3" itemValue="3" /> 
+                                    <f:selectItem itemLabel="4" itemValue="4" /> 
+                                    <f:selectItem itemLabel="5" itemValue="5" />          
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_chimioautres}" for="chimioautres" />
+
+                                <p:selectOneButton  id="chimioautres" value="#{consultationController.selected.chimioautres}" required="true" requiredMessage="Please choose a value for Chimio autres"  >
+                                    <f:selectItem itemLabel="0" itemValue="0" />                            
+                                    <f:selectItem itemLabel="1" itemValue="1" /> 
+                                    <f:selectItem itemLabel="2" itemValue="2" />     
+                                    <f:selectItem itemLabel="3" itemValue="3" /> 
+                                    <f:selectItem itemLabel="4" itemValue="4" /> 
+                                    <f:selectItem itemLabel="5" itemValue="5" />          
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_antiemetique}" for="antiemetique" />
+                                <p:selectOneButton id="antiemetique" value="#{consultationController.selected.antiemetique}" required="true" requiredMessage="Please choose a value for Antiémétique"  >
+                                    <f:selectItem itemLabel="Aucune" itemValue="aucune" />                            
+                                    <f:selectItem itemLabel="Zophren" itemValue="zophren" /> 
+                                    <f:selectItem itemLabel="Kytril" itemValue="kytril" />     
+                                    <f:selectItem itemLabel="Autre" itemValue="autre" />         
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_corticotherapienom}" for="corticotherapienom" />
+                                <p:selectOneButton id="corticotherapienom" value="#{consultationController.selected.corticotherapienom}" required="true" requiredMessage="Please choose a value for Corticothérapie nom"  >
+                                    <f:selectItem itemLabel="Medrol" itemValue="Medrol" />                            
+                                    <f:selectItem itemLabel="cortencyl" itemValue="cortencyl" /> 
+                                    <f:selectItem itemLabel="solumedrol" itemValue="solumedrol" />     
+                                    <f:selectItem itemLabel="Autre" itemValue="autre" />  
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_corticotherapieposologie}" for="corticotherapieposologie" />
+
+
+                                <p:inputText id="corticotherapieposologie" value="#{consultationController.selected.corticotherapieposologie}" title="#{myBundle.CreateConsultationTitle_corticotherapieposologie}" required="true" requiredMessage="Please choose a value for Corticothérapie posologie" > 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="ConsultationTab4" title="#{myBundle.TabHeaderPrefix} 4">
+                            <p:panelGrid columns="2" columnClasses="column">
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_nombredecriseepileptiquepartielle}" for="nombredecriseepileptiquepartielle" />
+                                <p:inputText id="nombredecriseepileptiquepartielle" value="#{consultationController.selected.nombredecriseepileptiquepartielle}" title="#{myBundle.CreateConsultationTitle_nombredecriseepileptiquepartielle}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_nombredecriseepileptiquegeneralisee}" for="nombredecriseepileptiquegeneralisee" />
+                                <p:inputText id="nombredecriseepileptiquegeneralisee" value="#{consultationController.selected.nombredecriseepileptiquegeneralisee}" title="#{myBundle.CreateConsultationTitle_nombredecriseepileptiquegeneralisee}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_nombredantiepileptique}" for="nombredantiepileptique" />
+                                <p:inputText id="nombredantiepileptique" value="#{consultationController.selected.nombredantiepileptique}" title="#{myBundle.CreateConsultationTitle_nombredantiepileptique}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="4" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_antiepileptique1nom}" for="antiepileptique1nom" />
+                                <p:selectOneButton id="antiepileptique1nom" value="#{consultationController.selected.antiepileptique1nom}" required="true" requiredMessage="Please choose a value for Antiépileptique 1 nom"  >
+                                    <f:selectItem itemLabel="Levetiracetam(Keppra)" itemValue="Levetiracetam(Kepra)" />                            
+                                    <f:selectItem itemLabel="Lacosamide(Vimpat)" itemValue="Lacosamide(Vimpat)" /> 
+                                    <f:selectItem itemLabel="Clobazam(Urbanil)" itemValue="Clobazam(Urbanil)" />     
+                                    <f:selectItem itemLabel="Valproate(Depakine)" itemValue="Valproate(Depakine)" /> 
+                                    <f:selectItem itemLabel="Clonazepam(Rivotril)" itemValue="Clonazepam(Rivotril)" /> 
+                                    <f:selectItem itemLabel="Catbamazepine(Tegretol)" itemValue="Catbamazepine(Tegretol)" />    
+                                    <f:selectItem itemLabel="Lamotrigine(Lamictal)" itemValue="Lamotrigine(Lamictal)" />   
+                                    <f:selectItem itemLabel="Perampanel(Fycompa)" itemValue="Perampanel(Fycompa)" />   
+                                    <f:selectItem itemLabel="Zonisamide(Zonegran)" itemValue="Zonisamide(Zonegran)" />   
+                                    <f:selectItem itemLabel="Autre" itemValue="autre" /> 
+                                    <f:selectItem itemLabel="NA" itemValue="na" />   
+                                </p:selectOneButton>
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_antiepileptique1posologie}" for="antiepileptique1posologie" />
+                                <p:inputText id="antiepileptique1posologie" value="#{consultationController.selected.antiepileptique1posologie}" title="#{myBundle.CreateConsultationTitle_antiepileptique1posologie}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_antiepileptique2nom}" for="antiepileptique2nom" />
+
+                                <p:selectOneButton id="antiepileptique2nom" value="#{consultationController.selected.antiepileptique2nom}" required="true" requiredMessage="Please choose a value for Antiépileptique 2 nom"  >
+                                    <f:selectItem itemLabel="Levetiracetam(Keppra)" itemValue="Levetiracetam(Kepra)" />                            
+                                    <f:selectItem itemLabel="Lacosamide(Vimpat)" itemValue="Lacosamide(Vimpat)" /> 
+                                    <f:selectItem itemLabel="Clobazam(Urbanil)" itemValue="Clobazam(Urbanil)" />     
+                                    <f:selectItem itemLabel="Valproate(Depakine)" itemValue="Valproate(Depakine)" /> 
+                                    <f:selectItem itemLabel="Clonazepam(Rivotril)" itemValue="Clonazepam(Rivotril)" /> 
+                                    <f:selectItem itemLabel="Catbamazepine(Tegretol)" itemValue="Catbamazepine(Tegretol)" />    
+                                    <f:selectItem itemLabel="Lamotrigine(Lamictal)" itemValue="Lamotrigine(Lamictal)" />   
+                                    <f:selectItem itemLabel="Perampanel(Fycompa)" itemValue="Perampanel(Fycompa)" />   
+                                    <f:selectItem itemLabel="Zonisamide(Zonegran)" itemValue="Zonisamide(Zonegran)" />   
+                                    <f:selectItem itemLabel="Autre" itemValue="autre" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_antiepileptique2posologie}" for="antiepileptique2posologie" />
+                                <p:inputText id="antiepileptique2posologie" value="#{consultationController.selected.antiepileptique2posologie}" title="#{myBundle.CreateConsultationTitle_antiepileptique2posologie}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_antiepileptique3nom}" for="antiepileptique3nom" />
+
+                                <p:selectOneButton id="antiepileptique3nom" value="#{consultationController.selected.antiepileptique3nom}" required="true" requiredMessage="Please choose a value for Antiépileptique 3 nom"  >
+                                    <f:selectItem itemLabel="Levetiracetam(Keppra)" itemValue="Levetiracetam(Kepra)" />                            
+                                    <f:selectItem itemLabel="Lacosamide(Vimpat)" itemValue="Lacosamide(Vimpat)" /> 
+                                    <f:selectItem itemLabel="Clobazam(Urbanil)" itemValue="Clobazam(Urbanil)" />     
+                                    <f:selectItem itemLabel="Valproate(Depakine)" itemValue="Valproate(Depakine)" /> 
+                                    <f:selectItem itemLabel="Clonazepam(Rivotril)" itemValue="Clonazepam(Rivotril)" /> 
+                                    <f:selectItem itemLabel="Catbamazepine(Tegretol)" itemValue="Catbamazepine(Tegretol)" />    
+                                    <f:selectItem itemLabel="Lamotrigine(Lamictal)" itemValue="Lamotrigine(Lamictal)" />   
+                                    <f:selectItem itemLabel="Perampanel(Fycompa)" itemValue="Perampanel(Fycompa)" />   
+                                    <f:selectItem itemLabel="Zonisamide(Zonegran)" itemValue="Zonisamide(Zonegran)" />   
+                                    <f:selectItem itemLabel="Autre" itemValue="autre" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />   
+                                </p:selectOneButton>
+
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_antiepileptique3posologie}" for="antiepileptique3posologie" />
+                                <p:inputText id="antiepileptique3posologie" value="#{consultationController.selected.antiepileptique3posologie}" title="#{myBundle.CreateConsultationTitle_antiepileptique3posologie}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_antiepileptique4nom}" for="antiepileptique4nom" />
+
+                                <p:selectOneButton id="antiepileptique4nom" value="#{consultationController.selected.antiepileptique4nom}" required="true" requiredMessage="Please choose a value for Antiépileptique 4 nom"  >
+                                    <f:selectItem itemLabel="Levetiracetam(Keppra)" itemValue="Levetiracetam(Kepra)" />                            
+                                    <f:selectItem itemLabel="Lacosamide(Vimpat)" itemValue="Lacosamide(Vimpat)" /> 
+                                    <f:selectItem itemLabel="Clobazam(Urbanil)" itemValue="Clobazam(Urbanil)" />     
+                                    <f:selectItem itemLabel="Valproate(Depakine)" itemValue="Valproate(Depakine)" /> 
+                                    <f:selectItem itemLabel="Clonazepam(Rivotril)" itemValue="Clonazepam(Rivotril)" /> 
+                                    <f:selectItem itemLabel="Catbamazepine(Tegretol)" itemValue="Catbamazepine(Tegretol)" />    
+                                    <f:selectItem itemLabel="Lamotrigine(Lamictal)" itemValue="Lamotrigine(Lamictal)" />   
+                                    <f:selectItem itemLabel="Perampanel(Fycompa)" itemValue="Perampanel(Fycompa)" />   
+                                    <f:selectItem itemLabel="Zonisamide(Zonegran)" itemValue="Zonisamide(Zonegran)" />   
+                                    <f:selectItem itemLabel="Autre" itemValue="autre" />
+                                    <f:selectItem itemLabel="NA" itemValue="na" />   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_antiepileptique4posologie}" for="antiepileptique4posologie" />
+                                <p:inputText id="antiepileptique4posologie" value="#{consultationController.selected.antiepileptique4posologie}" title="#{myBundle.CreateConsultationTitle_antiepileptique4posologie}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:converter converterId="gr.aueb.ecrf.maxminConverter"></f:converter>
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="1000000" />    
+                                </p:inputText> 
+
+
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="ConsultationTab5" title="#{myBundle.TabHeaderPrefix} 5">
+                            <p:panelGrid columns="2" columnClasses="column">
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_prophylaxieantiTVP}" for="prophylaxieantiTVP" />
+                                <p:selectOneButton id="prophylaxieantiTVP" value="#{consultationController.selected.prophylaxieantiTVP}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_prophylaxiepneumocystiscarinii}" for="prophylaxiepneumocystiscarinii" />
+                                <p:selectOneButton id="prophylaxiepneumocystiscarinii" value="#{consultationController.selected.prophylaxiepneumocystiscarinii}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_EPOdarbopoetin}" for="EPOdarbopoetin" />
+                                <p:selectOneButton id="EPOdarbopoetin" value="#{consultationController.selected.EPOdarbopoetin}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateConsultationLabel_GCsf}" for="GCsf" />
+                                <p:selectOneButton id="GCsf" value="#{consultationController.selected.GCsf}" >
+                                    <f:selectItem itemLabel="Oui" itemValue="true" />
+                                    <f:selectItem itemLabel="Non" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+
+                            </p:panelGrid>
+
+                        </p:tab>
+                    </p:tabView>
+                    <p:commandButton actionListener="#{consultationController.saveNew}" value="#{myBundle.Save}" update="display,:ConsultationListForm:datalist,:growl,:ConsultationListForm:createButton" oncomplete="handleSubmit(xhr,status,args,PF('ConsultationCreateDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="PF('ConsultationCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

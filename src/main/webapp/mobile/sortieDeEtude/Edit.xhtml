@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="SortieDeEtudeEditPage" lazy="true">
+        <pm:header title="#{myBundle.EditSortieDeEtudeTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:SortieDeEtudeListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="SortieDeEtudeEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{sortieDeEtudeController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{myBundle.EditSortieDeEtudeLabel_id}" for="id" />
+                            <h:outputText id="id" value="#{sortieDeEtudeController.selected.id}" />
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSortieDeEtudeLabel_raison}" for="raison" />
+                            <p:inputText id="raison" value="#{sortieDeEtudeController.selected.raison}" title="#{myBundle.EditSortieDeEtudeTitle_raison}" required="true" requiredMessage="#{myBundle.EditSortieDeEtudeRequiredMessage_raison}" size="15" maxlength="15"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSortieDeEtudeLabel_precision}" for="precision" />
+                            <p:inputTextarea rows="4" cols="30" id="precision" value="#{sortieDeEtudeController.selected.precision}" title="#{myBundle.EditSortieDeEtudeTitle_precision}" required="true" requiredMessage="#{myBundle.EditSortieDeEtudeRequiredMessage_precision}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSortieDeEtudeLabel_lieealatumeur}" for="lieealatumeur" />
+                            <p:selectBooleanCheckbox id="lieealatumeur" value="#{sortieDeEtudeController.selected.lieealatumeur}" required="true" requiredMessage="#{myBundle.EditSortieDeEtudeRequiredMessage_lieealatumeur}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSortieDeEtudeLabel_dateSortie}" for="dateSortie" />
+                            <p:calendar id="dateSortie" pattern="MM/dd/yyyy" value="#{sortieDeEtudeController.selected.dateSortie}" title="#{myBundle.EditSortieDeEtudeTitle_dateSortie}" required="true" requiredMessage="#{myBundle.EditSortieDeEtudeRequiredMessage_dateSortie}" showOn="button"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSortieDeEtudeLabel_codepatient}" for="codepatient" />
+                            <p:selectOneMenu id="codepatient" value="#{sortieDeEtudeController.selected.codepatient}" required="true" requiredMessage="#{myBundle.EditSortieDeEtudeRequiredMessage_codepatient}" converter="patientConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{patientController.items}"
+                                               var="codepatientItem"
+                                               itemValue="#{codepatientItem}"
+                                               itemLabel="#{codepatientItem.firstName.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{sortieDeEtudeController.save}" value="#{myBundle.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:SortieDeEtudeListPage:SortieDeEtudeListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:SortieDeEtudeListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

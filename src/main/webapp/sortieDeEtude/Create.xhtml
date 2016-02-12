@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SortieDeEtudeCreateDlg" widgetVar="SortieDeEtudeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{myBundle.CreateSortieDeEtudeTitle}" closeOnEscape="true">
+
+            <h:form id="SortieDeEtudeCreateForm">
+
+                <h:panelGroup id="display" rendered="#{SortieDeEtudeController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+                        <p:outputLabel value="#{myBundle.CreateCsctLabel_codepatient}" for="codepatient" />
+                        <h:outputText  id="codepatient" value="#{SortieDeEtudeController.selected.codepatient.codepatient}" />
+
+                        <p:outputLabel value="#{myBundle.CreateSortieDeEtudeLabel_raison}" for="raison" />
+                        <p:selectOneButton id="raison" value="#{SortieDeEtudeController.selected.raison}" required="true"  requiredMessage="#{myBundle.CreateSortieDeEtudeRequiredMessage_raison}" >
+                            <f:selectItem itemLabel="d&eacute;ce" itemValue="dece" />
+                            <f:selectItem itemLabel="d&eacute;cision Patient" itemValue="decisionPatient" /> 
+                            <f:selectItem itemLabel="autre" itemValue="autre" /> 
+                        </p:selectOneButton>  
+
+
+                        <p:outputLabel value="#{myBundle.CreateSortieDeEtudeLabel_precisionSortie}" for="precisionSortie" />
+                        <p:inputTextarea rows="4" cols="30" id="precisionSortie" value="#{SortieDeEtudeController.selected.precisionSortie}" title="#{myBundle.CreateSortieDeEtudeTitle_precisionSortie}" required="true" requiredMessage="#{myBundle.CreateSortieDeEtudeRequiredMessage_precisionSortie}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateSortieDeEtudeLabel_lieealatumeur}" for="lieealatumeur" />
+                        <p:selectOneButton id="lieealatumeur" value="#{SortieDeEtudeController.selected.lieealatumeur}" required="true" requiredMessage="#{myBundle.CreateSortieDeEtudeRequiredMessage_lieealatumeur}">
+                            <f:selectItem itemLabel="Yes" itemValue="true" />
+                            <f:selectItem itemLabel="No" itemValue="false" /> 
+                            <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>  
+                        </p:selectOneButton>    
+
+                        <p:outputLabel value="#{myBundle.CreateSortieDeEtudeLabel_dateSortie}" for="dateSortie" />
+                        <p:calendar id="dateSortie" pattern="dd/MM/yyyy" value="#{SortieDeEtudeController.selected.dateSortie}" title="#{myBundle.CreateSortieDeEtudeTitle_dateSortie}" required="true" requiredMessage="#{myBundle.CreateSortieDeEtudeRequiredMessage_dateSortie}" showOn="button"/>
+
+
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{SortieDeEtudeController.saveNew}" value="#{myBundle.Save}" update="display,:SortieDeEtudeListForm:datalist,:growl,:SortieDeEtudeListForm:createButton" oncomplete="handleSubmit(xhr,status,args,PF('SortieDeEtudeCreateDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="PF('SortieDeEtudeCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

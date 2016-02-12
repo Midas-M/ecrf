@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="UsersCreatePage" lazy="true">
+        <pm:header title="#{myUserBundle.CreateUsersTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myUserBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:UsersListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="UsersCreateForm">
+
+                <h:panelGroup id="display" rendered="#{usersController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myUserBundle.CreateUsersLabel_uname}" for="uname" />
+                            <p:inputText id="uname" value="#{usersController.selected.uname}" title="#{myUserBundle.CreateUsersTitle_uname}" required="true" requiredMessage="#{myUserBundle.CreateUsersRequiredMessage_uname}" size="60" maxlength="60"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myUserBundle.CreateUsersLabel_password}" for="password" />
+                            <p:inputText id="password" value="#{usersController.selected.password}" title="#{myUserBundle.CreateUsersTitle_password}" required="true" requiredMessage="#{myUserBundle.CreateUsersRequiredMessage_password}" size="60" maxlength="60"/>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{usersController.saveNew}" value="#{myUserBundle.Save}" update="display,:UsersListPage:UsersListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:UsersListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

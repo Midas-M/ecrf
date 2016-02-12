@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="BilanCognitifLbListPage">
+        <pm:header title="#{myBundle.ListBilanCognitifLbTitle}">
+            <h:form>
+                <p:commandButton id="backButton"   styleClass="ui-btn-left  ui-btn-inline" icon="ui-icon-arrow-l" value="#{myBundle.Back}" action="#{mobilePageController.navigateBackInHistory('/mobile/index')}"/>
+                <p:commandButton id="createButton" styleClass="ui-btn-right ui-btn-inline" icon="ui-icon-plus"    value="#{myBundle.Create}" update=":BilanCognitifLbCreatePage:BilanCognitifLbCreateForm" actionListener="#{bilanCognitifLbController.prepareCreate}" action="#{mobilePageController.navigateWithHistory('pm:BilanCognitifLbCreatePage')}">
+                    <f:actionListener binding="#{currentPageListener}"/>
+                </p:commandButton>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="BilanCognitifLbListForm">
+
+                <p:dataTable id="datalist"
+                             value="#{bilanCognitifLbController.items}"
+                             var="item"
+                             rowKey="#{item.id}"
+                             paginator="true"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             selectionMode="single"
+                             selection="#{bilanCognitifLbController.selected}"
+                             reflow="true">
+
+                    <p:ajax event="rowSelect"   update="@form:editButton,@form:deleteButton,@form:navigationMenuButton,@form:navigationMenuPanel" listener="#{bilanCognitifLbController.resetParents}"/>
+                    <p:ajax event="rowUnselect" update="@form:editButton,@form:deleteButton,@form:navigationMenuButton,@form:navigationMenuPanel" listener="#{bilanCognitifLbController.resetParents}"/>
+                    <p:ajax event="swipeleft"   oncomplete="document.getElementById('BilanCognitifLbListPage:BilanCognitifLbListForm:deleteButton').click();"/>
+                    <p:ajax event="tap"         oncomplete="document.getElementById('BilanCognitifLbListPage:BilanCognitifLbListForm:editButton').click();"/>
+                    <p:ajax event="taphold"     oncomplete="document.getElementById('BilanCognitifLbListPage:BilanCognitifLbListForm:navigationMenuButton').click();"/>
+
+                    <p:column sortBy="#{item.id}" filterBy="#{item.id}" headerText="#{myBundle.ListBilanCognitifLbTitle_id}"/>
+                    <h:outputText value="#{item.id}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.dateexamen}" filterBy="#{item.dateexamen}" headerText="#{myBundle.ListBilanCognitifLbTitle_dateexamen}"/>
+                    <h:outputText value="#{item.dateexamen}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.delaipostRT}" filterBy="#{item.delaipostRT}" headerText="#{myBundle.ListBilanCognitifLbTitle_delaipostRT}"/>
+                    <h:outputText value="#{item.delaipostRT}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.etatbilan}" filterBy="#{item.etatbilan}" headerText="#{myBundle.ListBilanCognitifLbTitle_etatbilan}"/>
+                    <h:outputText value="#{item.etatbilan}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.FNARTtotal}" filterBy="#{item.FNARTtotal}" headerText="#{myBundle.ListBilanCognitifLbTitle_FNARTtotal}"/>
+                    <h:outputText value="#{item.FNARTtotal}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.MMSEtotal}" filterBy="#{item.MMSEtotal}" headerText="#{myBundle.ListBilanCognitifLbTitle_MMSEtotal}"/>
+                    <h:outputText value="#{item.MMSEtotal}"/>
+                    </p:column>
+
+                    <!--
+                                        <p:column sortBy="#{item.MOCAtotal}" filterBy="#{item.MOCAtotal}" headerText="#{myBundle.ListBilanCognitifLbTitle_MOCAtotal}"/>
+                                            <h:outputText value="#{item.MOCAtotal}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.mattisbruttotal}" filterBy="#{item.mattisbruttotal}" headerText="#{myBundle.ListBilanCognitifLbTitle_mattisbruttotal}"/>
+                                            <h:outputText value="#{item.mattisbruttotal}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.mattisPCtotal}" filterBy="#{item.mattisPCtotal}" headerText="#{myBundle.ListBilanCognitifLbTitle_mattisPCtotal}"/>
+                                            <h:outputText value="#{item.mattisPCtotal}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.RLRI16brutRL1}" filterBy="#{item.RLRI16brutRL1}" headerText="#{myBundle.ListBilanCognitifLbTitle_RLRI16brutRL1}"/>
+                                            <h:outputText value="#{item.RLRI16brutRL1}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.rlri16ZsRl1}" filterBy="#{item.rlri16ZsRl1}" headerText="#{myBundle.ListBilanCognitifLbTitle_rlri16ZsRl1}"/>
+                                            <h:outputText value="#{item.rlri16ZsRl1}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.RLRI16brutRL2}" filterBy="#{item.RLRI16brutRL2}" headerText="#{myBundle.ListBilanCognitifLbTitle_RLRI16brutRL2}"/>
+                                            <h:outputText value="#{item.RLRI16brutRL2}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.rlri16ZsRl2}" filterBy="#{item.rlri16ZsRl2}" headerText="#{myBundle.ListBilanCognitifLbTitle_rlri16ZsRl2}"/>
+                                            <h:outputText value="#{item.rlri16ZsRl2}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.RLRI16brutRL3}" filterBy="#{item.RLRI16brutRL3}" headerText="#{myBundle.ListBilanCognitifLbTitle_RLRI16brutRL3}"/>
+                                            <h:outputText value="#{item.RLRI16brutRL3}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.rlri16ZsRl3}" filterBy="#{item.rlri16ZsRl3}" headerText="#{myBundle.ListBilanCognitifLbTitle_rlri16ZsRl3}"/>
+                                            <h:outputText value="#{item.rlri16ZsRl3}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.RLRI16brutRD}" filterBy="#{item.RLRI16brutRD}" headerText="#{myBundle.ListBilanCognitifLbTitle_RLRI16brutRD}"/>
+                                            <h:outputText value="#{item.RLRI16brutRD}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.rlri16ZsRd}" filterBy="#{item.rlri16ZsRd}" headerText="#{myBundle.ListBilanCognitifLbTitle_rlri16ZsRd}"/>
+                                            <h:outputText value="#{item.rlri16ZsRd}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.RLRI16Indice}" filterBy="#{item.RLRI16Indice}" headerText="#{myBundle.ListBilanCognitifLbTitle_RLRI16Indice}"/>
+                                            <h:outputText value="#{item.RLRI16Indice}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.RLRI16ZSmoy}" filterBy="#{item.RLRI16ZSmoy}" headerText="#{myBundle.ListBilanCognitifLbTitle_RLRI16ZSmoy}"/>
+                                            <h:outputText value="#{item.RLRI16ZSmoy}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.REYbrutrappel}" filterBy="#{item.REYbrutrappel}" headerText="#{myBundle.ListBilanCognitifLbTitle_REYbrutrappel}"/>
+                                            <h:outputText value="#{item.REYbrutrappel}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.REYPCrappel}" filterBy="#{item.REYPCrappel}" headerText="#{myBundle.ListBilanCognitifLbTitle_REYPCrappel}"/>
+                                            <h:outputText value="#{item.REYPCrappel}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.REYbrutcopie}" filterBy="#{item.REYbrutcopie}" headerText="#{myBundle.ListBilanCognitifLbTitle_REYbrutcopie}"/>
+                                            <h:outputText value="#{item.REYbrutcopie}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.REYPCcopie}" filterBy="#{item.REYPCcopie}" headerText="#{myBundle.ListBilanCognitifLbTitle_REYPCcopie}"/>
+                                            <h:outputText value="#{item.REYPCcopie}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.empandirect}" filterBy="#{item.empandirect}" headerText="#{myBundle.ListBilanCognitifLbTitle_empandirect}"/>
+                                            <h:outputText value="#{item.empandirect}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.empaninverse}" filterBy="#{item.empaninverse}" headerText="#{myBundle.ListBilanCognitifLbTitle_empaninverse}"/>
+                                            <h:outputText value="#{item.empaninverse}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.memoirechiffrebrut}" filterBy="#{item.memoirechiffrebrut}" headerText="#{myBundle.ListBilanCognitifLbTitle_memoirechiffrebrut}"/>
+                                            <h:outputText value="#{item.memoirechiffrebrut}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.memoirechiffreNS}" filterBy="#{item.memoirechiffreNS}" headerText="#{myBundle.ListBilanCognitifLbTitle_memoirechiffreNS}"/>
+                                            <h:outputText value="#{item.memoirechiffreNS}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.SLCbrut}" filterBy="#{item.SLCbrut}" headerText="#{myBundle.ListBilanCognitifLbTitle_SLCbrut}"/>
+                                            <h:outputText value="#{item.SLCbrut}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.slcNs}" filterBy="#{item.slcNs}" headerText="#{myBundle.ListBilanCognitifLbTitle_slcNs}"/>
+                                            <h:outputText value="#{item.slcNs}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.fluencesPbrut}" filterBy="#{item.fluencesPbrut}" headerText="#{myBundle.ListBilanCognitifLbTitle_fluencesPbrut}"/>
+                                            <h:outputText value="#{item.fluencesPbrut}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.fluencesPZS}" filterBy="#{item.fluencesPZS}" headerText="#{myBundle.ListBilanCognitifLbTitle_fluencesPZS}"/>
+                                            <h:outputText value="#{item.fluencesPZS}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.fluencesanimauxbrut}" filterBy="#{item.fluencesanimauxbrut}" headerText="#{myBundle.ListBilanCognitifLbTitle_fluencesanimauxbrut}"/>
+                                            <h:outputText value="#{item.fluencesanimauxbrut}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.fluencesanimauxZS}" filterBy="#{item.fluencesanimauxZS}" headerText="#{myBundle.ListBilanCognitifLbTitle_fluencesanimauxZS}"/>
+                                            <h:outputText value="#{item.fluencesanimauxZS}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.TMTAbrut}" filterBy="#{item.TMTAbrut}" headerText="#{myBundle.ListBilanCognitifLbTitle_TMTAbrut}"/>
+                                            <h:outputText value="#{item.TMTAbrut}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.tmtAZs}" filterBy="#{item.tmtAZs}" headerText="#{myBundle.ListBilanCognitifLbTitle_tmtAZs}"/>
+                                            <h:outputText value="#{item.tmtAZs}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.TMTBbrut}" filterBy="#{item.TMTBbrut}" headerText="#{myBundle.ListBilanCognitifLbTitle_TMTBbrut}"/>
+                                            <h:outputText value="#{item.TMTBbrut}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.tmtBZs}" filterBy="#{item.tmtBZs}" headerText="#{myBundle.ListBilanCognitifLbTitle_tmtBZs}"/>
+                                            <h:outputText value="#{item.tmtBZs}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.TMTBAbrut}" filterBy="#{item.TMTBAbrut}" headerText="#{myBundle.ListBilanCognitifLbTitle_TMTBAbrut}"/>
+                                            <h:outputText value="#{item.TMTBAbrut}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.tmtBAZs}" filterBy="#{item.tmtBAZs}" headerText="#{myBundle.ListBilanCognitifLbTitle_tmtBAZs}"/>
+                                            <h:outputText value="#{item.tmtBAZs}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.stroopdenobrut}" filterBy="#{item.stroopdenobrut}" headerText="#{myBundle.ListBilanCognitifLbTitle_stroopdenobrut}"/>
+                                            <h:outputText value="#{item.stroopdenobrut}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.stroopdenoZS}" filterBy="#{item.stroopdenoZS}" headerText="#{myBundle.ListBilanCognitifLbTitle_stroopdenoZS}"/>
+                                            <h:outputText value="#{item.stroopdenoZS}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.strooplecturebrut}" filterBy="#{item.strooplecturebrut}" headerText="#{myBundle.ListBilanCognitifLbTitle_strooplecturebrut}"/>
+                                            <h:outputText value="#{item.strooplecturebrut}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.strooplectureZS}" filterBy="#{item.strooplectureZS}" headerText="#{myBundle.ListBilanCognitifLbTitle_strooplectureZS}"/>
+                                            <h:outputText value="#{item.strooplectureZS}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.stroopinterbrut}" filterBy="#{item.stroopinterbrut}" headerText="#{myBundle.ListBilanCognitifLbTitle_stroopinterbrut}"/>
+                                            <h:outputText value="#{item.stroopinterbrut}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.stroopinterZS}" filterBy="#{item.stroopinterZS}" headerText="#{myBundle.ListBilanCognitifLbTitle_stroopinterZS}"/>
+                                            <h:outputText value="#{item.stroopinterZS}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.BNTbrut}" filterBy="#{item.BNTbrut}" headerText="#{myBundle.ListBilanCognitifLbTitle_BNTbrut}"/>
+                                            <h:outputText value="#{item.BNTbrut}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.bntZs}" filterBy="#{item.bntZs}" headerText="#{myBundle.ListBilanCognitifLbTitle_bntZs}"/>
+                                            <h:outputText value="#{item.bntZs}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.tokenbrut}" filterBy="#{item.tokenbrut}" headerText="#{myBundle.ListBilanCognitifLbTitle_tokenbrut}"/>
+                                            <h:outputText value="#{item.tokenbrut}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.tokenZS}" filterBy="#{item.tokenZS}" headerText="#{myBundle.ListBilanCognitifLbTitle_tokenZS}"/>
+                                            <h:outputText value="#{item.tokenZS}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQC30global}" filterBy="#{item.QLQC30global}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQC30global}"/>
+                                            <h:outputText value="#{item.QLQC30global}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQC30physique}" filterBy="#{item.QLQC30physique}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQC30physique}"/>
+                                            <h:outputText value="#{item.QLQC30physique}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQC30personnel}" filterBy="#{item.QLQC30personnel}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQC30personnel}"/>
+                                            <h:outputText value="#{item.QLQC30personnel}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQC30emotionnel}" filterBy="#{item.QLQC30emotionnel}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQC30emotionnel}"/>
+                                            <h:outputText value="#{item.QLQC30emotionnel}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQC30cognitif}" filterBy="#{item.QLQC30cognitif}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQC30cognitif}"/>
+                                            <h:outputText value="#{item.QLQC30cognitif}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQC30social}" filterBy="#{item.QLQC30social}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQC30social}"/>
+                                            <h:outputText value="#{item.QLQC30social}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQC30fatigue}" filterBy="#{item.QLQC30fatigue}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQC30fatigue}"/>
+                                            <h:outputText value="#{item.QLQC30fatigue}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQC30nausees}" filterBy="#{item.QLQC30nausees}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQC30nausees}"/>
+                                            <h:outputText value="#{item.QLQC30nausees}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQC30douleur}" filterBy="#{item.QLQC30douleur}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQC30douleur}"/>
+                                            <h:outputText value="#{item.QLQC30douleur}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQC30dyspnee}" filterBy="#{item.QLQC30dyspnee}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQC30dyspnee}"/>
+                                            <h:outputText value="#{item.QLQC30dyspnee}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQC30insomnies}" filterBy="#{item.QLQC30insomnies}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQC30insomnies}"/>
+                                            <h:outputText value="#{item.QLQC30insomnies}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQC30appetit}" filterBy="#{item.QLQC30appetit}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQC30appetit}"/>
+                                            <h:outputText value="#{item.QLQC30appetit}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQC30constipation}" filterBy="#{item.QLQC30constipation}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQC30constipation}"/>
+                                            <h:outputText value="#{item.QLQC30constipation}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQC30diarhees}" filterBy="#{item.QLQC30diarhees}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQC30diarhees}"/>
+                                            <h:outputText value="#{item.QLQC30diarhees}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQC30finances}" filterBy="#{item.QLQC30finances}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQC30finances}"/>
+                                            <h:outputText value="#{item.QLQC30finances}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQBN20futur}" filterBy="#{item.QLQBN20futur}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQBN20futur}"/>
+                                            <h:outputText value="#{item.QLQBN20futur}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQBN20visuel}" filterBy="#{item.QLQBN20visuel}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQBN20visuel}"/>
+                                            <h:outputText value="#{item.QLQBN20visuel}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQBN20moteur}" filterBy="#{item.QLQBN20moteur}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQBN20moteur}"/>
+                                            <h:outputText value="#{item.QLQBN20moteur}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQBN20comm}" filterBy="#{item.QLQBN20comm}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQBN20comm}"/>
+                                            <h:outputText value="#{item.QLQBN20comm}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQBN20epilepsie}" filterBy="#{item.QLQBN20epilepsie}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQBN20epilepsie}"/>
+                                            <h:outputText value="#{item.QLQBN20epilepsie}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQBN20somnolence}" filterBy="#{item.QLQBN20somnolence}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQBN20somnolence}"/>
+                                            <h:outputText value="#{item.QLQBN20somnolence}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQBN20demange}" filterBy="#{item.QLQBN20demange}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQBN20demange}"/>
+                                            <h:outputText value="#{item.QLQBN20demange}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQBN20cheveux}" filterBy="#{item.QLQBN20cheveux}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQBN20cheveux}"/>
+                                            <h:outputText value="#{item.QLQBN20cheveux}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQBN20faiblesse}" filterBy="#{item.QLQBN20faiblesse}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQBN20faiblesse}"/>
+                                            <h:outputText value="#{item.QLQBN20faiblesse}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.QLQBN20incontinence}" filterBy="#{item.QLQBN20incontinence}" headerText="#{myBundle.ListBilanCognitifLbTitle_QLQBN20incontinence}"/>
+                                            <h:outputText value="#{item.QLQBN20incontinence}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.isdc}" filterBy="#{item.isdc}" headerText="#{myBundle.ListBilanCognitifLbTitle_isdc}"/>
+                                            <h:outputText value="#{item.isdc}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.goldberg}" filterBy="#{item.goldberg}" headerText="#{myBundle.ListBilanCognitifLbTitle_goldberg}"/>
+                                            <h:outputText value="#{item.goldberg}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.facit}" filterBy="#{item.facit}" headerText="#{myBundle.ListBilanCognitifLbTitle_facit}"/>
+                                            <h:outputText value="#{item.facit}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.macNair}" filterBy="#{item.macNair}" headerText="#{myBundle.ListBilanCognitifLbTitle_macNair}"/>
+                                            <h:outputText value="#{item.macNair}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.eiadl}" filterBy="#{item.eiadl}" headerText="#{myBundle.ListBilanCognitifLbTitle_eiadl}"/>
+                                            <h:outputText value="#{item.eiadl}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.ces}" filterBy="#{item.ces}" headerText="#{myBundle.ListBilanCognitifLbTitle_ces}"/>
+                                            <h:outputText value="#{item.ces}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.evalglobaledeficit}" filterBy="#{item.evalglobaledeficit}" headerText="#{myBundle.ListBilanCognitifLbTitle_evalglobaledeficit}"/>
+                                            <h:selectBooleanCheckbox id="evalglobaledeficit" value="#{item.evalglobaledeficit}" title="#{myBundle.EditBilanCognitifLbTitle_evalglobaledeficit}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.memverbdeficit}" filterBy="#{item.memverbdeficit}" headerText="#{myBundle.ListBilanCognitifLbTitle_memverbdeficit}"/>
+                                            <h:selectBooleanCheckbox id="memverbdeficit" value="#{item.memverbdeficit}" title="#{myBundle.EditBilanCognitifLbTitle_memverbdeficit}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.memvisudeficit}" filterBy="#{item.memvisudeficit}" headerText="#{myBundle.ListBilanCognitifLbTitle_memvisudeficit}"/>
+                                            <h:selectBooleanCheckbox id="memvisudeficit" value="#{item.memvisudeficit}" title="#{myBundle.EditBilanCognitifLbTitle_memvisudeficit}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.VTIdeficit}" filterBy="#{item.VTIdeficit}" headerText="#{myBundle.ListBilanCognitifLbTitle_VTIdeficit}"/>
+                                            <h:selectBooleanCheckbox id="VTIdeficit" value="#{item.VTIdeficit}" title="#{myBundle.EditBilanCognitifLbTitle_VTIdeficit}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.MCTMDTdeficit}" filterBy="#{item.MCTMDTdeficit}" headerText="#{myBundle.ListBilanCognitifLbTitle_MCTMDTdeficit}"/>
+                                            <h:selectBooleanCheckbox id="MCTMDTdeficit" value="#{item.MCTMDTdeficit}" title="#{myBundle.EditBilanCognitifLbTitle_MCTMDTdeficit}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.inhibdeficit}" filterBy="#{item.inhibdeficit}" headerText="#{myBundle.ListBilanCognitifLbTitle_inhibdeficit}"/>
+                                            <h:selectBooleanCheckbox id="inhibdeficit" value="#{item.inhibdeficit}" title="#{myBundle.EditBilanCognitifLbTitle_inhibdeficit}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.shiftingdeficit}" filterBy="#{item.shiftingdeficit}" headerText="#{myBundle.ListBilanCognitifLbTitle_shiftingdeficit}"/>
+                                            <h:selectBooleanCheckbox id="shiftingdeficit" value="#{item.shiftingdeficit}" title="#{myBundle.EditBilanCognitifLbTitle_shiftingdeficit}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.expressiondeficit}" filterBy="#{item.expressiondeficit}" headerText="#{myBundle.ListBilanCognitifLbTitle_expressiondeficit}"/>
+                                            <h:selectBooleanCheckbox id="expressiondeficit" value="#{item.expressiondeficit}" title="#{myBundle.EditBilanCognitifLbTitle_expressiondeficit}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.comprehensiondeficit}" filterBy="#{item.comprehensiondeficit}" headerText="#{myBundle.ListBilanCognitifLbTitle_comprehensiondeficit}"/>
+                                            <h:selectBooleanCheckbox id="comprehensiondeficit" value="#{item.comprehensiondeficit}" title="#{myBundle.EditBilanCognitifLbTitle_comprehensiondeficit}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.visuoconstrudeficit}" filterBy="#{item.visuoconstrudeficit}" headerText="#{myBundle.ListBilanCognitifLbTitle_visuoconstrudeficit}"/>
+                                            <h:selectBooleanCheckbox id="visuoconstrudeficit" value="#{item.visuoconstrudeficit}" title="#{myBundle.EditBilanCognitifLbTitle_visuoconstrudeficit}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.codepatient.firstName}" filterBy="#{item.codepatient.firstName}" headerText="#{myBundle.ListBilanCognitifLbTitle_codepatient}"/>
+                                            <h:outputText value="#{item.codepatient.firstName}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.visite.id}" filterBy="#{item.visite.id}" headerText="#{myBundle.ListBilanCognitifLbTitle_visite}"/>
+                                            <h:outputText value="#{item.visite.id}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.visit.id}" filterBy="#{item.visit.id}" headerText="#{myBundle.ListBilanCognitifLbTitle_visit}"/>
+                                            <h:outputText value="#{item.visit.id}"/>
+                                        </p:column>
+                    -->
+                </p:dataTable>
+                <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":BilanCognitifLbEditPage:BilanCognitifLbEditForm" disabled="#{empty bilanCognitifLbController.selected}" actionListener="#{mobilePageController.currentPageListener}" action="#{mobilePageController.navigateWithHistory('pm:BilanCognitifLbEditPage')}"/>
+                <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{bilanCognitifLbController.delete}" update=":growl,datalist" disabled="#{empty bilanCognitifLbController.selected}">
+                    <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                </p:commandButton>
+                <p:commandButton id="navigationMenuButton" style="visibility: hidden;" value="#{myBundle.Menu}" disabled="#{empty bilanCognitifLbController.selected}"/>
+
+                <p:overlayPanel id="navigationMenuPanel" for="navigationMenuButton" at="right" showEffect="overlay">
+                    <h2>#{myBundle.BilanCognitifLbHeading} #{myBundle.Menu}</h2>
+                    <p:menu>
+                        <p:menuitem value="#{myBundle.BilanCognitifLbMenuItem_codepatient}" icon="ui-icon-search" update=":PatientEditPage:PatientEditForm" disabled="#{empty bilanCognitifLbController.selected.codepatient}" actionListener="#{bilanCognitifLbController.prepareCodepatient}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:PatientEditPage"/>
+                        </p:menuitem>
+                        <p:menuitem value="#{myBundle.BilanCognitifLbMenuItem_visite}" icon="ui-icon-search" update=":VisitEditPage:VisitEditForm" disabled="#{empty bilanCognitifLbController.selected.visite}" actionListener="#{bilanCognitifLbController.prepareVisite}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:VisitEditPage"/>
+                        </p:menuitem>
+                        <p:menuitem value="#{myBundle.BilanCognitifLbMenuItem_visit}" icon="ui-icon-search" update=":VisitEditPage:VisitEditForm" disabled="#{empty bilanCognitifLbController.selected.visit}" actionListener="#{bilanCognitifLbController.prepareVisit}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:VisitEditPage"/>
+                        </p:menuitem>
+                    </p:menu>
+                </p:overlayPanel>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

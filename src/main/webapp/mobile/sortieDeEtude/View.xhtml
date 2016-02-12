@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="SortieDeEtudeViewPage" lazy="true">
+        <pm:header title="#{myBundle.ViewSortieDeEtudeTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:SortieDeEtudeListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="SortieDeEtudeViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{sortieDeEtudeController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewSortieDeEtudeLabel_id}"/>
+                            <h:outputText value="#{sortieDeEtudeController.selected.id}" title="#{myBundle.ViewSortieDeEtudeTitle_id}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewSortieDeEtudeLabel_raison}"/>
+                            <h:outputText value="#{sortieDeEtudeController.selected.raison}" title="#{myBundle.ViewSortieDeEtudeTitle_raison}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewSortieDeEtudeLabel_precision}"/>
+                            <h:outputText value="#{sortieDeEtudeController.selected.precision}" title="#{myBundle.ViewSortieDeEtudeTitle_precision}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewSortieDeEtudeLabel_lieealatumeur}"/>
+                            <h:selectBooleanCheckbox id="lieealatumeur" value="#{sortieDeEtudeController.selected.lieealatumeur}" title="#{myBundle.EditSortieDeEtudeTitle_lieealatumeur}" required="true" requiredMessage="#{myBundle.EditSortieDeEtudeRequiredMessage_lieealatumeur}" disabled="true"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewSortieDeEtudeLabel_dateSortie}"/>
+                            <h:outputText value="#{sortieDeEtudeController.selected.dateSortie}" title="#{myBundle.ViewSortieDeEtudeTitle_dateSortie}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewSortieDeEtudeLabel_codepatient}"/>
+                            <h:outputText value="#{sortieDeEtudeController.selected.codepatient.firstName}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ConsultationEditPage" lazy="true">
+        <pm:header title="#{myBundle.EditConsultationTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ConsultationListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ConsultationEditForm">
+
+                <h:panelGroup id="display">
+                    <p:tabView id="ConsultationTabView">
+
+                        <p:tab id="ConsultationTab1" title="#{myBundle.TabHeaderPrefix} 1">
+                            <p:outputPanel rendered="#{consultationController.selected != null}">
+                                <pm:field>
+                                    <h:outputLabel value="#{myBundle.EditConsultationLabel_id}" for="id" />
+                                    <h:outputText id="id" value="#{consultationController.selected.id}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_dateexamen}" for="dateexamen" />
+                                    <p:calendar id="dateexamen" pattern="MM/dd/yyyy" value="#{consultationController.selected.dateexamen}" title="#{myBundle.EditConsultationTitle_dateexamen}" required="true" requiredMessage="#{myBundle.EditConsultationRequiredMessage_dateexamen}" showOn="button"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_delaipostRT}" for="delaipostRT" />
+                                    <p:inputText id="delaipostRT" value="#{consultationController.selected.delaipostRT}" title="#{myBundle.EditConsultationTitle_delaipostRT}" required="true" requiredMessage="#{myBundle.EditConsultationRequiredMessage_delaipostRT}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_lignedetraitement}" for="lignedetraitement" />
+                                    <p:inputText id="lignedetraitement" value="#{consultationController.selected.lignedetraitement}" title="#{myBundle.EditConsultationTitle_lignedetraitement}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_chimiotherapie}" for="chimiotherapie" />
+                                    <p:inputText id="chimiotherapie" value="#{consultationController.selected.chimiotherapie}" title="#{myBundle.EditConsultationTitle_chimiotherapie}" size="13" maxlength="13"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_cycle}" for="cycle" />
+                                    <p:inputText id="cycle" value="#{consultationController.selected.cycle}" title="#{myBundle.EditConsultationTitle_cycle}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_posologie}" for="posologie" />
+                                    <p:inputText id="posologie" value="#{consultationController.selected.posologie}" title="#{myBundle.EditConsultationTitle_posologie}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_dosetotale}" for="dosetotale" />
+                                    <p:inputText id="dosetotale" value="#{consultationController.selected.dosetotale}" title="#{myBundle.EditConsultationTitle_dosetotale}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_ik}" for="ik" />
+                                    <p:inputText id="ik" value="#{consultationController.selected.ik}" title="#{myBundle.EditConsultationTitle_ik}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_examennormal}" for="examennormal" />
+                                    <p:selectBooleanCheckbox id="examennormal" value="#{consultationController.selected.examennormal}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_epilepsie}" for="epilepsie" />
+                                    <p:selectBooleanCheckbox id="epilepsie" value="#{consultationController.selected.epilepsie}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_deficitsensitivomoteur}" for="deficitsensitivomoteur" />
+                                    <p:selectBooleanCheckbox id="deficitsensitivomoteur" value="#{consultationController.selected.deficitsensitivomoteur}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_troublesphasiques}" for="troublesphasiques" />
+                                    <p:selectBooleanCheckbox id="troublesphasiques" value="#{consultationController.selected.troublesphasiques}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_troublesmnesiques}" for="troublesmnesiques" />
+                                    <p:selectBooleanCheckbox id="troublesmnesiques" value="#{consultationController.selected.troublesmnesiques}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_troublesattentionnels}" for="troublesattentionnels" />
+                                    <p:selectBooleanCheckbox id="troublesattentionnels" value="#{consultationController.selected.troublesattentionnels}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_troublesexecutifs}" for="troublesexecutifs" />
+                                    <p:selectBooleanCheckbox id="troublesexecutifs" value="#{consultationController.selected.troublesexecutifs}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_rigiditeaxiale}" for="rigiditeaxiale" />
+                                    <p:selectBooleanCheckbox id="rigiditeaxiale" value="#{consultationController.selected.rigiditeaxiale}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_ralentissementmarche}" for="ralentissementmarche" />
+                                    <p:selectBooleanCheckbox id="ralentissementmarche" value="#{consultationController.selected.ralentissementmarche}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_bradykinesie}" for="bradykinesie" />
+                                    <p:selectBooleanCheckbox id="bradykinesie" value="#{consultationController.selected.bradykinesie}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_urgenturie}" for="urgenturie" />
+                                    <p:selectBooleanCheckbox id="urgenturie" value="#{consultationController.selected.urgenturie}" />
+                                </pm:field>
+
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab id="ConsultationTab2" title="#{myBundle.TabHeaderPrefix} 2">
+                            <p:outputPanel rendered="#{consultationController.selected != null}">
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_rigiditemembres}" for="rigiditemembres" />
+                                    <p:selectBooleanCheckbox id="rigiditemembres" value="#{consultationController.selected.rigiditemembres}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_apraxiemarche}" for="apraxiemarche" />
+                                    <p:selectBooleanCheckbox id="apraxiemarche" value="#{consultationController.selected.apraxiemarche}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_apathie}" for="apathie" />
+                                    <p:selectBooleanCheckbox id="apathie" value="#{consultationController.selected.apathie}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_hypophonie}" for="hypophonie" />
+                                    <p:selectBooleanCheckbox id="hypophonie" value="#{consultationController.selected.hypophonie}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_troubledelaposture}" for="troubledelaposture" />
+                                    <p:selectBooleanCheckbox id="troubledelaposture" value="#{consultationController.selected.troubledelaposture}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_incontinenceurinaire}" for="incontinenceurinaire" />
+                                    <p:selectBooleanCheckbox id="incontinenceurinaire" value="#{consultationController.selected.incontinenceurinaire}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_hb}" for="hb" />
+                                    <p:inputText id="hb" value="#{consultationController.selected.hb}" title="#{myBundle.EditConsultationTitle_hb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_hbNadir}" for="hbNadir" />
+                                    <p:inputText id="hbNadir" value="#{consultationController.selected.hbNadir}" title="#{myBundle.EditConsultationTitle_hbNadir}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_pnn}" for="pnn" />
+                                    <p:inputText id="pnn" value="#{consultationController.selected.pnn}" title="#{myBundle.EditConsultationTitle_pnn}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_PNNNadir}" for="PNNNadir" />
+                                    <p:inputText id="PNNNadir" value="#{consultationController.selected.PNNNadir}" title="#{myBundle.EditConsultationTitle_PNNNadir}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_lymphocite}" for="lymphocite" />
+                                    <p:inputText id="lymphocite" value="#{consultationController.selected.lymphocite}" title="#{myBundle.EditConsultationTitle_lymphocite}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_lymphociteNadir}" for="lymphociteNadir" />
+                                    <p:inputText id="lymphociteNadir" value="#{consultationController.selected.lymphociteNadir}" title="#{myBundle.EditConsultationTitle_lymphociteNadir}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_plaquettes}" for="plaquettes" />
+                                    <p:inputText id="plaquettes" value="#{consultationController.selected.plaquettes}" title="#{myBundle.EditConsultationTitle_plaquettes}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_plaquettesNadir}" for="plaquettesNadir" />
+                                    <p:inputText id="plaquettesNadir" value="#{consultationController.selected.plaquettesNadir}" title="#{myBundle.EditConsultationTitle_plaquettesNadir}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_bilanhepatique}" for="bilanhepatique" />
+                                    <p:inputText id="bilanhepatique" value="#{consultationController.selected.bilanhepatique}" title="#{myBundle.EditConsultationTitle_bilanhepatique}" size="7" maxlength="7"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_asatAlat}" for="asatAlat" />
+                                    <p:inputText id="asatAlat" value="#{consultationController.selected.asatAlat}" title="#{myBundle.EditConsultationTitle_asatAlat}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_phosphatealkaline}" for="phosphatealkaline" />
+                                    <p:inputText id="phosphatealkaline" value="#{consultationController.selected.phosphatealkaline}" title="#{myBundle.EditConsultationTitle_phosphatealkaline}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_bilirubinemie}" for="bilirubinemie" />
+                                    <p:inputText id="bilirubinemie" value="#{consultationController.selected.bilirubinemie}" title="#{myBundle.EditConsultationTitle_bilirubinemie}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_fonctionrenale}" for="fonctionrenale" />
+                                    <p:inputText id="fonctionrenale" value="#{consultationController.selected.fonctionrenale}" title="#{myBundle.EditConsultationTitle_fonctionrenale}" size="7" maxlength="7"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_proteinurie}" for="proteinurie" />
+                                    <p:inputText id="proteinurie" value="#{consultationController.selected.proteinurie}" title="#{myBundle.EditConsultationTitle_proteinurie}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_chimionausees}" for="chimionausees" />
+                                    <p:inputText id="chimionausees" value="#{consultationController.selected.chimionausees}" title="#{myBundle.EditConsultationTitle_chimionausees}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab id="ConsultationTab3" title="#{myBundle.TabHeaderPrefix} 3">
+                            <p:outputPanel rendered="#{consultationController.selected != null}">
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_chimiofatigue}" for="chimiofatigue" />
+                                    <p:inputText id="chimiofatigue" value="#{consultationController.selected.chimiofatigue}" title="#{myBundle.EditConsultationTitle_chimiofatigue}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_chimiocephalees}" for="chimiocephalees" />
+                                    <p:inputText id="chimiocephalees" value="#{consultationController.selected.chimiocephalees}" title="#{myBundle.EditConsultationTitle_chimiocephalees}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_chimiodiarrhees}" for="chimiodiarrhees" />
+                                    <p:inputText id="chimiodiarrhees" value="#{consultationController.selected.chimiodiarrhees}" title="#{myBundle.EditConsultationTitle_chimiodiarrhees}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_chimioconstipation}" for="chimioconstipation" />
+                                    <p:inputText id="chimioconstipation" value="#{consultationController.selected.chimioconstipation}" title="#{myBundle.EditConsultationTitle_chimioconstipation}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_chimiofievre}" for="chimiofievre" />
+                                    <p:inputText id="chimiofievre" value="#{consultationController.selected.chimiofievre}" title="#{myBundle.EditConsultationTitle_chimiofievre}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_chimioepistaxis}" for="chimioepistaxis" />
+                                    <p:inputText id="chimioepistaxis" value="#{consultationController.selected.chimioepistaxis}" title="#{myBundle.EditConsultationTitle_chimioepistaxis}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_chimioallergies}" for="chimioallergies" />
+                                    <p:inputText id="chimioallergies" value="#{consultationController.selected.chimioallergies}" title="#{myBundle.EditConsultationTitle_chimioallergies}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_chimiohemato}" for="chimiohemato" />
+                                    <p:inputText id="chimiohemato" value="#{consultationController.selected.chimiohemato}" title="#{myBundle.EditConsultationTitle_chimiohemato}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_chimiodyspnees}" for="chimiodyspnees" />
+                                    <p:inputText id="chimiodyspnees" value="#{consultationController.selected.chimiodyspnees}" title="#{myBundle.EditConsultationTitle_chimiodyspnees}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_chimiophlebites}" for="chimiophlebites" />
+                                    <p:inputText id="chimiophlebites" value="#{consultationController.selected.chimiophlebites}" title="#{myBundle.EditConsultationTitle_chimiophlebites}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_chimioautres}" for="chimioautres" />
+                                    <p:inputText id="chimioautres" value="#{consultationController.selected.chimioautres}" title="#{myBundle.EditConsultationTitle_chimioautres}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_antiemetique}" for="antiemetique" />
+                                    <p:inputText id="antiemetique" value="#{consultationController.selected.antiemetique}" title="#{myBundle.EditConsultationTitle_antiemetique}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_corticotherapienom}" for="corticotherapienom" />
+                                    <p:inputText id="corticotherapienom" value="#{consultationController.selected.corticotherapienom}" title="#{myBundle.EditConsultationTitle_corticotherapienom}" size="7" maxlength="7"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_corticotherapieposologie}" for="corticotherapieposologie" />
+                                    <p:inputText id="corticotherapieposologie" value="#{consultationController.selected.corticotherapieposologie}" title="#{myBundle.EditConsultationTitle_corticotherapieposologie}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_nombredecriseepileptiquepartielle}" for="nombredecriseepileptiquepartielle" />
+                                    <p:inputText id="nombredecriseepileptiquepartielle" value="#{consultationController.selected.nombredecriseepileptiquepartielle}" title="#{myBundle.EditConsultationTitle_nombredecriseepileptiquepartielle}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_nombredecriseepileptiquegeneralisee}" for="nombredecriseepileptiquegeneralisee" />
+                                    <p:inputText id="nombredecriseepileptiquegeneralisee" value="#{consultationController.selected.nombredecriseepileptiquegeneralisee}" title="#{myBundle.EditConsultationTitle_nombredecriseepileptiquegeneralisee}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_nombredantiepileptique}" for="nombredantiepileptique" />
+                                    <p:inputText id="nombredantiepileptique" value="#{consultationController.selected.nombredantiepileptique}" title="#{myBundle.EditConsultationTitle_nombredantiepileptique}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_antiepileptique1nom}" for="antiepileptique1nom" />
+                                    <p:inputText id="antiepileptique1nom" value="#{consultationController.selected.antiepileptique1nom}" title="#{myBundle.EditConsultationTitle_antiepileptique1nom}" size="23" maxlength="23"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_antiepileptique1posologie}" for="antiepileptique1posologie" />
+                                    <p:inputText id="antiepileptique1posologie" value="#{consultationController.selected.antiepileptique1posologie}" title="#{myBundle.EditConsultationTitle_antiepileptique1posologie}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_antiepileptique2nom}" for="antiepileptique2nom" />
+                                    <p:inputText id="antiepileptique2nom" value="#{consultationController.selected.antiepileptique2nom}" title="#{myBundle.EditConsultationTitle_antiepileptique2nom}" size="23" maxlength="23"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_antiepileptique2posologie}" for="antiepileptique2posologie" />
+                                    <p:inputText id="antiepileptique2posologie" value="#{consultationController.selected.antiepileptique2posologie}" title="#{myBundle.EditConsultationTitle_antiepileptique2posologie}"/>
+                                </pm:field>
+
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab id="ConsultationTab4" title="#{myBundle.TabHeaderPrefix} 4">
+                            <p:outputPanel rendered="#{consultationController.selected != null}">
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_antiepileptique3nom}" for="antiepileptique3nom" />
+                                    <p:inputText id="antiepileptique3nom" value="#{consultationController.selected.antiepileptique3nom}" title="#{myBundle.EditConsultationTitle_antiepileptique3nom}" size="23" maxlength="23"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_antiepileptique3posologie}" for="antiepileptique3posologie" />
+                                    <p:inputText id="antiepileptique3posologie" value="#{consultationController.selected.antiepileptique3posologie}" title="#{myBundle.EditConsultationTitle_antiepileptique3posologie}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_antiepileptique4nom}" for="antiepileptique4nom" />
+                                    <p:inputText id="antiepileptique4nom" value="#{consultationController.selected.antiepileptique4nom}" title="#{myBundle.EditConsultationTitle_antiepileptique4nom}" size="23" maxlength="23"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_antiepileptique4posologie}" for="antiepileptique4posologie" />
+                                    <p:inputText id="antiepileptique4posologie" value="#{consultationController.selected.antiepileptique4posologie}" title="#{myBundle.EditConsultationTitle_antiepileptique4posologie}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_prophylaxieantiTVP}" for="prophylaxieantiTVP" />
+                                    <p:selectBooleanCheckbox id="prophylaxieantiTVP" value="#{consultationController.selected.prophylaxieantiTVP}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_prophylaxiepneumocystiscarinii}" for="prophylaxiepneumocystiscarinii" />
+                                    <p:selectBooleanCheckbox id="prophylaxiepneumocystiscarinii" value="#{consultationController.selected.prophylaxiepneumocystiscarinii}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_EPOdarbopoetin}" for="EPOdarbopoetin" />
+                                    <p:selectBooleanCheckbox id="EPOdarbopoetin" value="#{consultationController.selected.EPOdarbopoetin}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_GCsf}" for="GCsf" />
+                                    <p:selectBooleanCheckbox id="GCsf" value="#{consultationController.selected.GCsf}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_codepatient}" for="codepatient" />
+                                    <p:selectOneMenu id="codepatient" value="#{consultationController.selected.codepatient}" required="true" requiredMessage="#{myBundle.EditConsultationRequiredMessage_codepatient}" converter="patientConverter">
+                                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{patientController.items}"
+                                                       var="codepatientItem"
+                                                       itemValue="#{codepatientItem}"
+                                                       itemLabel="#{codepatientItem.firstName.toString()}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_visite}" for="visite" />
+                                    <p:selectOneMenu id="visite" value="#{consultationController.selected.visite}" required="true" requiredMessage="#{myBundle.EditConsultationRequiredMessage_visite}" converter="visitConverter">
+                                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{visitController.items}"
+                                                       var="visiteItem"
+                                                       itemValue="#{visiteItem}"
+                                                       itemLabel="#{visiteItem.id.toString()}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditConsultationLabel_visit}" for="visit" />
+                                    <p:selectOneMenu id="visit" value="#{consultationController.selected.visit}"  converter="visitConverter">
+                                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{visitController.items}"
+                                                       var="visitItem"
+                                                       itemValue="#{visitItem}"
+                                                       itemLabel="#{visitItem.id.toString()}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                </pm:field>
+                            </p:outputPanel>
+                        </p:tab>
+                    </p:tabView>
+                    <p:commandButton actionListener="#{consultationController.save}" value="#{myBundle.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:ConsultationListPage:ConsultationListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:ConsultationListPage')}">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

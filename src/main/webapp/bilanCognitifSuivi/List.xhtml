@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="BilanCognitifSuiviListForm">
+
+        <p:panel header="#{myBundle.ListBilanCognitifSuiviTitle}">
+            <p:contextMenu id="BilanCognitifSuiviDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{myBundle.Create}" onclick="document.getElementById('BilanCognitifSuiviListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('BilanCognitifSuiviListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('BilanCognitifSuiviListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{myBundle.Delete}" onclick="document.getElementById('BilanCognitifSuiviListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{bilanCognitifSuiviController.items}"
+                         var="item"
+                         rowKey="#{item.id}"
+                         paginator="false"
+                         rows="1"
+                         rowsPerPageTemplate="1"
+                         selectionMode="single"
+                         selection="#{bilanCognitifSuiviController.selected}">
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:BilanCognitifSuiviDataTableContextMenu" listener="#{bilanCognitifSuiviController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:BilanCognitifSuiviDataTableContextMenu" listener="#{bilanCognitifSuiviController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{bilanCognitifSuiviController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('BilanCognitifSuiviListForm:viewButton').click();"/>
+
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListBilanCognitifSuiviTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.visite.nom_visite}"/>
+                </p:column>
+
+
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListBilanCognitifSuiviTitle_dateexamen}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dateexamen}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"    disabled="#{bilanCognitifSuiviController.nItemsLimit}"  icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{bilanCognitifSuiviController.prepareCreate}" update=":BilanCognitifSuiviCreateForm" oncomplete="PF('BilanCognitifSuiviCreateDialog').show()"/>
+            <p:commandButton id="viewButton"  rendered="false"    icon="ui-icon-search" value="#{myBundle.View}" update=":BilanCognitifSuiviViewForm" oncomplete="PF('BilanCognitifSuiviViewDialog').show()" disabled="#{empty bilanCognitifSuiviController.selected}"/>
+            <p:commandButton id="editButton"    icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":BilanCognitifSuiviEditForm" oncomplete="PF('BilanCognitifSuiviEditDialog').show()" disabled="#{empty bilanCognitifSuiviController.selected}"/>
+            <p:commandButton id="deleteButton" rendered="false"  icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{bilanCognitifSuiviController.delete}" update=":growl,datalist" disabled="#{empty bilanCognitifSuiviController.selected}">
+                <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

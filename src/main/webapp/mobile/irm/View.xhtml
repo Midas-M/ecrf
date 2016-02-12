@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="IrmViewPage" lazy="true">
+        <pm:header title="#{myBundle.ViewIrmTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:IrmListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="IrmViewForm">
+
+                <h:panelGroup id="display">
+                    <p:tabView id="IrmTabView">
+
+                        <p:tab id="IrmTab1" title="#{myBundle.TabHeaderPrefix} 1">
+                            <p:outputPanel rendered="#{irmController.selected != null}">
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_id}"/>
+                                    <h:outputText value="#{irmController.selected.id}" title="#{myBundle.ViewIrmTitle_id}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_dateexamen}"/>
+                                    <h:outputText value="#{irmController.selected.dateexamen}" title="#{myBundle.ViewIrmTitle_dateexamen}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_delaipostRT}"/>
+                                    <h:outputText value="#{irmController.selected.delaipostRT}" title="#{myBundle.ViewIrmTitle_delaipostRT}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_fgSb}"/>
+                                    <h:outputText value="#{irmController.selected.fgSb}" title="#{myBundle.ViewIrmTitle_fgSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_fdSb}"/>
+                                    <h:outputText value="#{irmController.selected.fdSb}" title="#{myBundle.ViewIrmTitle_fdSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_fgAc}"/>
+                                    <h:outputText value="#{irmController.selected.fgAc}" title="#{myBundle.ViewIrmTitle_fgAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_fdAc}"/>
+                                    <h:outputText value="#{irmController.selected.fdAc}" title="#{myBundle.ViewIrmTitle_fdAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_tgSb}"/>
+                                    <h:outputText value="#{irmController.selected.tgSb}" title="#{myBundle.ViewIrmTitle_tgSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_tdSb}"/>
+                                    <h:outputText value="#{irmController.selected.tdSb}" title="#{myBundle.ViewIrmTitle_tdSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_tgAc}"/>
+                                    <h:outputText value="#{irmController.selected.tgAc}" title="#{myBundle.ViewIrmTitle_tgAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_tdAc}"/>
+                                    <h:outputText value="#{irmController.selected.tdAc}" title="#{myBundle.ViewIrmTitle_tdAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_pogSb}"/>
+                                    <h:outputText value="#{irmController.selected.pogSb}" title="#{myBundle.ViewIrmTitle_pogSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_podSb}"/>
+                                    <h:outputText value="#{irmController.selected.podSb}" title="#{myBundle.ViewIrmTitle_podSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_pogAc}"/>
+                                    <h:outputText value="#{irmController.selected.pogAc}" title="#{myBundle.ViewIrmTitle_pogAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_podAc}"/>
+                                    <h:outputText value="#{irmController.selected.podAc}" title="#{myBundle.ViewIrmTitle_podAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_cgSb}"/>
+                                    <h:outputText value="#{irmController.selected.cgSb}" title="#{myBundle.ViewIrmTitle_cgSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_cdSb}"/>
+                                    <h:outputText value="#{irmController.selected.cdSb}" title="#{myBundle.ViewIrmTitle_cdSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_cgAc}"/>
+                                    <h:outputText value="#{irmController.selected.cgAc}" title="#{myBundle.ViewIrmTitle_cgAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_cdAc}"/>
+                                    <h:outputText value="#{irmController.selected.cdAc}" title="#{myBundle.ViewIrmTitle_cdAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_ggbgSb}"/>
+                                    <h:outputText value="#{irmController.selected.ggbgSb}" title="#{myBundle.ViewIrmTitle_ggbgSb}"/>
+                                </pm:field>
+
+                            </p:outputPanel>
+                        </p:tab>
+                        <p:tab id="IrmTab2" title="#{myBundle.TabHeaderPrefix} 2">
+                            <p:outputPanel rendered="#{irmController.selected != null}">
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_ggbdSb}"/>
+                                    <h:outputText value="#{irmController.selected.ggbdSb}" title="#{myBundle.ViewIrmTitle_ggbdSb}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_ggbgAc}"/>
+                                    <h:outputText value="#{irmController.selected.ggbgAc}" title="#{myBundle.ViewIrmTitle_ggbgAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_ggbdAc}"/>
+                                    <h:outputText value="#{irmController.selected.ggbdAc}" title="#{myBundle.ViewIrmTitle_ggbdAc}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_codepatient}"/>
+                                    <h:outputText value="#{irmController.selected.codepatient.firstName}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_visite}"/>
+                                    <h:outputText value="#{irmController.selected.visite.id}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <h:outputText value="#{myBundle.ViewIrmLabel_visit}"/>
+                                    <h:outputText value="#{irmController.selected.visit.id}"/>
+                                </pm:field>
+                            </p:outputPanel>
+                        </p:tab>
+                    </p:tabView>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

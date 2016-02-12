@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DosimetrieViewDlg" widgetVar="DosimetrieViewDialog" width="auto" position="left top" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewDosimetrieTitle}" closeOnEscape="true">
+
+            <h:form id="DosimetrieViewForm">
+
+                <h:panelGroup id="display">
+                    <p:tabView id="DosimetrieTabView">
+
+                        <p:tab id="DosimetrieTab1" title="#{myBundle.TabHeaderPrefix} 1">
+                            <p:panelGrid columns="4" columnClasses="column" rendered="#{dosimetrieController.selected != null}">
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_id}"/>
+                                <h:outputText value="#{dosimetrieController.selected.id}" title="#{myBundle.ViewDosimetrieTitle_id}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_datedebutRT}"/>
+                                <h:outputText value="#{dosimetrieController.selected.datedebutRT}" title="#{myBundle.ViewDosimetrieTitle_datedebutRT}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_datefinRT}"/>
+                                <h:outputText value="#{dosimetrieController.selected.datefinRT}" title="#{myBundle.ViewDosimetrieTitle_datefinRT}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_dosetotale}"/>
+                                <h:outputText value="#{dosimetrieController.selected.dosetotale}" title="#{myBundle.ViewDosimetrieTitle_dosetotale}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_nbrfraction}"/>
+                                <h:outputText value="#{dosimetrieController.selected.nbrfraction}" title="#{myBundle.ViewDosimetrieTitle_nbrfraction}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_energiephotonMV}"/>
+                                <h:outputText value="#{dosimetrieController.selected.energiephotonMV}" title="#{myBundle.ViewDosimetrieTitle_energiephotonMV}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_typetechnique}"/>
+                                <h:outputText value="#{dosimetrieController.selected.typetechnique}" title="#{myBundle.ViewDosimetrieTitle_typetechnique}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_interuptempo}"/>
+                                <h:selectBooleanCheckbox id="interuptempo" value="#{dosimetrieController.selected.interuptempo}" title="#{myBundle.EditDosimetrieTitle_interuptempo}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_interuptempo}" disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_jourdarretcumul}"/>
+                                <h:outputText value="#{dosimetrieController.selected.jourdarretcumul}" title="#{myBundle.ViewDosimetrieTitle_jourdarretcumul}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_nbrperiodearret3j}"/>
+                                <h:outputText value="#{dosimetrieController.selected.nbrperiodearret3j}" title="#{myBundle.ViewDosimetrieTitle_nbrperiodearret3j}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_arret3jcausepatient}"/>
+                                <h:outputText value="#{dosimetrieController.selected.arret3jcausepatient}" title="#{myBundle.ViewDosimetrieTitle_arret3jcausepatient}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_arret3jcausemaladieinter}"/>
+                                <h:outputText value="#{dosimetrieController.selected.arret3jcausemaladieinter}" title="#{myBundle.ViewDosimetrieTitle_arret3jcausemaladieinter}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_arret3jcauseferies}"/>
+                                <h:outputText value="#{dosimetrieController.selected.arret3jcauseferies}" title="#{myBundle.ViewDosimetrieTitle_arret3jcauseferies}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_arret3jcausemaintenance}"/>
+                                <h:outputText value="#{dosimetrieController.selected.arret3jcausemaintenance}" title="#{myBundle.ViewDosimetrieTitle_arret3jcausemaintenance}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_arret3jcausepanne}"/>
+                                <h:outputText value="#{dosimetrieController.selected.arret3jcausepanne}" title="#{myBundle.ViewDosimetrieTitle_arret3jcausepanne}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_arret3jcausetoxicite}"/>
+                                <h:outputText value="#{dosimetrieController.selected.arret3jcausetoxicite}" title="#{myBundle.ViewDosimetrieTitle_arret3jcausetoxicite}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_arret3jcauseautre}"/>
+                                <h:outputText value="#{dosimetrieController.selected.arret3jcauseautre}" title="#{myBundle.ViewDosimetrieTitle_arret3jcauseautre}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_interuptionprematuree}"/>
+                                <h:outputText value="#{dosimetrieController.selected.interuptionprematuree}" title="#{myBundle.ViewDosimetrieTitle_interuptionprematuree}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_GTVtumeurmacro}"/>
+                                <h:outputText value="#{dosimetrieController.selected.GTVtumeurmacro}" title="#{myBundle.ViewDosimetrieTitle_GTVtumeurmacro}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_CTVvolumeanatomoclinique}"/>
+                                <h:outputText value="#{dosimetrieController.selected.CTVvolumeanatomoclinique}" title="#{myBundle.ViewDosimetrieTitle_CTVvolumeanatomoclinique}"/>
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="DosimetrieTab2" title="#{myBundle.TabHeaderPrefix} 2">
+                            <p:panelGrid columns="4" columnClasses="column" rendered="#{dosimetrieController.selected != null}">
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_PTVvolumecibleplanif}"/>
+                                <h:outputText value="#{dosimetrieController.selected.PTVvolumecibleplanif}" title="#{myBundle.ViewDosimetrieTitle_PTVvolumecibleplanif}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_volumeoedeme}"/>
+                                <h:outputText value="#{dosimetrieController.selected.volumeoedeme}" title="#{myBundle.ViewDosimetrieTitle_volumeoedeme}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_PTV95dose}"/>
+                                <h:outputText value="#{dosimetrieController.selected.PTV95dose}" title="#{myBundle.ViewDosimetrieTitle_PTV95dose}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_PTV90dose}"/>
+                                <h:outputText value="#{dosimetrieController.selected.PTV90dose}" title="#{myBundle.ViewDosimetrieTitle_PTV90dose}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_PTV107dose}"/>
+                                <h:outputText value="#{dosimetrieController.selected.PTV107dose}" title="#{myBundle.ViewDosimetrieTitle_PTV107dose}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_volumeisodose95}"/>
+                                <h:outputText value="#{dosimetrieController.selected.volumeisodose95}" title="#{myBundle.ViewDosimetrieTitle_volumeisodose95}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_rcmiD98Ptv}"/>
+                                <h:outputText value="#{dosimetrieController.selected.rcmiD98Ptv}" title="#{myBundle.ViewDosimetrieTitle_rcmiD98Ptv}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_rcmiD2Ptv}"/>
+                                <h:outputText value="#{dosimetrieController.selected.rcmiD2Ptv}" title="#{myBundle.ViewDosimetrieTitle_rcmiD2Ptv}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_rcmiD50Ptv}"/>
+                                <h:outputText value="#{dosimetrieController.selected.rcmiD50Ptv}" title="#{myBundle.ViewDosimetrieTitle_rcmiD50Ptv}"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_deliHippocampes}"/>
+                                <h:selectBooleanCheckbox id="deliHippocampes" value="#{dosimetrieController.selected.deliHippocampes}" title="#{myBundle.EditDosimetrieTitle_deliHippocampes}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_deliHippocampes}" disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_delihippocampes5mm}"/>
+                                <h:selectBooleanCheckbox id="delihippocampes5mm" value="#{dosimetrieController.selected.delihippocampes5mm}" title="#{myBundle.EditDosimetrieTitle_delihippocampes5mm}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delihippocampes5mm}" disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_delicorpscalleux}"/>
+                                <h:selectBooleanCheckbox id="delicorpscalleux" value="#{dosimetrieController.selected.delicorpscalleux}" title="#{myBundle.EditDosimetrieTitle_delicorpscalleux}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delicorpscalleux}" disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_delilobetemporaux}"/>
+                                <h:selectBooleanCheckbox id="delilobetemporaux" value="#{dosimetrieController.selected.delilobetemporaux}" title="#{myBundle.EditDosimetrieTitle_delilobetemporaux}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delilobetemporaux}" disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_delilobefrontaux}"/>
+                                <h:selectBooleanCheckbox id="delilobefrontaux" value="#{dosimetrieController.selected.delilobefrontaux}" title="#{myBundle.EditDosimetrieTitle_delilobefrontaux}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delilobefrontaux}" disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_delicervelet}"/>
+                                <h:selectBooleanCheckbox id="delicervelet" value="#{dosimetrieController.selected.delicervelet}" title="#{myBundle.EditDosimetrieTitle_delicervelet}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delicervelet}" disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_deliperiventriculaire}"/>
+                                <h:selectBooleanCheckbox id="deliperiventriculaire" value="#{dosimetrieController.selected.deliperiventriculaire}" title="#{myBundle.EditDosimetrieTitle_deliperiventriculaire}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_deliperiventriculaire}" disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_deliencephalesain}"/>
+                                <h:selectBooleanCheckbox id="deliencephalesain" value="#{dosimetrieController.selected.deliencephalesain}" title="#{myBundle.EditDosimetrieTitle_deliencephalesain}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_deliencephalesain}" disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_delisustentoriel}"/>
+                                <h:selectBooleanCheckbox id="delisustentoriel" value="#{dosimetrieController.selected.delisustentoriel}" title="#{myBundle.EditDosimetrieTitle_delisustentoriel}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delisustentoriel}" disabled="true"/>
+
+                                <h:outputText value="#{myBundle.ViewDosimetrieLabel_delifosseposterieure}"/>
+                                <h:selectBooleanCheckbox id="delifosseposterieure" value="#{dosimetrieController.selected.delifosseposterieure}" title="#{myBundle.EditDosimetrieTitle_delifosseposterieure}" required="true" requiredMessage="#{myBundle.EditDosimetrieRequiredMessage_delifosseposterieure}" disabled="true"/>
+                            </p:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('DosimetrieViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

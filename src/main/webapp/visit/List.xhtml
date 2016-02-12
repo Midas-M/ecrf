@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="VisitListForm">
+
+        <p:panel header="#{myBundle.ListVisitTitle}">
+            <p:contextMenu id="VisitDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{myBundle.Create}" onclick="document.getElementById('VisitListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('VisitListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('VisitListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{myBundle.Delete}" rendered="false" onclick="document.getElementById('VisitListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                
+            </p:contextMenu>
+
+            <p:dataTable id="datalist"
+                         value="#{visitController.items}"
+                         var="item"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{visitController.selected}">
+         
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('ViewListForm:viewButton').click();"/>                  
+                <p:ajax event="rowSelect" update="@form:showExamButton,@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:VisitDataTableContextMenu"  listener="#{visitController.toggleSelectedVisit()}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:VisitDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+               
+                <p:column sortBy="#{item.nom_visite}" filterBy="#{item.nom_visite}">
+                    <f:facet name="header">
+                        <h:outputText value="Nom de la visite"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nom_visite}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.dateString}" filterBy="#{item.dateString}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListVisitTitle_date}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dateString}">
+                        
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListVisitTitle_codepatient}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codepatient.codepatient}"/>
+                </p:column>
+
+
+
+            </p:dataTable>
+
+            <div>
+            <p:commandButton id="createButton" icon="ui-icon-plus"  value="#{myBundle.Create}" actionListener="#{visitController.prepareCreate}"  update=":VisitCreateForm" oncomplete="PF('VisitCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   rendered="false"   icon="ui-icon-search" value="#{myBundle.View}" update=":VisitViewForm" oncomplete="PF('VisitViewDialog').show()" disabled="#{not visitController.selectedVisit}"/>
+            <p:commandButton id="editButton"    icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":VisitEditForm" oncomplete="PF('VisitEditDialog').show()" disabled="#{not visitController.selectedVisit}"/>
+            <p:commandButton id="deleteButton" rendered="false" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{visitController.delete}" update=":growl,datalist" disabled="#{not visitController.selectedVisit}">
+                <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+            </div>
+            <p:commandButton id="showExamButton" disabled="#{not visitController.selectedVisit}" value="Accéder aux examens"  update=":testdlg,@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:VisitDataTableContextMenu" oncomplete="PF('dlg1').show();"   actionListener="#{visitController.examDialog}">  
+                            
+            </p:commandButton>
+           
+            <p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;">
+               <f:facet name="start">
+                   <p:graphicImage  library="images" name="ajax-loader.gif" />
+               </f:facet>
+           </p:ajaxStatus>
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                <p:graphicImage library="images" name="ajax-loader.gif" />
+            </p:dialog>
+            
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

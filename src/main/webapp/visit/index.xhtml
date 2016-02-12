@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{myBundle.VisitTitle}"/>
+    </ui:define>
+
+    <ui:define name="body">
+        <ui:include src="/patient/View.xhtml"/>
+        
+            <p:panel  id="visitlist"  rendered="#{not visitController.renderCsct}"  style="visibility: visible;" >  
+                <ui:include src="/visit/List.xhtml"/>
+                <ui:include src="/visit/View.xhtml"/>
+                <ui:include src="/visit/Edit.xhtml"/>
+                <ui:include src="/visit/Create.xhtml"/>
+            </p:panel>
+            <p:dialog  header="Select a Patient" closable="false" appendTo="@(body)" widgetVar="dlg2" modal="true" resizable="false" >
+                <p:commandButton value="Ok!"  action="/patient/index.xhtml" />
+            </p:dialog>
+            <p:dialog  id="testdlg" header="Exams" closable="false" appendTo="@(body)" widgetVar="dlg1" modal="true" resizable="false" fitViewport="true"  >
+                <h:panelGrid  columns="3" rendered="#{visitController.renderCsct}">
+                          <h:panelGroup>                 
+                                <ui:include src="/csct/Create.xhtml"/>
+                                <ui:include src="/csct/List.xhtml"/>
+                                <ui:include src="/csct/Edit.xhtml"/>
+                                <ui:include src="/csct/View.xhtml"/>
+                          </h:panelGroup>
+                          <h:panelGroup>
+                                <ui:include src="/bilanCognitifSuivi/Create.xhtml"/>
+                                <ui:include src="/bilanCognitifSuivi/List.xhtml"/>
+                                <ui:include src="/bilanCognitifSuivi/Edit.xhtml"/>
+                                <ui:include src="/bilanCognitifSuivi/View.xhtml"/>
+                          </h:panelGroup>
+                          <h:panelGroup>
+                                <ui:include src="/bilanCognitifLb/Create.xhtml"/>
+                                <ui:include src="/bilanCognitifLb/List.xhtml"/>
+                                <ui:include src="/bilanCognitifLb/Edit.xhtml"/>
+                                <ui:include src="/bilanCognitifLb/View.xhtml"/>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                <ui:include src="/consultation/Create.xhtml"/>
+                                <ui:include src="/consultation/List.xhtml"/>
+                                <ui:include src="/consultation/Edit.xhtml"/>
+                                <ui:include src="/consultation/View.xhtml"/>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                <ui:include src="/irm/Create.xhtml"/>
+                                <ui:include src="/irm/List.xhtml"/>
+                                <ui:include src="/irm/Edit.xhtml"/>
+                                <ui:include src="/irm/View.xhtml"/>
+                            </h:panelGroup>   
+                </h:panelGrid>
+                <p:commandButton id="closedlgbtn" value="Done editing" update=":testdlg"  onsuccess="PF('dlg1').hide();"  actionListener="#{visitController.clearSelection}"/> 
+               </p:dialog>
+    
+       
+    </ui:define>
+
+</ui:composition>

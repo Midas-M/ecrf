@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="DosimetrieEditDlg" widgetVar="DosimetrieEditDialog" width="auto" position="left top" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditDosimetrieTitle}" closeOnEscape="true">
+
+            <h:form id="DosimetrieEditForm">
+
+                <h:panelGroup id="display">
+                     <p:tabView id="DosimetrieTabView">
+
+                        <p:tab id="DosimetrieTab1" title="#{myBundle.TabHeaderPrefix} 1">
+                            <p:panelGrid columns="4" columnClasses="column">
+
+                                <p:outputLabel value="#{myBundle.CreateCsctLabel_codepatient}" for="codepatient" />
+                                <h:outputText  id="codepatient" value="#{dosimetrieController.selected.codepatient.codepatient}" />
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_datedebutRT}" for="datedebutRT" />
+                                <p:calendar id="datedebutRT" pattern="dd/MM/yyyy" value="#{dosimetrieController.selected.datedebutRT}" title="#{myBundle.CreateDosimetrieTitle_datedebutRT}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_datedebutRT}" showOn="button"/>
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_datefinRT}" for="datefinRT" />
+                                <p:calendar id="datefinRT" pattern="dd/MM/yyyy" value="#{dosimetrieController.selected.datefinRT}" title="#{myBundle.CreateDosimetrieTitle_datefinRT}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_datefinRT}" showOn="button"/>
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_dosetotale}" for="dosetotale" />
+                                <p:inputText id="dosetotale" value="#{dosimetrieController.selected.dosetotale}" title="#{myBundle.CreateDosimetrieTitle_dosetotale}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_dosetotale}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="99" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_nbrfraction}" for="nbrfraction" />
+                                <p:inputText id="nbrfraction" value="#{dosimetrieController.selected.nbrfraction}" title="#{myBundle.CreateDosimetrieTitle_nbrfraction}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_nbrfraction}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="99" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_energiephotonMV}" for="energiephotonMV" />
+                                <p:inputText id="energiephotonMV" value="#{dosimetrieController.selected.energiephotonMV}" title="#{myBundle.CreateDosimetrieTitle_energiephotonMV}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_energiephotonMV}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="99" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_typetechnique}" for="typetechnique" />                             
+                                <p:selectOneButton  id="typetechnique" value="#{dosimetrieController.selected.typetechnique}"   required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_typetechnique}" >
+                                    <f:selectItem itemLabel="3DCRT" itemValue="3DCRT" />                            
+                                    <f:selectItem itemLabel="RCMI non TOMO" itemValue="RCMI_non_TOMO" />                           
+                                    <f:selectItem itemLabel="TOMO" itemValue="TOMO" />
+                                    <f:selectItem itemLabel="autre" itemValue="autre" />
+                                </p:selectOneButton>
+
+
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_interuptempo}" for="interuptempo" />
+                                <p:selectOneButton id="interuptempo" value="#{dosimetrieController.selected.interuptempo}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_interuptempo}">
+                                    <f:selectItem itemLabel="Yes" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_jourdarretcumul}" for="jourdarretcumul" />
+                                <p:inputText id="jourdarretcumul" value="#{dosimetrieController.selected.jourdarretcumul}" title="#{myBundle.CreateDosimetrieTitle_jourdarretcumul}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_jourdarretcumul}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="99" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_nbrperiodearret3j}" for="nbrperiodearret3j" />
+                                <p:inputText id="nbrperiodearret3j" value="#{dosimetrieController.selected.nbrperiodearret3j}" title="#{myBundle.CreateDosimetrieTitle_nbrperiodearret3j}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_nbrperiodearret3j}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="99" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_arret3jcausepatient}" for="arret3jcausepatient" />
+                                <p:inputText id="arret3jcausepatient" value="#{dosimetrieController.selected.arret3jcausepatient}" title="#{myBundle.CreateDosimetrieTitle_arret3jcausepatient}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_arret3jcausepatient}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="99" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_arret3jcausemaladieinter}" for="arret3jcausemaladieinter" />
+                                <p:inputText id="arret3jcausemaladieinter" value="#{dosimetrieController.selected.arret3jcausemaladieinter}" title="#{myBundle.CreateDosimetrieTitle_arret3jcausemaladieinter}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_arret3jcausemaladieinter}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="99" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_arret3jcauseferies}" for="arret3jcauseferies" />
+                                <p:inputText id="arret3jcauseferies" value="#{dosimetrieController.selected.arret3jcauseferies}" title="#{myBundle.CreateDosimetrieTitle_arret3jcauseferies}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_arret3jcauseferies}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="99" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_arret3jcausemaintenance}" for="arret3jcausemaintenance" />
+                                <p:inputText id="arret3jcausemaintenance" value="#{dosimetrieController.selected.arret3jcausemaintenance}" title="#{myBundle.CreateDosimetrieTitle_arret3jcausemaintenance}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_arret3jcausemaintenance}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="99" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_arret3jcausepanne}" for="arret3jcausepanne" />
+                                <p:inputText id="arret3jcausepanne" value="#{dosimetrieController.selected.arret3jcausepanne}" title="#{myBundle.CreateDosimetrieTitle_arret3jcausepanne}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_arret3jcausepanne}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="99" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_arret3jcausetoxicite}" for="arret3jcausetoxicite" />
+                                <p:inputText id="arret3jcausetoxicite" value="#{dosimetrieController.selected.arret3jcausetoxicite}" title="#{myBundle.CreateDosimetrieTitle_arret3jcausetoxicite}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_arret3jcausetoxicite}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="99" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_arret3jcauseautre}" for="arret3jcauseautre" />
+                                <p:inputText id="arret3jcauseautre" value="#{dosimetrieController.selected.arret3jcauseautre}" title="#{myBundle.CreateDosimetrieTitle_arret3jcauseautre}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_arret3jcauseautre}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="99" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_interuptionprematuree}" for="interuptionprematuree" />
+
+                                <p:selectOneButton id="interuptionprematuree" value="#{dosimetrieController.selected.interuptionprematuree}"   required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_interuptionprematuree}" >
+                                    <f:selectItem itemLabel="Aucune" itemValue="aucune" />                            
+                                    <f:selectItem itemLabel="toxicité" itemValue="toxicite" />                           
+                                    <f:selectItem itemLabel="technique" itemValue="technique" />
+                                    <f:selectItem itemLabel="administrative" itemValue="administrative" />
+                                    <f:selectItem itemLabel="autre" itemValue="autre" />
+                                </p:selectOneButton>
+
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_GTVtumeurmacro}" for="GTVtumeurmacro" />
+                                <p:inputText id="GTVtumeurmacro" value="#{dosimetrieController.selected.GTVtumeurmacro}" title="#{myBundle.CreateDosimetrieTitle_GTVtumeurmacro}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_GTVtumeurmacro}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="999" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_CTVvolumeanatomoclinique}" for="CTVvolumeanatomoclinique" />
+                                <p:inputText id="CTVvolumeanatomoclinique" value="#{dosimetrieController.selected.CTVvolumeanatomoclinique}" title="#{myBundle.CreateDosimetrieTitle_CTVvolumeanatomoclinique}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_CTVvolumeanatomoclinique}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="999" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_PTVvolumecibleplanif}" for="PTVvolumecibleplanif" />
+                                <p:inputText id="PTVvolumecibleplanif" value="#{dosimetrieController.selected.PTVvolumecibleplanif}" title="#{myBundle.CreateDosimetrieTitle_PTVvolumecibleplanif}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_PTVvolumecibleplanif}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="999" />    
+                                </p:inputText> 
+
+
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab id="DosimetrieTab2" title="#{myBundle.TabHeaderPrefix} 2">
+                            <p:panelGrid columns="4" columnClasses="column">
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_volumeoedeme}" for="volumeoedeme" />
+                                <p:inputText id="volumeoedeme" value="#{dosimetrieController.selected.volumeoedeme}" title="#{myBundle.CreateDosimetrieTitle_volumeoedeme}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_volumeoedeme}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="999" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_PTV95dose}" for="PTV95dose" />
+                                <p:inputText id="PTV95dose" value="#{dosimetrieController.selected.PTV95dose}" title="#{myBundle.CreateDosimetrieTitle_PTV95dose}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_PTV95dose}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_PTV90dose}" for="PTV90dose" />
+                                <p:inputText id="PTV90dose" value="#{dosimetrieController.selected.PTV90dose}" title="#{myBundle.CreateDosimetrieTitle_PTV90dose}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_PTV90dose}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_PTV107dose}" for="PTV107dose" />
+                                <p:inputText id="PTV107dose" value="#{dosimetrieController.selected.PTV107dose}" title="#{myBundle.CreateDosimetrieTitle_PTV107dose}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_PTV107dose}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_volumeisodose95}" for="volumeisodose95" />
+                                <p:inputText id="volumeisodose95" value="#{dosimetrieController.selected.volumeisodose95}" title="#{myBundle.CreateDosimetrieTitle_volumeisodose95}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_volumeisodose95}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="999" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_rcmiD98Ptv}" for="rcmiD98Ptv" />
+                                <p:inputText id="rcmiD98Ptv" value="#{dosimetrieController.selected.rcmiD98Ptv}" title="#{myBundle.CreateDosimetrieTitle_rcmiD98Ptv}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_rcmiD2Ptv}" for="rcmiD2Ptv" />
+                                <p:inputText id="rcmiD2Ptv" value="#{dosimetrieController.selected.rcmiD2Ptv}" title="#{myBundle.CreateDosimetrieTitle_rcmiD2Ptv}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_rcmiD50Ptv}" for="rcmiD50Ptv" />
+                                <p:inputText id="rcmiD50Ptv" value="#{dosimetrieController.selected.rcmiD50Ptv}" title="#{myBundle.CreateDosimetrieTitle_rcmiD50Ptv}"> 
+                                    <f:validator validatorId="gr.aueb.ecrf.maxminValidator"  /> 
+                                    <f:attribute name="min" value="0" /> 
+                                    <f:attribute name="max" value="100" />    
+                                </p:inputText> 
+
+
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_deliHippocampes}" for="deliHippocampes" />
+                                <p:selectOneButton id="deliHippocampes" value="#{dosimetrieController.selected.deliHippocampes}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_deliHippocampes}">
+                                    <f:selectItem itemLabel="Yes" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_delihippocampes5mm}" for="delihippocampes5mm" />
+                                <p:selectOneButton id="delihippocampes5mm" value="#{dosimetrieController.selected.delihippocampes5mm}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_delihippocampes5mm}">
+                                    <f:selectItem itemLabel="Yes" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_delicorpscalleux}" for="delicorpscalleux" />
+                                <p:selectOneButton id="delicorpscalleux" value="#{dosimetrieController.selected.delicorpscalleux}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_delicorpscalleux}">
+                                    <f:selectItem itemLabel="Yes" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_delilobetemporaux}" for="delilobetemporaux" />
+                                <p:selectOneButton id="delilobetemporaux" value="#{dosimetrieController.selected.delilobetemporaux}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_delilobetemporaux}">
+                                    <f:selectItem itemLabel="Yes" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_delilobefrontaux}" for="delilobefrontaux" />
+                                <p:selectOneButton id="delilobefrontaux" value="#{dosimetrieController.selected.delilobefrontaux}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_delilobefrontaux}">
+                                    <f:selectItem itemLabel="Yes" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_delicervelet}" for="delicervelet" />
+                                <p:selectOneButton id="delicervelet" value="#{dosimetrieController.selected.delicervelet}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_delicervelet}">
+                                    <f:selectItem itemLabel="Yes" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_deliperiventriculaire}" for="deliperiventriculaire" />
+                                <p:selectOneButton id="deliperiventriculaire" value="#{dosimetrieController.selected.deliperiventriculaire}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_deliperiventriculaire}">
+                                    <f:selectItem itemLabel="Yes" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_deliencephalesain}" for="deliencephalesain" />
+                                <p:selectOneButton id="deliencephalesain" value="#{dosimetrieController.selected.deliencephalesain}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_deliencephalesain}">
+                                    <f:selectItem itemLabel="Yes" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_delisustentoriel}" for="delisustentoriel" />
+                                <p:selectOneButton id="delisustentoriel" value="#{dosimetrieController.selected.delisustentoriel}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_delisustentoriel}">
+                                    <f:selectItem itemLabel="Yes" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                                <p:outputLabel value="#{myBundle.CreateDosimetrieLabel_delifosseposterieure}" for="delifosseposterieure" />
+                                <p:selectOneButton id="delifosseposterieure" value="#{dosimetrieController.selected.delifosseposterieure}" required="true" requiredMessage="#{myBundle.CreateDosimetrieRequiredMessage_delifosseposterieure}">
+                                    <f:selectItem itemLabel="Yes" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" /> 
+                                    <f:converter converterId="gr.aueb.ecrf.booleanConverter"></f:converter>   
+                                </p:selectOneButton>
+                            </p:panelGrid>
+                        </p:tab>
+
+                    </p:tabView>
+                    <p:commandButton actionListener="#{dosimetrieController.save}" value="#{myBundle.Save}" update="display,:DosimetrieListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('DosimetrieEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="PF('DosimetrieEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

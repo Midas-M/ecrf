@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="SortieDeEtudeListForm">
+
+        <p:panel header="#{myBundle.ListSortieDeEtudeTitle}">
+            <p:contextMenu id="SortieDeEtudeDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{myBundle.Create}" onclick="document.getElementById('SortieDeEtudeListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{myBundle.View}" rendered="false" onclick="document.getElementById('SortieDeEtudeListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('SortieDeEtudeListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{myBundle.Delete}" rendered="false" onclick="document.getElementById('SortieDeEtudeListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{myBundle.SortieDeEtudeMenuItem_codepatient}" icon="ui-icon-search"  actionListener="#{SortieDeEtudeController.prepareCodepatient}" update=":PatientViewForm" oncomplete="PF('PatientViewDialog').show()" disabled="#{empty SortieDeEtudeController.selected.codepatient}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{SortieDeEtudeController.items}"
+                         var="item"
+                         rowKey="#{item.id}"
+                         paginator="false"
+                         rows="1"
+                         rowsPerPageTemplate="1"
+                         selectionMode="single"
+                         selection="#{SortieDeEtudeController.selected}">
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SortieDeEtudeDataTableContextMenu" />
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SortieDeEtudeDataTableContextMenu" />
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" />
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('SortieDeEtudeListForm:editButton').click();"/>
+
+                <p:column  >
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSortieDeEtudeTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+
+
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSortieDeEtudeTitle_raison}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.raison}"/>
+                </p:column>
+
+
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSortieDeEtudeTitle_precisionSortie}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.precisionSortie}"/>
+                </p:column>
+
+
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSortieDeEtudeTitle_lieealatumeur}"/>
+                    </f:facet>
+                    <h:selectBooleanCheckbox id="lieealatumeur" value="#{item.lieealatumeur}" title="#{myBundle.EditSortieDeEtudeTitle_lieealatumeur}" required="true" requiredMessage="#{myBundle.EditSortieDeEtudeRequiredMessage_lieealatumeur}" disabled="true"/>
+                </p:column>
+
+
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSortieDeEtudeTitle_dateSortie}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dateSortie}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+
+             
+
+
+            </p:dataTable>
+            <p:commandButton id="createButton"  disabled="#{SortieDeEtudeController.items.size()>0}"   icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{SortieDeEtudeController.prepareCreate}" update=":SortieDeEtudeCreateForm" oncomplete="PF('SortieDeEtudeCreateDialog').show()"/>
+            <p:commandButton id="viewButton" rendered="false"   style="visibility: hidden;" icon="ui-icon-search" value="#{myBundle.View}" update=":SortieDeEtudeViewForm" oncomplete="PF('SortieDeEtudeViewDialog').show()" disabled="#{empty SortieDeEtudeController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: visible;" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":SortieDeEtudeEditForm" oncomplete="PF('SortieDeEtudeEditDialog').show()" disabled="#{empty SortieDeEtudeController.selected}"/>
+            <p:commandButton id="deleteButton" rendered="false" style="visibility: hidden;" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{SortieDeEtudeController.delete}" update=":growl,datalist" disabled="#{empty SortieDeEtudeController.selected}">
+                <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

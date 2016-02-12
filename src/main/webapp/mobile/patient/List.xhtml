@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="PatientListPage">
+        <pm:header title="#{myBundle.ListPatientTitle}">
+            <h:form>
+                <p:commandButton id="backButton"   styleClass="ui-btn-left  ui-btn-inline" icon="ui-icon-arrow-l" value="#{myBundle.Back}" action="#{mobilePageController.navigateBackInHistory('/mobile/index')}"/>
+                <p:commandButton id="createButton" styleClass="ui-btn-right ui-btn-inline" icon="ui-icon-plus"    value="#{myBundle.Create}" update=":PatientCreatePage:PatientCreateForm" actionListener="#{patientController.prepareCreate}" action="#{mobilePageController.navigateWithHistory('pm:PatientCreatePage')}">
+                    <f:actionListener binding="#{currentPageListener}"/>
+                </p:commandButton>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="PatientListForm">
+
+                <p:dataTable id="datalist"
+                             value="#{patientController.items}"
+                             var="item"
+                             rowKey="#{item.codepatient}"
+                             paginator="true"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             selectionMode="single"
+                             selection="#{patientController.selected}"
+                             reflow="true">
+
+                    <p:ajax event="rowSelect"   update="@form:editButton,@form:deleteButton,@form:navigationMenuButton,@form:navigationMenuPanel"/>
+                    <p:ajax event="rowUnselect" update="@form:editButton,@form:deleteButton,@form:navigationMenuButton,@form:navigationMenuPanel"/>
+                    <p:ajax event="swipeleft"   oncomplete="document.getElementById('PatientListPage:PatientListForm:deleteButton').click();"/>
+                    <p:ajax event="tap"         oncomplete="document.getElementById('PatientListPage:PatientListForm:editButton').click();"/>
+                    <p:ajax event="taphold"     oncomplete="document.getElementById('PatientListPage:PatientListForm:navigationMenuButton').click();"/>
+
+                    <p:column sortBy="#{item.codepatient}" filterBy="#{item.codepatient}" headerText="#{myBundle.ListPatientTitle_codepatient}"/>
+                    <h:outputText value="#{item.codepatient}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.firstName}" filterBy="#{item.firstName}" headerText="#{myBundle.ListPatientTitle_firstName}"/>
+                    <h:outputText value="#{item.firstName}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.lastName}" filterBy="#{item.lastName}" headerText="#{myBundle.ListPatientTitle_lastName}"/>
+                    <h:outputText value="#{item.lastName}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.centre}" filterBy="#{item.centre}" headerText="#{myBundle.ListPatientTitle_centre}"/>
+                    <h:outputText value="#{item.centre}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.datedeNaissance}" filterBy="#{item.datedeNaissance}" headerText="#{myBundle.ListPatientTitle_datedeNaissance}"/>
+                    <h:outputText value="#{item.datedeNaissance}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.ageInclusion}" filterBy="#{item.ageInclusion}" headerText="#{myBundle.ListPatientTitle_ageInclusion}"/>
+                    <h:outputText value="#{item.ageInclusion}"/>
+                    </p:column>
+
+                    <!--
+                                        <p:column sortBy="#{item.sexe}" filterBy="#{item.sexe}" headerText="#{myBundle.ListPatientTitle_sexe}"/>
+                                            <h:outputText value="#{item.sexe}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.niveaudetude}" filterBy="#{item.niveaudetude}" headerText="#{myBundle.ListPatientTitle_niveaudetude}"/>
+                                            <h:outputText value="#{item.niveaudetude}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.lateralite}" filterBy="#{item.lateralite}" headerText="#{myBundle.ListPatientTitle_lateralite}"/>
+                                            <h:outputText value="#{item.lateralite}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.grade}" filterBy="#{item.grade}" headerText="#{myBundle.ListPatientTitle_grade}"/>
+                                            <h:outputText value="#{item.grade}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.taille}" filterBy="#{item.taille}" headerText="#{myBundle.ListPatientTitle_taille}"/>
+                                            <h:outputText value="#{item.taille}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.localisation}" filterBy="#{item.localisation}" headerText="#{myBundle.ListPatientTitle_localisation}"/>
+                                            <h:outputText value="#{item.localisation}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.chirurgie}" filterBy="#{item.chirurgie}" headerText="#{myBundle.ListPatientTitle_chirurgie}"/>
+                                            <h:outputText value="#{item.chirurgie}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.diabete}" filterBy="#{item.diabete}" headerText="#{myBundle.ListPatientTitle_diabete}"/>
+                                            <h:selectBooleanCheckbox id="diabete" value="#{item.diabete}" title="#{myBundle.EditPatientTitle_diabete}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_diabete}" disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.hta}" filterBy="#{item.hta}" headerText="#{myBundle.ListPatientTitle_hta}"/>
+                                            <h:selectBooleanCheckbox id="hta" value="#{item.hta}" title="#{myBundle.EditPatientTitle_hta}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_hta}" disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.tabac}" filterBy="#{item.tabac}" headerText="#{myBundle.ListPatientTitle_tabac}"/>
+                                            <h:outputText value="#{item.tabac}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.datedarretdutabac}" filterBy="#{item.datedarretdutabac}" headerText="#{myBundle.ListPatientTitle_datedarretdutabac}"/>
+                                            <h:outputText value="#{item.datedarretdutabac}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.dyslipidemie}" filterBy="#{item.dyslipidemie}" headerText="#{myBundle.ListPatientTitle_dyslipidemie}"/>
+                                            <h:selectBooleanCheckbox id="dyslipidemie" value="#{item.dyslipidemie}" title="#{myBundle.EditPatientTitle_dyslipidemie}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_dyslipidemie}" disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.alcool}" filterBy="#{item.alcool}" headerText="#{myBundle.ListPatientTitle_alcool}"/>
+                                            <h:outputText value="#{item.alcool}"/>
+                                        </p:column>
+                    -->
+                </p:dataTable>
+                <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":PatientEditPage:PatientEditForm" disabled="#{empty patientController.selected}" actionListener="#{mobilePageController.currentPageListener}" action="#{mobilePageController.navigateWithHistory('pm:PatientEditPage')}"/>
+                <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{patientController.delete}" update=":growl,datalist" disabled="#{empty patientController.selected}">
+                    <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                </p:commandButton>
+                <p:commandButton id="navigationMenuButton" style="visibility: hidden;" value="#{myBundle.Menu}" disabled="#{empty patientController.selected}"/>
+
+                <p:overlayPanel id="navigationMenuPanel" for="navigationMenuButton" at="right" showEffect="overlay">
+                    <h2>#{myBundle.PatientHeading} #{myBundle.Menu}</h2>
+                    <p:menu>
+                        <p:menuitem value="#{myBundle.PatientMenuItem_bilanCognitifLbCollection}" icon="ui-icon-search"  action="#{mobilePageController.navigateWithHistory}" disabled="#{empty patientController.selected.bilanCognitifLbCollection}" ajax="false">
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="#{patientController.navigateBilanCognitifLbCollection()}"/>
+                        </p:menuitem>  
+                        <p:menuitem value="#{myBundle.PatientMenuItem_irmCollection}" icon="ui-icon-search"  action="#{mobilePageController.navigateWithHistory}" disabled="#{empty patientController.selected.irmCollection}" ajax="false">
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="#{patientController.navigateIrmCollection()}"/>
+                        </p:menuitem>  
+                        <p:menuitem value="#{myBundle.PatientMenuItem_consultationCollection}" icon="ui-icon-search"  action="#{mobilePageController.navigateWithHistory}" disabled="#{empty patientController.selected.consultationCollection}" ajax="false">
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="#{patientController.navigateConsultationCollection()}"/>
+                        </p:menuitem>  
+                        <p:menuitem value="#{myBundle.PatientMenuItem_visitCollection}" icon="ui-icon-search"  action="#{mobilePageController.navigateWithHistory}" disabled="#{empty patientController.selected.visitCollection}" ajax="false">
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="#{patientController.navigateVisitCollection()}"/>
+                        </p:menuitem>  
+                        <p:menuitem value="#{myBundle.PatientMenuItem_bilanCognitifSuiviCollection}" icon="ui-icon-search"  action="#{mobilePageController.navigateWithHistory}" disabled="#{empty patientController.selected.bilanCognitifSuiviCollection}" ajax="false">
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="#{patientController.navigateBilanCognitifSuiviCollection()}"/>
+                        </p:menuitem>  
+                        <p:menuitem value="#{myBundle.PatientMenuItem_csctCollection}" icon="ui-icon-search"  action="#{mobilePageController.navigateWithHistory}" disabled="#{empty patientController.selected.csctCollection}" ajax="false">
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="#{patientController.navigateCsctCollection()}"/>
+                        </p:menuitem>  
+                    </p:menu>
+                </p:overlayPanel>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

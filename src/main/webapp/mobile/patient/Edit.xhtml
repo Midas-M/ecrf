@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="PatientEditPage" lazy="true">
+        <pm:header title="#{myBundle.EditPatientTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:PatientListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="PatientEditForm">
+
+                <h:panelGroup id="display">
+                    <p:tabView id="PatientTabView">
+
+                        <p:tab id="PatientTab1" title="#{myBundle.TabHeaderPrefix} 1">
+                            <p:outputPanel rendered="#{patientController.selected != null}">
+                                <pm:field>
+                                    <h:outputLabel value="#{myBundle.EditPatientLabel_codepatient}" for="codepatient" />
+                                    <h:outputText id="codepatient" value="#{patientController.selected.codepatient}" />
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_firstName}" for="firstName" />
+                                    <p:inputTextarea rows="4" cols="30" id="firstName" value="#{patientController.selected.firstName}" title="#{myBundle.EditPatientTitle_firstName}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_firstName}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_lastName}" for="lastName" />
+                                    <p:inputTextarea rows="4" cols="30" id="lastName" value="#{patientController.selected.lastName}" title="#{myBundle.EditPatientTitle_lastName}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_lastName}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_centre}" for="centre" />
+                                    <p:inputText id="centre" value="#{patientController.selected.centre}" title="#{myBundle.EditPatientTitle_centre}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_centre}" size="18" maxlength="18"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_datedeNaissance}" for="datedeNaissance" />
+                                    <p:calendar id="datedeNaissance" pattern="MM/dd/yyyy" value="#{patientController.selected.datedeNaissance}" title="#{myBundle.EditPatientTitle_datedeNaissance}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_datedeNaissance}" showOn="button"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_ageInclusion}" for="ageInclusion" />
+                                    <p:inputText id="ageInclusion" value="#{patientController.selected.ageInclusion}" title="#{myBundle.EditPatientTitle_ageInclusion}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_ageInclusion}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_sexe}" for="sexe" />
+                                    <p:inputText id="sexe" value="#{patientController.selected.sexe}" title="#{myBundle.EditPatientTitle_sexe}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_sexe}" size="6" maxlength="6"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_niveaudetude}" for="niveaudetude" />
+                                    <p:inputText id="niveaudetude" value="#{patientController.selected.niveaudetude}" title="#{myBundle.EditPatientTitle_niveaudetude}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_niveaudetude}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_lateralite}" for="lateralite" />
+                                    <p:inputText id="lateralite" value="#{patientController.selected.lateralite}" title="#{myBundle.EditPatientTitle_lateralite}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_lateralite}" size="10" maxlength="10"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_grade}" for="grade" />
+                                    <p:inputText id="grade" value="#{patientController.selected.grade}" title="#{myBundle.EditPatientTitle_grade}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_grade}" size="2" maxlength="2"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_taille}" for="taille" />
+                                    <p:inputText id="taille" value="#{patientController.selected.taille}" title="#{myBundle.EditPatientTitle_taille}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_localisation}" for="localisation" />
+                                    <p:inputTextarea rows="4" cols="30" id="localisation" value="#{patientController.selected.localisation}" title="#{myBundle.EditPatientTitle_localisation}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_localisation}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_chirurgie}" for="chirurgie" />
+                                    <p:inputText id="chirurgie" value="#{patientController.selected.chirurgie}" title="#{myBundle.EditPatientTitle_chirurgie}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_chirurgie}" size="18" maxlength="18"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_diabete}" for="diabete" />
+                                    <p:selectBooleanCheckbox id="diabete" value="#{patientController.selected.diabete}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_diabete}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_hta}" for="hta" />
+                                    <p:selectBooleanCheckbox id="hta" value="#{patientController.selected.hta}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_hta}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_tabac}" for="tabac" />
+                                    <p:inputText id="tabac" value="#{patientController.selected.tabac}" title="#{myBundle.EditPatientTitle_tabac}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_tabac}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_datedarretdutabac}" for="datedarretdutabac" />
+                                    <p:calendar id="datedarretdutabac" pattern="MM/dd/yyyy" value="#{patientController.selected.datedarretdutabac}" title="#{myBundle.EditPatientTitle_datedarretdutabac}"  showOn="button"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_dyslipidemie}" for="dyslipidemie" />
+                                    <p:selectBooleanCheckbox id="dyslipidemie" value="#{patientController.selected.dyslipidemie}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_dyslipidemie}"/>
+                                </pm:field>
+
+                                <pm:field>
+                                    <p:outputLabel value="#{myBundle.EditPatientLabel_alcool}" for="alcool" />
+                                    <p:inputText id="alcool" value="#{patientController.selected.alcool}" title="#{myBundle.EditPatientTitle_alcool}" required="true" requiredMessage="#{myBundle.EditPatientRequiredMessage_alcool}"/>
+                                </pm:field>
+                            </p:outputPanel>
+                        </p:tab>
+                    </p:tabView>
+                    <p:commandButton actionListener="#{patientController.save}" value="#{myBundle.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:PatientListPage:PatientListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:PatientListPage')}">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

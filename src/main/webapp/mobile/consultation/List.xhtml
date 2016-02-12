@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ConsultationListPage">
+        <pm:header title="#{myBundle.ListConsultationTitle}">
+            <h:form>
+                <p:commandButton id="backButton"   styleClass="ui-btn-left  ui-btn-inline" icon="ui-icon-arrow-l" value="#{myBundle.Back}" action="#{mobilePageController.navigateBackInHistory('/mobile/index')}"/>
+                <p:commandButton id="createButton" styleClass="ui-btn-right ui-btn-inline" icon="ui-icon-plus"    value="#{myBundle.Create}" update=":ConsultationCreatePage:ConsultationCreateForm" actionListener="#{consultationController.prepareCreate}" action="#{mobilePageController.navigateWithHistory('pm:ConsultationCreatePage')}">
+                    <f:actionListener binding="#{currentPageListener}"/>
+                </p:commandButton>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ConsultationListForm">
+
+                <p:dataTable id="datalist"
+                             value="#{consultationController.items}"
+                             var="item"
+                             rowKey="#{item.id}"
+                             paginator="true"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             selectionMode="single"
+                             selection="#{consultationController.selected}"
+                             reflow="true">
+
+                    <p:ajax event="rowSelect"   update="@form:editButton,@form:deleteButton,@form:navigationMenuButton,@form:navigationMenuPanel" listener="#{consultationController.resetParents}"/>
+                    <p:ajax event="rowUnselect" update="@form:editButton,@form:deleteButton,@form:navigationMenuButton,@form:navigationMenuPanel" listener="#{consultationController.resetParents}"/>
+                    <p:ajax event="swipeleft"   oncomplete="document.getElementById('ConsultationListPage:ConsultationListForm:deleteButton').click();"/>
+                    <p:ajax event="tap"         oncomplete="document.getElementById('ConsultationListPage:ConsultationListForm:editButton').click();"/>
+                    <p:ajax event="taphold"     oncomplete="document.getElementById('ConsultationListPage:ConsultationListForm:navigationMenuButton').click();"/>
+
+                    <p:column sortBy="#{item.id}" filterBy="#{item.id}" headerText="#{myBundle.ListConsultationTitle_id}"/>
+                    <h:outputText value="#{item.id}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.dateexamen}" filterBy="#{item.dateexamen}" headerText="#{myBundle.ListConsultationTitle_dateexamen}"/>
+                    <h:outputText value="#{item.dateexamen}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.delaipostRT}" filterBy="#{item.delaipostRT}" headerText="#{myBundle.ListConsultationTitle_delaipostRT}"/>
+                    <h:outputText value="#{item.delaipostRT}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.lignedetraitement}" filterBy="#{item.lignedetraitement}" headerText="#{myBundle.ListConsultationTitle_lignedetraitement}"/>
+                    <h:outputText value="#{item.lignedetraitement}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.chimiotherapie}" filterBy="#{item.chimiotherapie}" headerText="#{myBundle.ListConsultationTitle_chimiotherapie}"/>
+                    <h:outputText value="#{item.chimiotherapie}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.cycle}" filterBy="#{item.cycle}" headerText="#{myBundle.ListConsultationTitle_cycle}"/>
+                    <h:outputText value="#{item.cycle}"/>
+                    </p:column>
+
+                    <!--
+                                        <p:column sortBy="#{item.posologie}" filterBy="#{item.posologie}" headerText="#{myBundle.ListConsultationTitle_posologie}"/>
+                                            <h:outputText value="#{item.posologie}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.dosetotale}" filterBy="#{item.dosetotale}" headerText="#{myBundle.ListConsultationTitle_dosetotale}"/>
+                                            <h:outputText value="#{item.dosetotale}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.ik}" filterBy="#{item.ik}" headerText="#{myBundle.ListConsultationTitle_ik}"/>
+                                            <h:outputText value="#{item.ik}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.examennormal}" filterBy="#{item.examennormal}" headerText="#{myBundle.ListConsultationTitle_examennormal}"/>
+                                            <h:selectBooleanCheckbox id="examennormal" value="#{item.examennormal}" title="#{myBundle.EditConsultationTitle_examennormal}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.epilepsie}" filterBy="#{item.epilepsie}" headerText="#{myBundle.ListConsultationTitle_epilepsie}"/>
+                                            <h:selectBooleanCheckbox id="epilepsie" value="#{item.epilepsie}" title="#{myBundle.EditConsultationTitle_epilepsie}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.deficitsensitivomoteur}" filterBy="#{item.deficitsensitivomoteur}" headerText="#{myBundle.ListConsultationTitle_deficitsensitivomoteur}"/>
+                                            <h:selectBooleanCheckbox id="deficitsensitivomoteur" value="#{item.deficitsensitivomoteur}" title="#{myBundle.EditConsultationTitle_deficitsensitivomoteur}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.troublesphasiques}" filterBy="#{item.troublesphasiques}" headerText="#{myBundle.ListConsultationTitle_troublesphasiques}"/>
+                                            <h:selectBooleanCheckbox id="troublesphasiques" value="#{item.troublesphasiques}" title="#{myBundle.EditConsultationTitle_troublesphasiques}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.troublesmnesiques}" filterBy="#{item.troublesmnesiques}" headerText="#{myBundle.ListConsultationTitle_troublesmnesiques}"/>
+                                            <h:selectBooleanCheckbox id="troublesmnesiques" value="#{item.troublesmnesiques}" title="#{myBundle.EditConsultationTitle_troublesmnesiques}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.troublesattentionnels}" filterBy="#{item.troublesattentionnels}" headerText="#{myBundle.ListConsultationTitle_troublesattentionnels}"/>
+                                            <h:selectBooleanCheckbox id="troublesattentionnels" value="#{item.troublesattentionnels}" title="#{myBundle.EditConsultationTitle_troublesattentionnels}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.troublesexecutifs}" filterBy="#{item.troublesexecutifs}" headerText="#{myBundle.ListConsultationTitle_troublesexecutifs}"/>
+                                            <h:selectBooleanCheckbox id="troublesexecutifs" value="#{item.troublesexecutifs}" title="#{myBundle.EditConsultationTitle_troublesexecutifs}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.rigiditeaxiale}" filterBy="#{item.rigiditeaxiale}" headerText="#{myBundle.ListConsultationTitle_rigiditeaxiale}"/>
+                                            <h:selectBooleanCheckbox id="rigiditeaxiale" value="#{item.rigiditeaxiale}" title="#{myBundle.EditConsultationTitle_rigiditeaxiale}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.ralentissementmarche}" filterBy="#{item.ralentissementmarche}" headerText="#{myBundle.ListConsultationTitle_ralentissementmarche}"/>
+                                            <h:selectBooleanCheckbox id="ralentissementmarche" value="#{item.ralentissementmarche}" title="#{myBundle.EditConsultationTitle_ralentissementmarche}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.bradykinesie}" filterBy="#{item.bradykinesie}" headerText="#{myBundle.ListConsultationTitle_bradykinesie}"/>
+                                            <h:selectBooleanCheckbox id="bradykinesie" value="#{item.bradykinesie}" title="#{myBundle.EditConsultationTitle_bradykinesie}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.urgenturie}" filterBy="#{item.urgenturie}" headerText="#{myBundle.ListConsultationTitle_urgenturie}"/>
+                                            <h:selectBooleanCheckbox id="urgenturie" value="#{item.urgenturie}" title="#{myBundle.EditConsultationTitle_urgenturie}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.rigiditemembres}" filterBy="#{item.rigiditemembres}" headerText="#{myBundle.ListConsultationTitle_rigiditemembres}"/>
+                                            <h:selectBooleanCheckbox id="rigiditemembres" value="#{item.rigiditemembres}" title="#{myBundle.EditConsultationTitle_rigiditemembres}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.apraxiemarche}" filterBy="#{item.apraxiemarche}" headerText="#{myBundle.ListConsultationTitle_apraxiemarche}"/>
+                                            <h:selectBooleanCheckbox id="apraxiemarche" value="#{item.apraxiemarche}" title="#{myBundle.EditConsultationTitle_apraxiemarche}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.apathie}" filterBy="#{item.apathie}" headerText="#{myBundle.ListConsultationTitle_apathie}"/>
+                                            <h:selectBooleanCheckbox id="apathie" value="#{item.apathie}" title="#{myBundle.EditConsultationTitle_apathie}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.hypophonie}" filterBy="#{item.hypophonie}" headerText="#{myBundle.ListConsultationTitle_hypophonie}"/>
+                                            <h:selectBooleanCheckbox id="hypophonie" value="#{item.hypophonie}" title="#{myBundle.EditConsultationTitle_hypophonie}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.troubledelaposture}" filterBy="#{item.troubledelaposture}" headerText="#{myBundle.ListConsultationTitle_troubledelaposture}"/>
+                                            <h:selectBooleanCheckbox id="troubledelaposture" value="#{item.troubledelaposture}" title="#{myBundle.EditConsultationTitle_troubledelaposture}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.incontinenceurinaire}" filterBy="#{item.incontinenceurinaire}" headerText="#{myBundle.ListConsultationTitle_incontinenceurinaire}"/>
+                                            <h:selectBooleanCheckbox id="incontinenceurinaire" value="#{item.incontinenceurinaire}" title="#{myBundle.EditConsultationTitle_incontinenceurinaire}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.hb}" filterBy="#{item.hb}" headerText="#{myBundle.ListConsultationTitle_hb}"/>
+                                            <h:outputText value="#{item.hb}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.hbNadir}" filterBy="#{item.hbNadir}" headerText="#{myBundle.ListConsultationTitle_hbNadir}"/>
+                                            <h:outputText value="#{item.hbNadir}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.pnn}" filterBy="#{item.pnn}" headerText="#{myBundle.ListConsultationTitle_pnn}"/>
+                                            <h:outputText value="#{item.pnn}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.PNNNadir}" filterBy="#{item.PNNNadir}" headerText="#{myBundle.ListConsultationTitle_PNNNadir}"/>
+                                            <h:outputText value="#{item.PNNNadir}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.lymphocite}" filterBy="#{item.lymphocite}" headerText="#{myBundle.ListConsultationTitle_lymphocite}"/>
+                                            <h:outputText value="#{item.lymphocite}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.lymphociteNadir}" filterBy="#{item.lymphociteNadir}" headerText="#{myBundle.ListConsultationTitle_lymphociteNadir}"/>
+                                            <h:outputText value="#{item.lymphociteNadir}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.plaquettes}" filterBy="#{item.plaquettes}" headerText="#{myBundle.ListConsultationTitle_plaquettes}"/>
+                                            <h:outputText value="#{item.plaquettes}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.plaquettesNadir}" filterBy="#{item.plaquettesNadir}" headerText="#{myBundle.ListConsultationTitle_plaquettesNadir}"/>
+                                            <h:outputText value="#{item.plaquettesNadir}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.bilanhepatique}" filterBy="#{item.bilanhepatique}" headerText="#{myBundle.ListConsultationTitle_bilanhepatique}"/>
+                                            <h:outputText value="#{item.bilanhepatique}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.asatAlat}" filterBy="#{item.asatAlat}" headerText="#{myBundle.ListConsultationTitle_asatAlat}"/>
+                                            <h:outputText value="#{item.asatAlat}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.phosphatealkaline}" filterBy="#{item.phosphatealkaline}" headerText="#{myBundle.ListConsultationTitle_phosphatealkaline}"/>
+                                            <h:outputText value="#{item.phosphatealkaline}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.bilirubinemie}" filterBy="#{item.bilirubinemie}" headerText="#{myBundle.ListConsultationTitle_bilirubinemie}"/>
+                                            <h:outputText value="#{item.bilirubinemie}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.fonctionrenale}" filterBy="#{item.fonctionrenale}" headerText="#{myBundle.ListConsultationTitle_fonctionrenale}"/>
+                                            <h:outputText value="#{item.fonctionrenale}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.proteinurie}" filterBy="#{item.proteinurie}" headerText="#{myBundle.ListConsultationTitle_proteinurie}"/>
+                                            <h:outputText value="#{item.proteinurie}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.chimionausees}" filterBy="#{item.chimionausees}" headerText="#{myBundle.ListConsultationTitle_chimionausees}"/>
+                                            <h:outputText value="#{item.chimionausees}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.chimiofatigue}" filterBy="#{item.chimiofatigue}" headerText="#{myBundle.ListConsultationTitle_chimiofatigue}"/>
+                                            <h:outputText value="#{item.chimiofatigue}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.chimiocephalees}" filterBy="#{item.chimiocephalees}" headerText="#{myBundle.ListConsultationTitle_chimiocephalees}"/>
+                                            <h:outputText value="#{item.chimiocephalees}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.chimiodiarrhees}" filterBy="#{item.chimiodiarrhees}" headerText="#{myBundle.ListConsultationTitle_chimiodiarrhees}"/>
+                                            <h:outputText value="#{item.chimiodiarrhees}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.chimioconstipation}" filterBy="#{item.chimioconstipation}" headerText="#{myBundle.ListConsultationTitle_chimioconstipation}"/>
+                                            <h:outputText value="#{item.chimioconstipation}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.chimiofievre}" filterBy="#{item.chimiofievre}" headerText="#{myBundle.ListConsultationTitle_chimiofievre}"/>
+                                            <h:outputText value="#{item.chimiofievre}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.chimioepistaxis}" filterBy="#{item.chimioepistaxis}" headerText="#{myBundle.ListConsultationTitle_chimioepistaxis}"/>
+                                            <h:outputText value="#{item.chimioepistaxis}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.chimioallergies}" filterBy="#{item.chimioallergies}" headerText="#{myBundle.ListConsultationTitle_chimioallergies}"/>
+                                            <h:outputText value="#{item.chimioallergies}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.chimiohemato}" filterBy="#{item.chimiohemato}" headerText="#{myBundle.ListConsultationTitle_chimiohemato}"/>
+                                            <h:outputText value="#{item.chimiohemato}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.chimiodyspnees}" filterBy="#{item.chimiodyspnees}" headerText="#{myBundle.ListConsultationTitle_chimiodyspnees}"/>
+                                            <h:outputText value="#{item.chimiodyspnees}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.chimiophlebites}" filterBy="#{item.chimiophlebites}" headerText="#{myBundle.ListConsultationTitle_chimiophlebites}"/>
+                                            <h:outputText value="#{item.chimiophlebites}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.chimioautres}" filterBy="#{item.chimioautres}" headerText="#{myBundle.ListConsultationTitle_chimioautres}"/>
+                                            <h:outputText value="#{item.chimioautres}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.antiemetique}" filterBy="#{item.antiemetique}" headerText="#{myBundle.ListConsultationTitle_antiemetique}"/>
+                                            <h:outputText value="#{item.antiemetique}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.corticotherapienom}" filterBy="#{item.corticotherapienom}" headerText="#{myBundle.ListConsultationTitle_corticotherapienom}"/>
+                                            <h:outputText value="#{item.corticotherapienom}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.corticotherapieposologie}" filterBy="#{item.corticotherapieposologie}" headerText="#{myBundle.ListConsultationTitle_corticotherapieposologie}"/>
+                                            <h:outputText value="#{item.corticotherapieposologie}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.nombredecriseepileptiquepartielle}" filterBy="#{item.nombredecriseepileptiquepartielle}" headerText="#{myBundle.ListConsultationTitle_nombredecriseepileptiquepartielle}"/>
+                                            <h:outputText value="#{item.nombredecriseepileptiquepartielle}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.nombredecriseepileptiquegeneralisee}" filterBy="#{item.nombredecriseepileptiquegeneralisee}" headerText="#{myBundle.ListConsultationTitle_nombredecriseepileptiquegeneralisee}"/>
+                                            <h:outputText value="#{item.nombredecriseepileptiquegeneralisee}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.nombredantiepileptique}" filterBy="#{item.nombredantiepileptique}" headerText="#{myBundle.ListConsultationTitle_nombredantiepileptique}"/>
+                                            <h:outputText value="#{item.nombredantiepileptique}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.antiepileptique1nom}" filterBy="#{item.antiepileptique1nom}" headerText="#{myBundle.ListConsultationTitle_antiepileptique1nom}"/>
+                                            <h:outputText value="#{item.antiepileptique1nom}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.antiepileptique1posologie}" filterBy="#{item.antiepileptique1posologie}" headerText="#{myBundle.ListConsultationTitle_antiepileptique1posologie}"/>
+                                            <h:outputText value="#{item.antiepileptique1posologie}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.antiepileptique2nom}" filterBy="#{item.antiepileptique2nom}" headerText="#{myBundle.ListConsultationTitle_antiepileptique2nom}"/>
+                                            <h:outputText value="#{item.antiepileptique2nom}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.antiepileptique2posologie}" filterBy="#{item.antiepileptique2posologie}" headerText="#{myBundle.ListConsultationTitle_antiepileptique2posologie}"/>
+                                            <h:outputText value="#{item.antiepileptique2posologie}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.antiepileptique3nom}" filterBy="#{item.antiepileptique3nom}" headerText="#{myBundle.ListConsultationTitle_antiepileptique3nom}"/>
+                                            <h:outputText value="#{item.antiepileptique3nom}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.antiepileptique3posologie}" filterBy="#{item.antiepileptique3posologie}" headerText="#{myBundle.ListConsultationTitle_antiepileptique3posologie}"/>
+                                            <h:outputText value="#{item.antiepileptique3posologie}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.antiepileptique4nom}" filterBy="#{item.antiepileptique4nom}" headerText="#{myBundle.ListConsultationTitle_antiepileptique4nom}"/>
+                                            <h:outputText value="#{item.antiepileptique4nom}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.antiepileptique4posologie}" filterBy="#{item.antiepileptique4posologie}" headerText="#{myBundle.ListConsultationTitle_antiepileptique4posologie}"/>
+                                            <h:outputText value="#{item.antiepileptique4posologie}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.prophylaxieantiTVP}" filterBy="#{item.prophylaxieantiTVP}" headerText="#{myBundle.ListConsultationTitle_prophylaxieantiTVP}"/>
+                                            <h:selectBooleanCheckbox id="prophylaxieantiTVP" value="#{item.prophylaxieantiTVP}" title="#{myBundle.EditConsultationTitle_prophylaxieantiTVP}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.prophylaxiepneumocystiscarinii}" filterBy="#{item.prophylaxiepneumocystiscarinii}" headerText="#{myBundle.ListConsultationTitle_prophylaxiepneumocystiscarinii}"/>
+                                            <h:selectBooleanCheckbox id="prophylaxiepneumocystiscarinii" value="#{item.prophylaxiepneumocystiscarinii}" title="#{myBundle.EditConsultationTitle_prophylaxiepneumocystiscarinii}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.EPOdarbopoetin}" filterBy="#{item.EPOdarbopoetin}" headerText="#{myBundle.ListConsultationTitle_EPOdarbopoetin}"/>
+                                            <h:selectBooleanCheckbox id="EPOdarbopoetin" value="#{item.EPOdarbopoetin}" title="#{myBundle.EditConsultationTitle_EPOdarbopoetin}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.GCsf}" filterBy="#{item.GCsf}" headerText="#{myBundle.ListConsultationTitle_GCsf}"/>
+                                            <h:selectBooleanCheckbox id="GCsf" value="#{item.GCsf}" title="#{myBundle.EditConsultationTitle_GCsf}"  disabled="true"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.codepatient.firstName}" filterBy="#{item.codepatient.firstName}" headerText="#{myBundle.ListConsultationTitle_codepatient}"/>
+                                            <h:outputText value="#{item.codepatient.firstName}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.visite.id}" filterBy="#{item.visite.id}" headerText="#{myBundle.ListConsultationTitle_visite}"/>
+                                            <h:outputText value="#{item.visite.id}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.visit.id}" filterBy="#{item.visit.id}" headerText="#{myBundle.ListConsultationTitle_visit}"/>
+                                            <h:outputText value="#{item.visit.id}"/>
+                                        </p:column>
+                    -->
+                </p:dataTable>
+                <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":ConsultationEditPage:ConsultationEditForm" disabled="#{empty consultationController.selected}" actionListener="#{mobilePageController.currentPageListener}" action="#{mobilePageController.navigateWithHistory('pm:ConsultationEditPage')}"/>
+                <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{consultationController.delete}" update=":growl,datalist" disabled="#{empty consultationController.selected}">
+                    <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                </p:commandButton>
+                <p:commandButton id="navigationMenuButton" style="visibility: hidden;" value="#{myBundle.Menu}" disabled="#{empty consultationController.selected}"/>
+
+                <p:overlayPanel id="navigationMenuPanel" for="navigationMenuButton" at="right" showEffect="overlay">
+                    <h2>#{myBundle.ConsultationHeading} #{myBundle.Menu}</h2>
+                    <p:menu>
+                        <p:menuitem value="#{myBundle.ConsultationMenuItem_codepatient}" icon="ui-icon-search" update=":PatientEditPage:PatientEditForm" disabled="#{empty consultationController.selected.codepatient}" actionListener="#{consultationController.prepareCodepatient}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:PatientEditPage"/>
+                        </p:menuitem>
+                        <p:menuitem value="#{myBundle.ConsultationMenuItem_visite}" icon="ui-icon-search" update=":VisitEditPage:VisitEditForm" disabled="#{empty consultationController.selected.visite}" actionListener="#{consultationController.prepareVisite}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:VisitEditPage"/>
+                        </p:menuitem>
+                        <p:menuitem value="#{myBundle.ConsultationMenuItem_visit}" icon="ui-icon-search" update=":VisitEditPage:VisitEditForm" disabled="#{empty consultationController.selected.visit}" actionListener="#{consultationController.prepareVisit}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:VisitEditPage"/>
+                        </p:menuitem>
+                    </p:menu>
+                </p:overlayPanel>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

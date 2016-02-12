@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="VisitListPage">
+        <pm:header title="#{myBundle.ListVisitTitle}">
+            <h:form>
+                <p:commandButton id="backButton"   styleClass="ui-btn-left  ui-btn-inline" icon="ui-icon-arrow-l" value="#{myBundle.Back}" action="#{mobilePageController.navigateBackInHistory('/mobile/index')}"/>
+                <p:commandButton id="createButton" styleClass="ui-btn-right ui-btn-inline" icon="ui-icon-plus"    value="#{myBundle.Create}" update=":VisitCreatePage:VisitCreateForm" actionListener="#{visitController.prepareCreate}" action="#{mobilePageController.navigateWithHistory('pm:VisitCreatePage')}">
+                    <f:actionListener binding="#{currentPageListener}"/>
+                </p:commandButton>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="VisitListForm">
+
+                <p:dataTable id="datalist"
+                             value="#{visitController.items}"
+                             var="item"
+                             rowKey="#{item.id}"
+                             paginator="true"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             selectionMode="single"
+                             selection="#{visitController.selected}"
+                             reflow="true">
+
+                    <p:ajax event="rowSelect"   update="@form:editButton,@form:deleteButton,@form:navigationMenuButton,@form:navigationMenuPanel" listener="#{visitController.resetParents}"/>
+                    <p:ajax event="rowUnselect" update="@form:editButton,@form:deleteButton,@form:navigationMenuButton,@form:navigationMenuPanel" listener="#{visitController.resetParents}"/>
+                    <p:ajax event="swipeleft"   oncomplete="document.getElementById('VisitListPage:VisitListForm:deleteButton').click();"/>
+                    <p:ajax event="tap"         oncomplete="document.getElementById('VisitListPage:VisitListForm:editButton').click();"/>
+                    <p:ajax event="taphold"     oncomplete="document.getElementById('VisitListPage:VisitListForm:navigationMenuButton').click();"/>
+
+                    <p:column sortBy="#{item.id}" filterBy="#{item.id}" headerText="#{myBundle.ListVisitTitle_id}"/>
+                    <h:outputText value="#{item.id}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.date}" filterBy="#{item.date}" headerText="#{myBundle.ListVisitTitle_date}"/>
+                    <h:outputText value="#{item.date}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.codepatient.firstName}" filterBy="#{item.codepatient.firstName}" headerText="#{myBundle.ListVisitTitle_codepatient}"/>
+                    <h:outputText value="#{item.codepatient.firstName}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.irmid.id}" filterBy="#{item.irmid.id}" headerText="#{myBundle.ListVisitTitle_irmid}"/>
+                    <h:outputText value="#{item.irmid.id}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.csctid.id}" filterBy="#{item.csctid.id}" headerText="#{myBundle.ListVisitTitle_csctid}"/>
+                    <h:outputText value="#{item.csctid.id}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.bilancognitiflbid.id}" filterBy="#{item.bilancognitiflbid.id}" headerText="#{myBundle.ListVisitTitle_bilancognitiflbid}"/>
+                    <h:outputText value="#{item.bilancognitiflbid.id}"/>
+                    </p:column>
+
+                    <!--
+                                        <p:column sortBy="#{item.consultationid.id}" filterBy="#{item.consultationid.id}" headerText="#{myBundle.ListVisitTitle_consultationid}"/>
+                                            <h:outputText value="#{item.consultationid.id}"/>
+                                        </p:column>
+                    -->
+                    <!--
+                                        <p:column sortBy="#{item.bilancognitifsuiviid.id}" filterBy="#{item.bilancognitifsuiviid.id}" headerText="#{myBundle.ListVisitTitle_bilancognitifsuiviid}"/>
+                                            <h:outputText value="#{item.bilancognitifsuiviid.id}"/>
+                                        </p:column>
+                    -->
+                </p:dataTable>
+                <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":VisitEditPage:VisitEditForm" disabled="#{empty visitController.selected}" actionListener="#{mobilePageController.currentPageListener}" action="#{mobilePageController.navigateWithHistory('pm:VisitEditPage')}"/>
+                <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{visitController.delete}" update=":growl,datalist" disabled="#{empty visitController.selected}">
+                    <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                </p:commandButton>
+                <p:commandButton id="navigationMenuButton" style="visibility: hidden;" value="#{myBundle.Menu}" disabled="#{empty visitController.selected}"/>
+
+                <p:overlayPanel id="navigationMenuPanel" for="navigationMenuButton" at="right" showEffect="overlay">
+                    <h2>#{myBundle.VisitHeading} #{myBundle.Menu}</h2>
+                    <p:menu>
+                        <p:menuitem value="#{myBundle.VisitMenuItem_bilanCognitifLbCollection}" icon="ui-icon-search"  action="#{mobilePageController.navigateWithHistory}" disabled="#{empty visitController.selected.bilanCognitifLbCollection}" ajax="false">
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="#{visitController.navigateBilanCognitifLbCollection()}"/>
+                        </p:menuitem>  
+                        <p:menuitem value="#{myBundle.VisitMenuItem_irmCollection}" icon="ui-icon-search"  action="#{mobilePageController.navigateWithHistory}" disabled="#{empty visitController.selected.irmCollection}" ajax="false">
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="#{visitController.navigateIrmCollection()}"/>
+                        </p:menuitem>  
+                        <p:menuitem value="#{myBundle.VisitMenuItem_consultationCollection}" icon="ui-icon-search"  action="#{mobilePageController.navigateWithHistory}" disabled="#{empty visitController.selected.consultationCollection}" ajax="false">
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="#{visitController.navigateConsultationCollection()}"/>
+                        </p:menuitem>  
+                        <p:menuitem value="#{myBundle.VisitMenuItem_codepatient}" icon="ui-icon-search" update=":PatientEditPage:PatientEditForm" disabled="#{empty visitController.selected.codepatient}" actionListener="#{visitController.prepareCodepatient}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:PatientEditPage"/>
+                        </p:menuitem>
+                        <p:menuitem value="#{myBundle.VisitMenuItem_irmid}" icon="ui-icon-search" update=":IrmEditPage:IrmEditForm" disabled="#{empty visitController.selected.irmid}" actionListener="#{visitController.prepareIrmid}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:IrmEditPage"/>
+                        </p:menuitem>
+                        <p:menuitem value="#{myBundle.VisitMenuItem_csctid}" icon="ui-icon-search" update=":CsctEditPage:CsctEditForm" disabled="#{empty visitController.selected.csctid}" actionListener="#{visitController.prepareCsctid}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:CsctEditPage"/>
+                        </p:menuitem>
+                        <p:menuitem value="#{myBundle.VisitMenuItem_bilancognitiflbid}" icon="ui-icon-search" update=":BilanCognitifLbEditPage:BilanCognitifLbEditForm" disabled="#{empty visitController.selected.bilancognitiflbid}" actionListener="#{visitController.prepareBilancognitiflbid}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:BilanCognitifLbEditPage"/>
+                        </p:menuitem>
+                        <p:menuitem value="#{myBundle.VisitMenuItem_consultationid}" icon="ui-icon-search" update=":ConsultationEditPage:ConsultationEditForm" disabled="#{empty visitController.selected.consultationid}" actionListener="#{visitController.prepareConsultationid}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:ConsultationEditPage"/>
+                        </p:menuitem>
+                        <p:menuitem value="#{myBundle.VisitMenuItem_bilancognitifsuiviid}" icon="ui-icon-search" update=":BilanCognitifSuiviEditPage:BilanCognitifSuiviEditForm" disabled="#{empty visitController.selected.bilancognitifsuiviid}" actionListener="#{visitController.prepareBilancognitifsuiviid}" action="#{mobilePageController.navigateWithHistory}">  
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="pm:BilanCognitifSuiviEditPage"/>
+                        </p:menuitem>
+                        <p:menuitem value="#{myBundle.VisitMenuItem_bilanCognitifSuiviCollection}" icon="ui-icon-search"  action="#{mobilePageController.navigateWithHistory}" disabled="#{empty visitController.selected.bilanCognitifSuiviCollection}" ajax="false">
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="#{visitController.navigateBilanCognitifSuiviCollection()}"/>
+                        </p:menuitem>  
+                        <p:menuitem value="#{myBundle.VisitMenuItem_csctCollection}" icon="ui-icon-search"  action="#{mobilePageController.navigateWithHistory}" disabled="#{empty visitController.selected.csctCollection}" ajax="false">
+                            <f:actionListener binding="#{currentPageActionListener}"/>
+                            <f:setPropertyActionListener target="#{mobilePageController.nextPage}" value="#{visitController.navigateCsctCollection()}"/>
+                        </p:menuitem>  
+                    </p:menu>
+                </p:overlayPanel>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>
